@@ -1,9 +1,18 @@
-import React from 'react';
+import NavBar from './NavBar';
+import { Container } from 'semantic-ui-react';
+import MyHealthList from '../../features/myhealth/MyHealthList';
+
+
 
 function App() {
-  return (
 
-    <h1>Hello</h1>
+  return (
+    <>
+    <NavBar/>
+    <Container style={{marginTop:"7em"}}>
+        <MyHealthList/>
+    </Container>
+    </>
   )
   }
 export default App;

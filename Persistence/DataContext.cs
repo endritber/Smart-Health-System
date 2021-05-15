@@ -1,12 +1,17 @@
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
     public class DataContext : DbContext
     {
-        protected DataContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions options) : base(options)
         {
-
         }
+
+        public DbSet<LabResult> LabResults { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
+
+
     }
 }
