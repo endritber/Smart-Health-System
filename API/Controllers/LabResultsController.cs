@@ -1,32 +1,44 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.LabResults;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
     public class LabResultsController : BaseApiController
     {
-        private readonly DataContext _context;
-        public LabResultsController(DataContext context)
+
+        [HttpGet]
+        public async Task<ActionResult<List<LabResult>>> GetLabResults()
         {
-            _context = context;
+            return await Mediator.Send(new ListLabResults.Query());
         }
 
+        
+        [HttpGet("{id}")] //activities/id
 
-        [HttpGet]        
-        public async Task<ActionResult<List<LabResult>>> GetLabResults() 
+        public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
         {
-            return await _context.LabResults.ToListAsync();
+          return await Mediator.Send(new LabResultsDetails.Query{Id = id});
         }
 
-        [HttpGet("{id}")]
-         public async Task<ActionResult<LabResult>> GetLabResult(Guid id) 
-        {
-            return await _context.LabResults.FindAsync(id);
+        [HttpPost]
+
+        public async Task<IActionResult> CreateLabResult(LabResult labresult) {
+            return Ok(await Mediator.Send(new CreateLabResult.Command{LabResult= labresult}));
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditLabResult(Guid id, LabResult labresult) {
+            labresult.Id = id;
+            return Ok(await Mediator.Send(new EditLabResult.Command{LabResult = labresult}));
+        }
+        [HttpDelete("{id}")]
+         public async Task<IActionResult> DeleteLabResult(Guid id) {
+             return Ok(await Mediator.Send(new DeleteLabResult.Command{Id = id}));
+         }
+
     }
 }

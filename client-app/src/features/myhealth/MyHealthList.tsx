@@ -1,18 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Icon, Item } from 'semantic-ui-react';
 
 
 
 export default function MyHealthList() {
     return (
+
         <Item.Group relaxed>
+          <Item></Item>
+          <Item></Item>
         <Item>
         <Icon name='calendar check' size='massive'/>
           <Item.Content verticalAlign='bottom'>
             <Item.Header>Appointments</Item.Header>
             <Item.Description>Check the latest appointments you made</Item.Description>
             <Item.Extra>
-              <Button style={{marginRight:"450px"}}  floated='right'>View</Button>
+              <Button  style={{marginRight:"450px"}}  floated='right'>View</Button>
             </Item.Extra>
           </Item.Content>
         </Item>
@@ -23,7 +27,7 @@ export default function MyHealthList() {
             <Item.Header>Lab Results</Item.Header>
             <Item.Description>The result of tests done in laboratory</Item.Description>
             <Item.Extra>
-              <Button style={{marginRight:"450px"}} floated='right'>View</Button>
+              <Button as={Link} to = '/myhealthlist/labresults' style={{marginRight:"450px"}} floated='right'>View</Button>
             </Item.Extra>
           </Item.Content>
         </Item>
@@ -35,7 +39,7 @@ export default function MyHealthList() {
             <Item.Header>Prescriptions</Item.Header>
             <Item.Description>Medicines ordered by the Doctor</Item.Description>
             <Item.Extra>
-              <Button style={{marginRight:"450px"}} floated='right'>View</Button>
+              <Button as={Link} to = '/myhealthlist/prescriptions' style={{marginRight:"450px"}} floated='right'>View</Button>
             </Item.Extra>
           </Item.Content>
         </Item>

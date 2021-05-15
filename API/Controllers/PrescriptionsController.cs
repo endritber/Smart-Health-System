@@ -1,32 +1,47 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.LabResults;
+using Application.Prescriptions;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
     public class PrescriptionsController : BaseApiController
     {
-        private readonly DataContext _context;
-        public PrescriptionsController(DataContext context)
+
+        [HttpGet]
+        public async Task<ActionResult<List<Prescription>>> GetPrescriptions()
         {
-            _context = context;
+            return await Mediator.Send(new ListPrescriptions.Query());
         }
 
+        
+        [HttpGet("{id}")] //activities/id
 
-        [HttpGet]        
-        public async Task<ActionResult<List<Prescription>>> GetLabResults() 
+        public async Task<ActionResult<Prescription>> GetPrescriptions(Guid id)
         {
-            return await _context.Prescriptions.ToListAsync();
+          return await Mediator.Send(new PrescriptionsDetails.Query{Id = id});
         }
 
-        [HttpGet("{id}")]
-         public async Task<ActionResult<Prescription>> GetLabResult(Guid id) 
-        {
-            return await _context.Prescriptions.FindAsync(id);
+        [HttpPost]
+
+        public async Task<IActionResult> CreatePrescription(Prescription prescription) {
+            return Ok(await Mediator.Send(new CreatePrescription.Command{Prescription= prescription}));
         }
+
+        [HttpPut("{id}")]
+        //Logic error cannot change prescription data
+        public async Task<IActionResult> EditPrescription(Guid id, Prescription prescription) {
+            prescription.Id = id;
+            return Ok(await Mediator.Send(new EditPrescription.Command{Prescription = prescription}));
+        }
+
+        [HttpDelete("{id}")]
+         public async Task<IActionResult> DeletePrescription(Guid id) {
+             return Ok(await Mediator.Send(new DeletePrescription.Command{Id = id}));
+         }
+
     }
 }
