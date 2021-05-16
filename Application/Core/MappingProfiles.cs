@@ -8,6 +8,7 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<LabResult, LabResult>();
+            CreateMap<Prescription, Prescription>();
         }
     }
 }
