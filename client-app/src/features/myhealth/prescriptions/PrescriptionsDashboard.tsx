@@ -1,5 +1,23 @@
-export default function PrescriptionsDashboard() {
+
+import { Grid } from 'semantic-ui-react'
+import { LabResult } from '../../../app/models/labresult'
+import { Prescription } from '../../../app/models/prescription'
+import PrescreptionList from './PrescriptionList'
+
+interface Props {
+    prescriptions: Prescription[];
+}
+
+export default function PrescriptionDashboard({prescriptions}: Props) {
+
     return (
-        <h1>DashBoard for prescriptions</h1>
+        <Grid>
+            <Grid.Column width='15'>
+                    <PrescreptionList prescriptions={prescriptions}/>
+            </Grid.Column>
+    
+        </Grid>
+
     )
+
 }

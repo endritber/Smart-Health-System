@@ -22,7 +22,7 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Problem")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProblemProportion")
@@ -33,6 +33,12 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ResultProportion")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Sample")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -45,11 +51,23 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Dose")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Frequency")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Medication")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Proportion")
+                    b.Property<DateTime>("Prescribed")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Provider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

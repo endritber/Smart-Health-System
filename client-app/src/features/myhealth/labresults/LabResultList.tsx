@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Form, Icon, Item, Label, Segment } from "semantic-ui-react";
+import { Button, Card, Checkbox, Divider, Form, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { LabResult } from "../../../app/models/labresult";
 
 interface Props {
@@ -12,13 +12,13 @@ export default function LabResultList({labresults, selectLabResult}: Props) {
         {labresults.map(labresult => (
         <Item key={labresult.id}>
             <Item.Content>
-                <Item.Header as='a'>Problem: {labresult.problem}</Item.Header>
-                <Item.Meta>Proportion: {labresult.problemProportion}</Item.Meta>
-                <Card.Group>
+                <Item.Header as='a'>Sample: {labresult.sample}</Item.Header>
+                <Divider/>
+                <Card.Group doubling>
                     <Card>
                     <Card.Content>
-                        <Card.Header>Result: {labresult.result}</Card.Header>
-                        <Card.Meta>Proportion: {labresult.resultProportion}</Card.Meta>
+                        <Card.Header>Date: {labresult.date}</Card.Header>
+                        <Card.Meta>Status: {labresult.status}</Card.Meta>
                     </Card.Content>
                     </Card>
                 </Card.Group>

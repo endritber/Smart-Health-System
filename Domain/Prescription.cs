@@ -8,6 +8,16 @@ namespace Domain
 
         public string Medication { get; set; }
 
-        public string Proportion {get; set;}
+        public string Dose { get; set; }
+
+        public string Frequency { get; set; }
+
+        public int Quantity { get; set; }
+
+        public string Provider { get; set; }
+        
+        public DateTime Prescribed { get; set; }
+
+
     }
 }

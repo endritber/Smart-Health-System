@@ -1,5 +1,10 @@
-export interface IPrescription {
+export interface Prescription {
+    
     id: string;
     medication: string;
-    proportion: string;
+    dose: string;
+    frequency: string;
+    quantity: number;
+    provider: string;
+    prescribed: string;
 }

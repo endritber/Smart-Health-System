@@ -1,4 +1,4 @@
-import { Button, Card, Icon, Image } from "semantic-ui-react";
+import { Button, Card, Divider, Grid, Icon, Image, SegmentGroup } from "semantic-ui-react";
 import { LabResult } from "../../../../app/models/labresult";
 
 interface Props {
@@ -9,23 +9,30 @@ interface Props {
 export default function LabResultDetail({labresult, cancelSelectLabResult}:Props) {
 
     return (
-    <Card style={{marginLeft:"130px"}}>
-    <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+
+    <Card centered style={{marginLeft:"130px"}}>
+    <Icon name="file text outline" size='huge'></Icon>
     <Card.Content>
-      <Card.Header>Problem: {labresult.problem}</Card.Header>
-      <Card.Meta></Card.Meta>
+      <Card.Header>Sample: {labresult.sample}</Card.Header>
+      <Divider/>
       <Card.Meta>
         <span className=''> Problem Proportion: {labresult.problemProportion}</span>
       </Card.Meta>
-      <Card.Meta></Card.Meta>
+      <Divider/>
       <Card.Header>Result: {labresult.result}</Card.Header>
-      <Card.Meta></Card.Meta>
-      <Card.Meta></Card.Meta>
+      <Divider/>
       <Card.Meta>
         <span className=''> Result Proportion: {labresult.resultProportion}</span>
       </Card.Meta>
+      <Divider/>
+      <Card.Header>Date: {labresult.date}</Card.Header>
+      <Divider/>
+      <Card.Meta>
+        <span className=''> Status: {labresult.status}</span>
+      </Card.Meta>
+      <Divider/>
       <Card.Description>
-        Result Desription (soon to be added!)
+        Result Description (soon to be added!)
       </Card.Description>
     </Card.Content>
     <Card.Content extra>

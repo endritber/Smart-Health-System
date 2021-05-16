@@ -1,7 +1,10 @@
+
 export interface LabResult {
     id: string;
-    problem: string;
+    sample: string;
     problemProportion: string;
-    result: string;
+    date: string;
+    result:string;
     resultProportion: string;
+    status: number;
 }
