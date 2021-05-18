@@ -8,8 +8,7 @@ export default function MyHealthList() {
     return (
 
         <Item.Group relaxed>
-          <Item></Item>
-          <Item></Item>
+  
         <Item>
         <Icon name='calendar check' size='massive'/>
           <Item.Content verticalAlign='bottom'>
@@ -20,7 +19,6 @@ export default function MyHealthList() {
             </Item.Extra>
           </Item.Content>
         </Item>
-       <Item></Item>
         <Item>
         <Icon name='file alternate outline' size='massive'/>
           <Item.Content verticalAlign='bottom'>
@@ -31,7 +29,7 @@ export default function MyHealthList() {
             </Item.Extra>
           </Item.Content>
         </Item>
-        <Item></Item>
+  
         <Item>
 
         <Icon name='pen square' size='massive'/>
@@ -43,7 +41,6 @@ export default function MyHealthList() {
             </Item.Extra>
           </Item.Content>
         </Item>
-        <Item></Item>
         <Item>
         
         <Icon name='heartbeat' size='massive'/>
@@ -55,7 +52,6 @@ export default function MyHealthList() {
             </Item.Extra>
           </Item.Content>
         </Item>
-        <Item></Item>
         <Item>
 
         <Icon name='chart bar' size='massive'/>

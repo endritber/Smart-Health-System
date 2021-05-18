@@ -10,15 +10,41 @@ import DiseasePrediction from '../../features/diseaseprediction/DiseasePredictio
 import { observer } from 'mobx-react-lite';
 import LabResults from '../../features/myhealth/labresults/LabResults';
 import Prescriptions from '../../features/myhealth/prescriptions/Prescriptions';
+import LoginForm from '../../features/users/LoginForm';
+import { useStore } from '../stores/store';
+import { useEffect } from 'react';
+import ModalContainer from '../modals/ModalContainer';
+import DoctorNavBar from './DoctorNavBar';
+import MyPatientList from '../../features/mypatients/MyPatientList';
+
 
 function App() {
 
+  const {commonStore, userStore} = useStore();
+
+  useEffect (()=>{
+    if(commonStore.token) {
+      userStore.getUser().finally(()=> commonStore.setAppLoaded())
+
+    } else {
+      commonStore.setAppLoaded();
+    }
+  },[commonStore, userStore])
 
   return (
+
+
     <>
+    {userStore.user?.roleId === 1 ? (
+      <>
+    <Route exact path='/' component={HomePage}/>
+     <ModalContainer/>
+      <Route 
+      path={'/(.+)'}
+      render={()=>(
+        <>
     <NavBar/>
-    <Container style={{marginTop:"7em"}}>
-        <Route exact path='/' component={HomePage}/>  
+    <Container style={{marginTop:"7em"}}> 
         <Route exact path='/myhealthlist' component={MyHealthList}/>
         <Route path='/summarylist' component={SummaryList}/>
         <Route path='/getcare' component={GetCare}/>
@@ -26,8 +52,33 @@ function App() {
         <Route path='/diseaseprediction' component={DiseasePrediction}/>
         <Route path='/myhealthlist/labresults' component={LabResults}/>
         <Route path='/myhealthlist/prescriptions' component={Prescriptions}/>
+        <Route path='/login' component={LoginForm}/>
     </Container>
     </>
-  )
-  }
+  )}
+  />
+  
+  </>) : (
+    <>
+    <Route exact path='/' component={HomePage}/>
+        <ModalContainer/>
+          <Route 
+          path={'/(.+)'}
+          render={()=>(
+            <>
+    <DoctorNavBar/>
+        <Container style={{marginTop:"7em"}}> 
+        <Route exact path='/mypatientlist' component={MyPatientList}/>
+
+        </Container>
+        </>
+  )}
+  />
+</>
+  )}
+
+</>
+);
+}
+
 export default observer(App);

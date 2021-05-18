@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Divider, Form, Icon, Item, Label, Segment } from "semantic-ui-react";
+import { Button, Card, Checkbox, Divider, Icon, Item, Segment } from "semantic-ui-react";
 import { LabResult } from "../../../app/models/labresult";
 
 interface Props {

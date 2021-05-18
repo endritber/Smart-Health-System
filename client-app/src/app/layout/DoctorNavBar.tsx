@@ -1,11 +1,9 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Container, Dropdown, Icon, Image, Menu} from 'semantic-ui-react';
-import { useStore } from '../stores/store';
+import { observer } from "mobx-react-lite";
+import { Link, NavLink } from "react-router-dom";
+import { Container, Dropdown, Icon, Menu } from "semantic-ui-react";
+import { useStore } from "../stores/store";
 
-export default observer (function NavBar() {
-
+export default  observer (function DoctorNavBar() {
     const {userStore:{user, logout}} = useStore();
 
 
@@ -16,11 +14,9 @@ export default observer (function NavBar() {
                 <Menu.Item as={NavLink} to= '/' header>
                     <Icon name="heartbeat" size="big"></Icon>
                 </Menu.Item>
-                <Menu.Item as={NavLink} to = '/myhealthlist' name ="My Health" />
-                <Menu.Item as={NavLink} to = '/summarylist' name ="Summary"/>
-                <Menu.Item as={NavLink} to = '/getcare' name ="Get Care"/>
-                <Menu.Item as={NavLink} to = '/messages' name ="Messages"/>
-                <Menu.Item as={NavLink} to = '/diseaseprediction' name ="Disease Prediction"/>
+
+                <Menu.Item as={NavLink} to = '/mypatientlist' name ="MyPatients" />
+                <Menu.Item as={NavLink} to = '/mypatientlist' name ="Message"/>
 
                 <Menu.Item position="right">
                     <Icon name='user'/>

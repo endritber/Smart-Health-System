@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { LabResult } from '../models/labresult';
+import { User, userFormValues } from '../models/user';
 
 
 const sleep = (delay: number) => {
@@ -12,7 +13,7 @@ axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(async response =>{
    try {
-        await sleep(1000);
+        await sleep(1000); 
         return response;
     } catch (error) {
         console.log(error);
@@ -20,13 +21,13 @@ axios.interceptors.response.use(async response =>{
     }
 })
 
-// axios.interceptors.request.use((config) => {
-//     const token = window.localStorage.getItem('jwt');
-//     if (token) config.headers.Authorization = `Bearer ${token}`;
-//     return config;
-// }, error => {
-//     return Promise.reject(error);
-// })
+axios.interceptors.request.use((config) => {
+    const token = window.localStorage.getItem('jwt');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+}, error => {
+    return Promise.reject(error);
+})
 
 const responseBody = <T> (response: AxiosResponse<T>) => response.data;
 
@@ -47,8 +48,15 @@ const labresults = {
 
 }
 
+const Account = {
+    current: () => requests.get<User>('/account'),
+    login: (user: userFormValues) => requests.post<User>('/account/login', user),
+    register: (user: userFormValues) => requests.post<User>('/account/register', user)
+}
+
 const agent ={
-    labresults
+    labresults,
+    Account
 }
 
 export default agent;

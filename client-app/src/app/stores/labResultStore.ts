@@ -1,6 +1,4 @@
-import { makeAutoObservable, reaction, runInAction } from "mobx";
-import agent from "../api/agent";
-
+import { makeAutoObservable} from "mobx";
 
 export default class labResultStore {
     constructor() {

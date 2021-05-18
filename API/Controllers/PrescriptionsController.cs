@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.LabResults;
 using Application.Prescriptions;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [AllowAnonymous]
     public class PrescriptionsController : BaseApiController
     {
 
@@ -17,7 +18,6 @@ namespace API.Controllers
             return await Mediator.Send(new ListPrescriptions.Query());
         }
 
-        
         [HttpGet("{id}")] //activities/id
 
         public async Task<ActionResult<Prescription>> GetPrescriptions(Guid id)
