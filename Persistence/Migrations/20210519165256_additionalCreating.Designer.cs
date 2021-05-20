@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210518112927_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20210519165256_additionalCreating")]
+    partial class additionalCreating
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,12 +112,44 @@ namespace Persistence.Migrations
                     b.Property<string>("Sample")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("status")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("status")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("LabResults");
+                });
+
+            modelBuilder.Entity("Domain.PatientInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Allergies")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Disease")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nationality")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Profession")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientInfos");
                 });
 
             modelBuilder.Entity("Domain.Prescription", b =>
@@ -141,8 +173,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Provider")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Quantity")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

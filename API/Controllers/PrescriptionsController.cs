@@ -18,7 +18,7 @@ namespace API.Controllers
             return await Mediator.Send(new ListPrescriptions.Query());
         }
 
-        [HttpGet("{id}")] //activities/id
+        [HttpGet("{id}")] //prescriptions/id
 
         public async Task<ActionResult<Prescription>> GetPrescriptions(Guid id)
         {

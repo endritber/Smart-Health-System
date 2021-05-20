@@ -12,7 +12,7 @@ namespace Domain
 
         public string Frequency { get; set; }
 
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
 
         public string Provider { get; set; }
         

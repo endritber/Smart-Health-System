@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { LabResult } from '../models/labresult';
+import { Patient } from '../models/patient';
+import { Prescription } from '../models/prescription';
 import { User, userFormValues } from '../models/user';
 
 
@@ -42,9 +44,25 @@ const requests = {
 const labresults = {
     list: () => requests.get<LabResult[]>('/labresults'),
     details: (id: string) => requests.get<LabResult>(`/labresults/${id}`),
-    create: (LabResult: LabResult)=>axios.post<void>('/labresults', LabResult),
+    create: (LabResult: LabResult)=>requests.post<void>('/labresults', LabResult),
     update: (LabResult: LabResult)=>axios.put<void>(`/labresults/${LabResult.id}`, LabResult),
     delete: (id: string)=>axios.delete<void>(`/labresults/${id}`)
+
+}
+const Patients = {
+    list: () => requests.get<Patient[]>('/patients'),
+    details: (id: string) => requests.get<Patient>(`/patients/${id}`),
+    create: (patient: Patient)=>requests.post<void>('/patients', patient),
+    update: (patient: Patient)=>axios.put<void>(`/patients/${patient.id}`, patient),
+    delete: (id: string)=>axios.delete<void>(`/patients/${id}`)
+
+}
+const prescriptions = {
+    list: () => requests.get<Prescription[]>('/prescriptions'),
+    details: (id: string) => requests.get<Prescription>(`/prescriptions/${id}`),
+    create: (Prescription: Prescription)=>axios.post<void>('/prescriptions', Prescription),
+    update: (Prescription: Prescription)=>axios.put<void>(`/prescriptions/${Prescription.id}`, Prescription),
+    delete: (id: string)=>axios.delete<void>(`/prescriptions/${id}`)
 
 }
 
@@ -56,7 +74,9 @@ const Account = {
 
 const agent ={
     labresults,
-    Account
+    Account, 
+    prescriptions,
+    Patients
 }
 
 export default agent;

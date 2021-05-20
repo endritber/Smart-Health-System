@@ -1,6 +1,9 @@
 using Application.Core;
+using Application.Interfaces;
 using Application.LabResults;
+using Application.PatientInfos;
 using Application.Prescriptions;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +33,10 @@ namespace API.Extensions
             });
             services.AddMediatR(typeof(ListLabResults.Handler).Assembly);
             services.AddMediatR(typeof(ListPrescriptions.Handler).Assembly);
+            services.AddMediatR(typeof(ListPatients.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+            services.AddScoped<IUserAccessor, UserAccessor>();
             
             return services;
         }

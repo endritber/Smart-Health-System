@@ -1,12 +1,14 @@
-import { Button, Card, Divider, Grid, Icon, Image, SegmentGroup } from "semantic-ui-react";
-import { LabResult } from "../../../../app/models/labresult";
+import { Button, Card, Divider, Icon } from "semantic-ui-react";
+import LoadingComponent from "../../../../app/layout/LoadingComponent";
+import { useStore } from "../../../../app/stores/store";
 
-interface Props {
-    labresult: LabResult;
-    cancelSelectLabResult: () => void;
-}
 
-export default function LabResultDetail({labresult, cancelSelectLabResult}:Props) {
+export default function LabResultDetail() {
+
+  const{labResultStore} = useStore();
+  const {selectedLabResult: labresult, cancelSelectedLabResult} = labResultStore;
+
+  if (!labresult) return <LoadingComponent content="loading"/>;
 
     return (
 
@@ -36,7 +38,7 @@ export default function LabResultDetail({labresult, cancelSelectLabResult}:Props
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-    <Button onClick={cancelSelectLabResult} basic content = 'Cancel'color='red'>
+    <Button onClick={cancelSelectedLabResult} basic content = 'Cancel'color='red'>
     </Button>
     </Card.Content>
   </Card>

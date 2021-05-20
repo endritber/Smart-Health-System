@@ -1,4 +1,4 @@
-import { Divider, Grid, Icon, Image, Label, Menu, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import { Prescription } from "../../../app/models/prescription";
 
 interface Props {

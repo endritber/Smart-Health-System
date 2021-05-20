@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class IdentityAdded : Migration
+    public partial class additionalCreating : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,57 @@ namespace Persistence.Migrations
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
-        
+            migrationBuilder.CreateTable(
+                name: "LabResults",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Sample = table.Column<string>(type: "TEXT", nullable: true),
+                    ProblemProportion = table.Column<string>(type: "TEXT", nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Result = table.Column<string>(type: "TEXT", nullable: true),
+                    ResultProportion = table.Column<string>(type: "TEXT", nullable: true),
+                    status = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LabResults", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PatientInfos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    Nationality = table.Column<string>(type: "TEXT", nullable: true),
+                    Allergies = table.Column<string>(type: "TEXT", nullable: true),
+                    Profession = table.Column<string>(type: "TEXT", nullable: true),
+                    Disease = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientInfos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Prescriptions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Medication = table.Column<string>(type: "TEXT", nullable: true),
+                    Dose = table.Column<string>(type: "TEXT", nullable: true),
+                    Frequency = table.Column<string>(type: "TEXT", nullable: true),
+                    Quantity = table.Column<string>(type: "TEXT", nullable: true),
+                    Provider = table.Column<string>(type: "TEXT", nullable: true),
+                    Prescribed = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prescriptions", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -214,6 +264,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "LabResults");
+
+            migrationBuilder.DropTable(
+                name: "PatientInfos");
 
             migrationBuilder.DropTable(
                 name: "Prescriptions");

@@ -12,6 +12,25 @@ namespace Persistence
        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
 
 {
+
+
+                if (!context.PatientInfos.Any()) {
+                    var patientinfos = new List<PatientInfo> 
+                    {
+                        new PatientInfo 
+                        {
+                         Name = "Endrit",
+                        LastName="Berisha",
+                        Allergies=null,
+                        Disease="Blood Pressure",
+                        BirthDate= DateTime.Now.AddMonths(-20),
+                        Profession="Student",
+                        Nationality="Albanian"
+                        }
+                    };
+                    await context.PatientInfos.AddRangeAsync(patientinfos);
+                        }
+
          if (!userManager.Users.Any())
             {
                 var users = new List<AppUser> 
@@ -35,11 +54,11 @@ namespace Persistence
                     new LabResult
                     {
                         Sample = "HyperTension",
-                        ProblemProportion = "1.67%",
+                        ProblemProportion = ".67%",
                         Date= DateTime.Now.AddMonths(0),
                         Result = "Hematocrit",
                         ResultProportion="4.32%",
-                        status = 1
+                        status = "True"
 
                     },
                     new LabResult
@@ -49,7 +68,7 @@ namespace Persistence
                         Date= DateTime.Now.AddMonths(0),
                         Result = "Pottasium",
                         ResultProportion="4.32%",
-                        status = 0
+                        status = "False"
 
                     },
                     new LabResult
@@ -59,7 +78,7 @@ namespace Persistence
                         Date= DateTime.Now.AddMonths(-2),
                         Result = "Hemoglobin",
                         ResultProportion="4.32%",
-                        status = 1
+                        status = "True"
 
                     },
                              new LabResult
@@ -69,7 +88,7 @@ namespace Persistence
                         Date= DateTime.Now.AddMonths(-1),
                         Result = "Platelets",
                         ResultProportion="4.32%",
-                        status = 0
+                        status = "False"
 
                     },
                              new LabResult
@@ -79,7 +98,7 @@ namespace Persistence
                         Date= DateTime.Now.AddMonths(-1),
                         Result = "Hemoglobin",
                         ResultProportion="4.32%",
-                        status = 1
+                        status = "False"
 
                     },
                  
@@ -93,7 +112,7 @@ namespace Persistence
                         Medication = "Ibu Brufen",
                         Dose = "3.2%",
                         Frequency="1 daily",
-                        Quantity=2,
+                        Quantity="2",
                         Provider = "Barnes",
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
@@ -102,7 +121,7 @@ namespace Persistence
                         Medication = "Aspirin",
                         Dose = "2.53%",
                         Frequency="2 daily",
-                        Quantity=3,
+                        Quantity="3",
                         Provider = "OTC",
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
@@ -111,38 +130,42 @@ namespace Persistence
                         Medication = "Albuterol",
                         Dose = "2.46%",
                         Frequency="2 daily",
-                        Quantity=1,
+                        Quantity="1",
                         Provider = "OTC",
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
                           new Prescription
                     {
                         Medication = "Gabapentin",
-                        Dose = "1.23%",
+                        Dose = "'True'.23%",
                         Frequency="1 daily",
-                        Quantity=1,
+                        Quantity="2",
                         Provider = "OTC",
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
                     new Prescription{
                         Medication = "Citalopran",
-                        Dose = "1.93%",
+                        Dose = "'True'.93%",
                         Frequency="2 daily",
-                        Quantity=4,
+                        Quantity="4",
                         Provider = "Barnes",
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
+
+
                     
                     
                  
                 };
 
+
+            
                 await context.LabResults.AddRangeAsync(labresults);
                 await context.Prescriptions.AddRangeAsync(prescriptions);
                 await context.SaveChangesAsync();
+            }
             }
         }
     }
 
     }
-}

@@ -11,4 +11,45 @@ body {
   text-decoration-color:white;
   font-size: 16px;
 }
+/*home page styles*/
+
+.masthead {
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(
+    135deg,
+    rgb(11, 36, 44) 0%,
+     rgb(17, 61, 75) 69%,
+      rgb(20, 84, 104) 89%
+      ) !important;
+
+  height: 100vh;
+}
+
+.masthead .ui.menu .ui.button,
+.ui.menu a.ui.inverted.button {
+  margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+/*end home page styles*/
+
+.photo {
+  height: 50px;
+  width: 50px; 
+}
+
+.navbarphoto {
+  height: 37px;
+  width: 37px; 
+}
  

@@ -14,7 +14,7 @@ export default observer (function NavBar() {
         <Menu inverted secondary fixed='top'>
             <Container>
                 <Menu.Item as={NavLink} to= '/' header>
-                    <Icon name="heartbeat" size="big"></Icon>
+                    <Image className='navbarphoto' src='/logohealth.png' alt = 'logo' />
                 </Menu.Item>
                 <Menu.Item as={NavLink} to = '/myhealthlist' name ="My Health" />
                 <Menu.Item as={NavLink} to = '/summarylist' name ="Summary"/>
@@ -27,7 +27,7 @@ export default observer (function NavBar() {
                     {/* <Image src= {user?.image || '/dika'} avatar spaced='right' /> */}
                     <Dropdown pointing="top left" text={user?.displayName}>
                         <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to={`/profile/${user?.username}`} text='My Profile' icon='user'/>
+                        <Dropdown.Item as={Link} to='/myprofile' text='My Profile' icon='user'/>
                         <Dropdown.Item onClick={logout} text='Log out' icon='power'/>
                         </Dropdown.Menu>
                         

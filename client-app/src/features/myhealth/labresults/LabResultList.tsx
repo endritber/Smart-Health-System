@@ -1,15 +1,16 @@
+import { observer } from "mobx-react-lite";
 import { Button, Card, Checkbox, Divider, Icon, Item, Segment } from "semantic-ui-react";
-import { LabResult } from "../../../app/models/labresult";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-    labresults: LabResult[];
-    selectLabResult: (id: string)=> void;
-}
 
-export default function LabResultList({labresults, selectLabResult}: Props) {
+export default observer (function LabResultList() {
+
+    const {labResultStore} = useStore();
+    const {LabResultsByName} = labResultStore;
+
     return (
         <Item.Group divided>
-        {labresults.map(labresult => (
+        {LabResultsByName.map(labresult => (
         <Item key={labresult.id}>
             <Item.Content>
                 <Item.Header as='a'>Sample: {labresult.sample}</Item.Header>
@@ -26,7 +27,7 @@ export default function LabResultList({labresults, selectLabResult}: Props) {
                     <Checkbox/>
                     </Segment>
                 <Item.Extra>
-                <Button onClick={() => selectLabResult(labresult.id)} primary floated='right' color='red'>
+                <Button onClick={() => labResultStore.selectLabResult(labresult.id)} primary floated='right' color='red'>
                     View Result
                     <Icon name='angle right' />
                 </Button>
@@ -39,43 +40,5 @@ export default function LabResultList({labresults, selectLabResult}: Props) {
   </Item.Group>
 
 
-
-
-
-
-
-
-        // <Segment>
-        //     <Item.Group divided>
-        //         {labresults.map(labresult => (
-        //             <Item key={labresult.id}>
-        //                 <Item.Content>
-        //                     <Item.Header as='a' >
-        //                         {labresult.problem}
-        //                         </Item.Header>
-        //                         <Item.Description >
-        //                             {labresult.problemProportion}
-        //                         </Item.Description>
-        //                         <Item></Item>
-        //                         <Item></Item>
-        //                         <Item.Description>
-        //                             {labresult.result}
-        //                         </Item.Description>
-        //                         <Item></Item>
-        //                         <Item></Item>
-        //                         <Item.Description>
-        //                             {labresult.resultProportion}
-        //                         </Item.Description>
-        //                         <Item></Item>
-        //                         <Item></Item>
-        //                         <Item.Extra>
-        //                             <Button floated='right' content='View Result' color='teal'/>
-        //                         </Item.Extra>
-                            
-        //                 </Item.Content>
-        //             </Item>
-        //         ))}
-        //     </Item.Group>
-        // </Segment>
     )
-}
+})

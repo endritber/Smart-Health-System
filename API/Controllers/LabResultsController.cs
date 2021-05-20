@@ -19,7 +19,7 @@ namespace API.Controllers
         }
 
         
-        [HttpGet("{id}")] //activities/id
+        [HttpGet("{id}")] //labresults/id
 
         public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
         {

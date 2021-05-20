@@ -4,7 +4,7 @@ export interface Prescription {
     medication: string;
     dose: string;
     frequency: string;
-    quantity: number;
+    quantity: string;
     provider: string;
     prescribed: string;
 }

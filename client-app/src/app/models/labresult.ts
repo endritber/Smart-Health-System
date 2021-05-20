@@ -6,5 +6,5 @@ export interface LabResult {
     date: string;
     result:string;
     resultProportion: string;
-    status: number;
+    status: string;
 }

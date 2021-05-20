@@ -10,8 +10,29 @@ namespace Persistence
         {
         }
 
+        
         public DbSet<LabResult> LabResults { get; set; }
+
         public DbSet<Prescription> Prescriptions { get; set; }
+
+        public DbSet<PatientInfo> PatientInfos { get; set; }
+        
+        
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+          base.OnModelCreating(builder);
+
+          builder.Entity<AppUser>(x=>x.HasKey(aa => new{aa.Id}));
+
+          builder.Entity<AppUser>()
+          .HasOne(u=>u.patient)
+          .WithOne(a=>a.user)
+          .HasForeignKey<PatientInfo>(aa=>aa.userId);
+
+
+        }
 
 
     }

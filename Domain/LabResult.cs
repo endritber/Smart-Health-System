@@ -16,7 +16,7 @@ namespace Domain
 
         public string ResultProportion { get; set; }
 
-        public int status {get; set;}
+        public string status {get; set;}
 
     }
 }

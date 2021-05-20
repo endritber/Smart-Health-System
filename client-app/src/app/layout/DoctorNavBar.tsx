@@ -1,22 +1,25 @@
 import { observer } from "mobx-react-lite";
 import { Link, NavLink } from "react-router-dom";
-import { Container, Dropdown, Icon, Menu } from "semantic-ui-react";
+import { Button, Container, Dropdown, Icon, Image, Menu } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 
-export default  observer (function DoctorNavBar() {
-    const {userStore:{user, logout}} = useStore();
 
+export default  observer (function DoctorNavBar() {
+    const {userStore:{user, logout}, patientStore} = useStore();
 
     return (
         
         <Menu inverted secondary fixed='top'>
             <Container>
                 <Menu.Item as={NavLink} to= '/' header>
-                    <Icon name="heartbeat" size="big"></Icon>
+                <Image className = 'navbarphoto'src='/logohealth.png' alt = 'logo' />
                 </Menu.Item>
 
-                <Menu.Item as={NavLink} to = '/mypatientlist' name ="MyPatients" />
-                <Menu.Item as={NavLink} to = '/mypatientlist' name ="Message"/>
+                <Menu.Item as={NavLink} to = '/patients' name ="MyPatients" />
+                <Menu.Item as={NavLink} to = '/messages' name ="Message"/>
+                <Menu.Item>
+                    <Button  onClick={()=>patientStore.openForm()}content = 'Add Patient'/>
+                </Menu.Item>
 
                 <Menu.Item position="right">
                     <Icon name='user'/>

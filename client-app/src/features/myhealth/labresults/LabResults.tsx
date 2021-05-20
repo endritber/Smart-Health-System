@@ -1,38 +1,30 @@
 import { Container } from 'semantic-ui-react';
 import LabResultsDashboard from './LabResultsDashboard';
 import { useEffect, useState } from 'react';
-import { LabResult } from '../../../app/models/labresult';
-import axios from 'axios';
+import { LabResult } from '../../../app/models/labresult'; 
+import { useStore } from '../../../app/stores/store';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { observer } from 'mobx-react-lite';
 
-export default function LabResults() {
-  const [labresults, setlabresults] = useState<LabResult[]>([]);
-  const[selectedLabResult, setSelectedLabResult] = useState<LabResult|undefined>(undefined);
+export default observer (function LabResults() {
+
+  const {labResultStore} = useStore();
 
   useEffect(() => {
-    axios.get<LabResult[]>("http://localhost:5000/api/labresults").then(response => {
-      setlabresults(response.data)
-    })
-  }, [])
+    labResultStore.loadLabResults();
+
+  }, [labResultStore])
 
 
-  function handleSelectedLabResult(id: string) {
-      setSelectedLabResult(labresults.find(x=>x.id === id))
-  }
 
-  function handleCancelSelectLabResult() {
-    setSelectedLabResult(undefined);
-  }
+  if (labResultStore.loadingInitial) return <LoadingComponent content='Loading...'/>
 
   return (
     <>
     <Container style={{marginTop:"7em"}}>
-        <LabResultsDashboard labresults =  {labresults}
-        selectLabResult = {handleSelectedLabResult}
-        selectedLabResult = {selectedLabResult}
-        cancelSelectLabResult ={handleCancelSelectLabResult}
-        />
+        <LabResultsDashboard />
   
     </Container>
     </>
   )
-  }
+  })

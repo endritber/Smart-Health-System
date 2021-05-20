@@ -8,6 +8,7 @@ import { BrowserRouter, Router} from 'react-router-dom';
 import { store, StoreContext } from './app/stores/store';
 import {createBrowserHistory} from 'history';
 
+
 export const history = createBrowserHistory();
 
 ReactDOM.render(
