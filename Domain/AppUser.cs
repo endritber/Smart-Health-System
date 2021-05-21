@@ -11,8 +11,6 @@ namespace Domain
         public int RoleId { get; set; }
         public string Bio { get; set; } 
 
-        public PatientInfo patient {get; set;}
-
 
 
     }

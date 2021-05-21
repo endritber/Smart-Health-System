@@ -1,12 +1,14 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Icon, Item } from 'semantic-ui-react';
+import LoadingComponent from '../../app/layout/LoadingComponent';
+import { useStore } from '../../app/stores/store';
 
 
 
-export default function MyHealthList() {
+export default observer(function MyHealthList() {
     return (
-
         <Item.Group relaxed>
   
         <Item>
@@ -66,4 +68,4 @@ export default function MyHealthList() {
         
       </Item.Group>
     )
-}
+})

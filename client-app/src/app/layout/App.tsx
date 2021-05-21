@@ -14,10 +14,8 @@ import LoginForm from '../../features/users/LoginForm';
 import { useStore } from '../stores/store';
 import { useEffect } from 'react';
 import ModalContainer from '../modals/ModalContainer';
-import Patients from '../../features/mypatients/Patients';
-import LoadingComponent from './LoadingComponent';
-import LabResultsForm from '../../features/mypatients/form/LabResultsForm';
-import PatientProfile from '../../features/Profiles/PatientProfile';
+import DoctorNavBar from './DoctorNavBar';
+
 
 
 function App() {
@@ -56,7 +54,6 @@ function App() {
         <Route path='/diseaseprediction' component={DiseasePrediction}/>
         <Route path='/myhealthlist/labresults' component={LabResults}/>
         <Route path='/myhealthlist/prescriptions' component={Prescriptions}/>
-        <Route path='/myprofile' component={PatientProfile} />
         <Route path='/login' component={LoginForm}/>
     </Container>
     </>
@@ -65,16 +62,15 @@ function App() {
   
   </>) : (
     <>
+    
     <Route exact path='/' component={HomePage}/>
         <ModalContainer/>
           <Route 
           path={'/(.+)'}
           render={()=>(
             <>
-    
+    <DoctorNavBar/>
         <Container style={{marginTop:"7em"}}> 
-        <Route exact path='/patients' component={Patients} />
-        <Route path='/addLabResults' component={LabResultsForm} />
         <Route />
 
         </Container>

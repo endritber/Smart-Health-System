@@ -13,24 +13,6 @@ namespace Persistence
 
 {
 
-
-                if (!context.PatientInfos.Any()) {
-                    var patientinfos = new List<PatientInfo> 
-                    {
-                        new PatientInfo 
-                        {
-                         Name = "Endrit",
-                        LastName="Berisha",
-                        Allergies=null,
-                        Disease="Blood Pressure",
-                        BirthDate= DateTime.Now.AddMonths(-20),
-                        Profession="Student",
-                        Nationality="Albanian"
-                        }
-                    };
-                    await context.PatientInfos.AddRangeAsync(patientinfos);
-                        }
-
          if (!userManager.Users.Any())
             {
                 var users = new List<AppUser> 

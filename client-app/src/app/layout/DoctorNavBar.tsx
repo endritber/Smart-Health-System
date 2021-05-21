@@ -5,7 +5,7 @@ import { useStore } from "../stores/store";
 
 
 export default  observer (function DoctorNavBar() {
-    const {userStore:{user, logout}, patientStore} = useStore();
+    const {userStore:{user, logout}} = useStore();
 
     return (
         
@@ -18,7 +18,7 @@ export default  observer (function DoctorNavBar() {
                 <Menu.Item as={NavLink} to = '/patients' name ="MyPatients" />
                 <Menu.Item as={NavLink} to = '/messages' name ="Message"/>
                 <Menu.Item>
-                    <Button  onClick={()=>patientStore.openForm()}content = 'Add Patient'/>
+                    <Button content = 'Add Patient'/>
                 </Menu.Item>
 
                 <Menu.Item position="right">
