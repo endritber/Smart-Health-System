@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { LabResult } from '../models/labresult';
 import { Prescription } from '../models/prescription';
-import { User, userFormValues } from '../models/user';
+import { patientUser, User, userFormValues } from '../models/user';
 
 
 const sleep = (delay: number) => {
@@ -64,10 +64,15 @@ const Account = {
     register: (user: userFormValues) => requests.post<User>('/account/register', user)
 }
 
+const Profile = {
+    get: (username:string) => requests.get<patientUser>(`/profiles/patient/${username}`)
+}
+
 const agent ={
     labresults,
     Account, 
-    prescriptions
+    prescriptions,
+    Profile
 }
 
 export default agent;

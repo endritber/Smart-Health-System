@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class additionalCreating : Migration
+    public partial class userInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,6 +29,21 @@ namespace Persistence.Migrations
                     DisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     RoleId = table.Column<int>(type: "INTEGER", nullable: false),
                     Bio = table.Column<string>(type: "TEXT", nullable: true),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    Education = table.Column<string>(type: "TEXT", nullable: true),
+                    YearsExperience = table.Column<int>(type: "INTEGER", nullable: true),
+                    Specialization = table.Column<string>(type: "TEXT", nullable: true),
+                    Qualification = table.Column<string>(type: "TEXT", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Gender = table.Column<string>(type: "TEXT", nullable: true),
+                    Patient_Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Patient_LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    Patient_BirthDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Address = table.Column<string>(type: "TEXT", nullable: true),
+                    Language = table.Column<string>(type: "TEXT", nullable: true),
+                    Profession = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -64,24 +79,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LabResults", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PatientInfos",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Nationality = table.Column<string>(type: "TEXT", nullable: true),
-                    Allergies = table.Column<string>(type: "TEXT", nullable: true),
-                    Profession = table.Column<string>(type: "TEXT", nullable: true),
-                    Disease = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PatientInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,9 +261,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "LabResults");
-
-            migrationBuilder.DropTable(
-                name: "PatientInfos");
 
             migrationBuilder.DropTable(
                 name: "Prescriptions");

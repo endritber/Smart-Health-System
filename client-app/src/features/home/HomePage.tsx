@@ -9,8 +9,6 @@ import LoginForm from '../users/LoginForm';
 export default observer(function HomePage() {
     const {userStore, modalStore, labResultStore} = useStore();
 
-    if (labResultStore.loadingInitial === false) {labResultStore.loadingInitial=true
-    return <LoadingComponent content="Loading Smart Health..."/>}
 
     return (
         <Segment inverted textAlign='center' vertical className='masthead'>
@@ -25,7 +23,7 @@ export default observer(function HomePage() {
                     <>
                 {userStore.isLoggedIn ? (
                     <>
-                    <Header as='h2' inverted content={`Everything You Need! - ${userStore.user?.displayName}`}/> 
+                    <Header as='h2' inverted content={`Everything You Need! - ${userStore.user?.userName}`}/> 
                     <Button primary as={Link} to='/myhealthlist' size='massive' >
                         Get Started
                     </Button>

@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
+    
     public class LabResultsController : BaseApiController
     {
 
+        
         [HttpGet]
         public async Task<ActionResult<List<LabResult>>> GetLabResults()
         {
@@ -19,11 +20,13 @@ namespace API.Controllers
         }
 
         
+        [Authorize]
         [HttpGet("{id}")] //labresults/id
 
         public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
         {
           return await Mediator.Send(new LabResultsDetails.Query{Id = id});
+
         }
 
         [HttpPost]

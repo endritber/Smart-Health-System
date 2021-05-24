@@ -12,7 +12,7 @@ import LabResultList from './LabResultList'
 export default  observer (function LabResultDashboard() {
 
     const {labResultStore} = useStore();
-    const {selectedLabResult, editMode} = labResultStore
+    const {selectedLabResult} = labResultStore
 
     return (
         <Grid>

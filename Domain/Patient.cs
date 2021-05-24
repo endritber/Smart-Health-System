@@ -1,12 +1,9 @@
 using System;
 
-namespace Application.Profiles
+namespace Domain
 {
-    public class PatientProfile
+    public class Patient : AppUser
     {
-       public string DisplayName {get;set;}
-
-        public string UserName {get;set;}
         public string Name { get; set; }
 
         public string LastName {get; set;}
@@ -15,12 +12,13 @@ namespace Application.Profiles
 
         public string Address{get; set;}
 
+        public  override string PhoneNumber {get; set;} 
+
         public string Language {get; set;}
 
         public string Profession { get; set; }
-        
-        public string Bio { get; set; }
 
-        public string Image {get; set;}
+        public Doctor doctor {get; set;}
+
     }
 }

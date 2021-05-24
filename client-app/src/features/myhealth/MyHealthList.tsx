@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Icon, Item } from 'semantic-ui-react';
+import { Button, Divider, Icon, Item } from 'semantic-ui-react';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 
@@ -12,6 +12,7 @@ export default observer(function MyHealthList() {
         <Item.Group relaxed>
   
         <Item>
+          <Divider/>
         <Icon name='calendar check' size='massive'/>
           <Item.Content verticalAlign='bottom'>
             <Item.Header>Appointments</Item.Header>
@@ -22,6 +23,7 @@ export default observer(function MyHealthList() {
           </Item.Content>
         </Item>
         <Item>
+        <Divider/>
         <Icon name='file alternate outline' size='massive'/>
           <Item.Content verticalAlign='bottom'>
             <Item.Header>Lab Results</Item.Header>
@@ -31,9 +33,8 @@ export default observer(function MyHealthList() {
             </Item.Extra>
           </Item.Content>
         </Item>
-  
         <Item>
-
+        <Divider/>
         <Icon name='pen square' size='massive'/>
           <Item.Content verticalAlign='bottom'>
             <Item.Header>Prescriptions</Item.Header>
@@ -44,7 +45,7 @@ export default observer(function MyHealthList() {
           </Item.Content>
         </Item>
         <Item>
-        
+        <Divider/>
         <Icon name='heartbeat' size='massive'/>
           <Item.Content verticalAlign='bottom'>
             <Item.Header>Vitals</Item.Header>
@@ -55,7 +56,7 @@ export default observer(function MyHealthList() {
           </Item.Content>
         </Item>
         <Item>
-
+        <Divider/>
         <Icon name='chart bar' size='massive'/>
           <Item.Content verticalAlign='bottom'>
             <Item.Header>Medical Images</Item.Header>

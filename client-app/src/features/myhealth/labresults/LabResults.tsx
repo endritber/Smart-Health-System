@@ -17,7 +17,7 @@ export default observer (function LabResults() {
 
 
 
-  if (labResultStore.loadingInitial) return <LoadingComponent content='Loading...'/>
+  if (labResultStore.loadingInitial) return <LoadingComponent content='Loading Lab Results...'/>
 
   return (
     <>

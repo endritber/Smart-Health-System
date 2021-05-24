@@ -15,6 +15,7 @@ import { useStore } from '../stores/store';
 import { useEffect } from 'react';
 import ModalContainer from '../modals/ModalContainer';
 import DoctorNavBar from './DoctorNavBar';
+import PatientProfilePage from '../../features/Profiles/PatientProfilePage';
 
 
 
@@ -53,6 +54,7 @@ function App() {
         <Route path='/messages' component={Messages}/>
         <Route path='/diseaseprediction' component={DiseasePrediction}/>
         <Route path='/myhealthlist/labresults' component={LabResults}/>
+        <Route path='/profiles/:username' component={PatientProfilePage}/>
         <Route path='/myhealthlist/prescriptions' component={Prescriptions}/>
         <Route path='/login' component={LoginForm}/>
     </Container>
@@ -71,6 +73,7 @@ function App() {
             <>
     <DoctorNavBar/>
         <Container style={{marginTop:"7em"}}> 
+  
         <Route />
 
         </Container>

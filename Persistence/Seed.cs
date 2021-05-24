@@ -13,20 +13,20 @@ namespace Persistence
 
 {
 
-         if (!userManager.Users.Any())
-            {
+       
                 var users = new List<AppUser> 
                 {
-                    new AppUser{DisplayName="Endrit", UserName="endrit", Email="endrit@test.com", RoleId=1},
-                    new AppUser{DisplayName="Dorant", UserName="dorant", Email="dorant@test.com", RoleId=1},
-                    new AppUser{DisplayName="Doctor", UserName="doctor", Email="doctor@test.com", RoleId=2},
+                    new Doctor {DisplayName="Doctor", Email="doctor@test.com",UserName="doctor", RoleId=2},
+                    new Doctor {DisplayName="Doctor2", Email="doctor2@test.com",UserName="doctor2", RoleId=2},
+                    new Patient {DisplayName="Endrit", Email="endrit@test.com",UserName="endrit", RoleId=1, }
+
                 };
 
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
-            }
+            
 
 
             if (!context.LabResults.Any())
@@ -119,7 +119,7 @@ namespace Persistence
                           new Prescription
                     {
                         Medication = "Gabapentin",
-                        Dose = "'True'.23%",
+                        Dose = "0.23%",
                         Frequency="1 daily",
                         Quantity="2",
                         Provider = "OTC",
@@ -127,7 +127,7 @@ namespace Persistence
                     },
                     new Prescription{
                         Medication = "Citalopran",
-                        Dose = "'True'.93%",
+                        Dose = "0.93%",
                         Frequency="2 daily",
                         Quantity="4",
                         Provider = "Barnes",

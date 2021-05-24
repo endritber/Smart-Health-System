@@ -1,5 +1,7 @@
 using System.Linq;
-using Application.PatientInfos;
+using Application.Doctors;
+using Application.Patients;
+using Application.Profiles;
 using AutoMapper;
 using Domain;
 
@@ -11,6 +13,18 @@ namespace Application.Core
         {
             CreateMap<LabResult, LabResult>();
             CreateMap<Prescription, Prescription>();
+
+            CreateMap<Doctor, DoctorDto>();
+            CreateMap<Doctor, DoctorProfile>();
+            CreateMap<Patient, PatientDto>();
+            CreateMap<Patient, PatientProfile>();
+
+            
+
+
+
+
+            
         }
     }
 }

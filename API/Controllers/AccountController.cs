@@ -59,7 +59,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new AppUser
+            var user = new Patient
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,

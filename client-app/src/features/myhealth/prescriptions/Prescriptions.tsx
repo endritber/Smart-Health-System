@@ -16,15 +16,6 @@ export default function Prescriptions() {
     })
   }, [])
 
-
-//   function handleSelectedLabResult(id: string) {
-//       setSelectedLabResult(labresults.find(x=>x.id === id))
-//   }
-
-//   function handleCancelSelectLabResult() {
-//     setSelectedLabResult(undefined);
-//   }
-
   return (
     <>
     <Container style={{marginTop:"7em"}}>

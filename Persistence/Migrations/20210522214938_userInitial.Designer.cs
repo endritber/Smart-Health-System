@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210522214938_userInitial")]
+    partial class userInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,7 +287,7 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Domain.AppUser");
 
-                    b.Property<DateTime?>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Education")
@@ -306,7 +308,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Specialization")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("YearsExperience")
+                    b.Property<int>("YearsExperience")
                         .HasColumnType("INTEGER");
 
                     b.HasDiscriminator().HasValue("Doctor");
@@ -319,7 +321,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT")
                         .HasColumnName("Patient_BirthDate");
 
@@ -336,11 +338,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Profession")
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("doctorId")
-                        .HasColumnType("TEXT");
-
-                    b.HasIndex("doctorId");
 
                     b.HasDiscriminator().HasValue("Patient");
                 });
@@ -394,20 +391,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Patient", b =>
-                {
-                    b.HasOne("Domain.Doctor", "doctor")
-                        .WithMany("Patients")
-                        .HasForeignKey("doctorId");
-
-                    b.Navigation("doctor");
-                });
-
-            modelBuilder.Entity("Domain.Doctor", b =>
-                {
-                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }

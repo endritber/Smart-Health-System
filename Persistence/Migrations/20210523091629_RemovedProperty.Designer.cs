@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210519165256_additionalCreating")]
-    partial class additionalCreating
+    [Migration("20210523091629_RemovedProperty")]
+    partial class RemovedProperty
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,10 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DisplayName")
@@ -89,6 +93,27 @@ namespace Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
+                });
+
+            modelBuilder.Entity("Domain.DoctorPatient", b =>
+                {
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("isDoctor")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("DoctorId", "PatientId");
+
+                    b.HasIndex("PatientId")
+                        .IsUnique();
+
+                    b.ToTable("DoctorPatients");
                 });
 
             modelBuilder.Entity("Domain.LabResult", b =>
@@ -118,38 +143,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LabResults");
-                });
-
-            modelBuilder.Entity("Domain.PatientInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Allergies")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Disease")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nationality")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Profession")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PatientInfos");
                 });
 
             modelBuilder.Entity("Domain.Prescription", b =>
@@ -309,6 +302,87 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.Doctor", b =>
+                {
+                    b.HasBaseType("Domain.AppUser");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Education")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Qualification")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Specialization")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("YearsExperience")
+                        .HasColumnType("INTEGER");
+
+                    b.HasDiscriminator().HasValue("Doctor");
+                });
+
+            modelBuilder.Entity("Domain.Patient", b =>
+                {
+                    b.HasBaseType("Domain.AppUser");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Patient_BirthDate");
+
+                    b.Property<string>("Language")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Patient_LastName");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Patient_Name");
+
+                    b.Property<string>("Profession")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("isRemoved")
+                        .HasColumnType("INTEGER");
+
+                    b.HasDiscriminator().HasValue("Patient");
+                });
+
+            modelBuilder.Entity("Domain.DoctorPatient", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany("Patients")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Patient", "patient")
+                        .WithOne("doctor")
+                        .HasForeignKey("Domain.DoctorPatient", "PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -358,6 +432,16 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Doctor", b =>
+                {
+                    b.Navigation("Patients");
+                });
+
+            modelBuilder.Entity("Domain.Patient", b =>
+                {
+                    b.Navigation("doctor");
                 });
 #pragma warning restore 612, 618
         }

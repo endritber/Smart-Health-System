@@ -1,12 +1,13 @@
 using System;
+using Application.Doctors;
+using Application.Profiles;
+using Domain;
 
-namespace Application.Profiles
+namespace Application.Patients
 {
-    public class PatientProfile
+    public class PatientDto
     {
-       public string DisplayName {get;set;}
-
-        public string UserName {get;set;}
+        public string Id {get;set;}
         public string Name { get; set; }
 
         public string LastName {get; set;}
@@ -18,9 +19,9 @@ namespace Application.Profiles
         public string Language {get; set;}
 
         public string Profession { get; set; }
-        
-        public string Bio { get; set; }
 
-        public string Image {get; set;}
+        public DoctorProfile doctor {get; set;}
+
     }
 }
+ 
