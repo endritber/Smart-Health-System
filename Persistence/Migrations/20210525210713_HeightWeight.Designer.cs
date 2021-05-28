@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210525210713_HeightWeight")]
+    partial class HeightWeight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,34 +167,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prescriptions");
-                });
-
-            modelBuilder.Entity("Domain.Steps", b =>
-                {
-                    b.Property<Guid>("stepsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("mySteps")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("stepsId");
-
-                    b.ToTable("Stepss");
-                });
-
-            modelBuilder.Entity("Domain.WaterIntake", b =>
-                {
-                    b.Property<Guid>("waterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("literPerHour")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("waterId");
-
-                    b.ToTable("WaterIntakes");
                 });
 
             modelBuilder.Entity("Domain.Weight", b =>

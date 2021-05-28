@@ -21,7 +21,7 @@ namespace API.Controllers
 
         
         [Authorize]
-        [HttpGet("{id}")] //labresults/id
+        [HttpGet("{id}")] 
 
         public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
         {
