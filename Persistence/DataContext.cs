@@ -11,7 +11,7 @@ namespace Persistence
         }
 
         public DbSet<Appointments> Appointmentss { get; set;}
-        public DbSet<Steps> Stepss { get; set;}
+        public DbSet<Vitals> Vitalss { get; set;}
         public DbSet<WaterIntake> WaterIntakes { get; set;}
         public DbSet<Weight> Weights { get; set;}
         public DbSet<Height> Heights { get; set;}
