@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-sclae=1.0">
+
+    <title> Document</title>
+    <body>
+    <h1>Hello to you</h1>
+    <span>Request Method - {{request_method}}</span>
+{
+
+    <form Method="POST" action="/symptoms">
+    {{form.hidden_tag()}}
+    {{form.symptom1}}
+    {{form.symptom2}}
+    {{form.symptom3}}
+    {{form.symptom4}}
+    {{form.symptom5}}
+    {{form.submit}}
+
+    {# <input type="text" placeholder = "Symptom1" name="Symptom1">
+    <input type="text" placeholder = "Symptom2" name="Symptom2">
+    <input type="text" placeholder = "Symptom3" name="Symptom3">
+    <input type="text" placeholder = "Symptom4" name="Symptom4">
+    <input type="text" placeholder = "Symptom5" name="Symptom5"> #}
+    {# <input type="submit"> #}
+    </form>
+
+     </body>
+ 
+</head>
+</html> 

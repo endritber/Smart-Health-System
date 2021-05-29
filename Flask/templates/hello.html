@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-sclae=1.0">
+
+    <title> Document</title>
+    <body>
+    <h1>Hello to you</h1>
+    <span>Request Method - {{request_method}}</span>
+
+
+    <form Method="POST" action="/">
+    <input type="text" placeholder = "first_name" name="first_name">
+    <input type="text" placeholder = "last_name" name="last_name">
+    <input type="submit">
+    </form>
+    <hr>
+    {% for i in sym%}
+        {{i.Symptom1}}
+        {{i.Symptom2}}
+        {{i.Symptom3}}
+        {{i.Symptom4}}
+        {{i.Symptom5}}
+    {%endfor%}
+    </hr>
+    
+
+     </body>
+ 
+</head>
+</html> 
