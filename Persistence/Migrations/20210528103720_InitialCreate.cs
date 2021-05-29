@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class userInitial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,7 @@ namespace Persistence.Migrations
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     Language = table.Column<string>(type: "TEXT", nullable: true),
                     Profession = table.Column<string>(type: "TEXT", nullable: true),
+                    doctorId = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -62,23 +63,12 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LabResults",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Sample = table.Column<string>(type: "TEXT", nullable: true),
-                    ProblemProportion = table.Column<string>(type: "TEXT", nullable: true),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Result = table.Column<string>(type: "TEXT", nullable: true),
-                    ResultProportion = table.Column<string>(type: "TEXT", nullable: true),
-                    status = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LabResults", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetUsers_doctorId",
+                        column: x => x.doctorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -204,6 +194,37 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LabResults",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Sample = table.Column<string>(type: "TEXT", nullable: true),
+                    ProblemProportion = table.Column<string>(type: "TEXT", nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Result = table.Column<string>(type: "TEXT", nullable: true),
+                    ResultProportion = table.Column<string>(type: "TEXT", nullable: true),
+                    status = table.Column<string>(type: "TEXT", nullable: true),
+                    patientId = table.Column<string>(type: "TEXT", nullable: true),
+                    doctorId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LabResults", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LabResults_AspNetUsers_doctorId",
+                        column: x => x.doctorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LabResults_AspNetUsers_patientId",
+                        column: x => x.patientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -236,10 +257,25 @@ namespace Persistence.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_doctorId",
+                table: "AspNetUsers",
+                column: "doctorId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LabResults_doctorId",
+                table: "LabResults",
+                column: "doctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LabResults_patientId",
+                table: "LabResults",
+                column: "patientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

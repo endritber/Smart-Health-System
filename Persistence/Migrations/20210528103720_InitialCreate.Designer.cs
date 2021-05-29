@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210523115552_AddedProperties")]
-    partial class AddedProperties
+    [Migration("20210528103720_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,10 +118,20 @@ namespace Persistence.Migrations
                     b.Property<string>("Sample")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("doctorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patientId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("status")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("doctorId");
+
+                    b.HasIndex("patientId");
 
                     b.ToTable("LabResults");
                 });
@@ -347,6 +357,21 @@ namespace Persistence.Migrations
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
+            modelBuilder.Entity("Domain.LabResult", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany()
+                        .HasForeignKey("doctorId");
+
+                    b.HasOne("Domain.Patient", "patient")
+                        .WithMany("LabResults")
+                        .HasForeignKey("patientId");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -410,6 +435,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Doctor", b =>
                 {
                     b.Navigation("Patients");
+                });
+
+            modelBuilder.Entity("Domain.Patient", b =>
+                {
+                    b.Navigation("LabResults");
                 });
 #pragma warning restore 612, 618
         }

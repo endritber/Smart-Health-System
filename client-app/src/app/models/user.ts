@@ -1,4 +1,7 @@
+
 export interface User {
+
+    id:string
 
     userName: string;
 
@@ -20,6 +23,7 @@ export interface userFormValues {
 }
 
 export interface patientUser {
+    id: string
     displayName: string;
     userName: string;
     name: string;
@@ -31,4 +35,19 @@ export interface patientUser {
     bio:string;
     image:string;
 
+}
+export interface doctorUser {
+    id: string;
+    displayName:string;
+    userName:string;
+    name: string;
+    lastName:string;
+    education:string;
+    yearsExperience:number;
+    specialization:string;
+    qualification:string;
+    birthDate:string;
+    gender:string;
+    bio:string;
+    image:string
 }

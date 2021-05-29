@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Application.Doctors;
 using Application.Profiles;
 using Domain;
@@ -21,6 +22,8 @@ namespace Application.Patients
         public string Profession { get; set; }
 
         public DoctorProfile doctor {get; set;}
+
+        public ICollection<string> LabResults {get; set;} = new List<string>();
 
     }
 }

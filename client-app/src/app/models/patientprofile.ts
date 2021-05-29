@@ -1,7 +1,7 @@
 import { patientUser, User } from "./user";
 
 export interface patientprofile {
-
+    id:string;
     displayName: string;
     userName: string;
     name: string;
@@ -12,11 +12,12 @@ export interface patientprofile {
     profession:string;
     bio:string;
     image:string;
-
+    
 }
 
 export class patientprofile implements patientprofile {
     constructor(user: patientUser) {
+        this.id = user.id;
         this.userName = user.userName;
         this.displayName = user.displayName;
         this.image = user.image;

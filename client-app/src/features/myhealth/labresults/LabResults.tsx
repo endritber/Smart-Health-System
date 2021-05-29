@@ -23,7 +23,6 @@ export default observer (function LabResults() {
     <>
     <Container style={{marginTop:"7em"}}>
         <LabResultsDashboard />
-  
     </Container>
     </>
   )

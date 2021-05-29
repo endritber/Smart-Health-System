@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -19,6 +20,8 @@ namespace Domain
         public string Profession { get; set; }
 
         public Doctor doctor {get; set;}
+
+        public ICollection<string> LabResults {get; set;} = new List<string>();
 
     }
 }

@@ -11,7 +11,6 @@ namespace API.Controllers
 {
     public class PatientController : BaseApiController
     {
-
         [HttpGet]
         public async Task<ActionResult<List<PatientDto>>> GetPatients()
         {
@@ -25,9 +24,6 @@ namespace API.Controllers
           return await Mediator.Send(new PatientDetail.Query{Id = id});
         }
 
-        [HttpPost]
-
-
         [HttpPut("{id}")]
         public async Task<IActionResult> EditPatient(String id, Patient patient) {
             patient.Id = id;
@@ -40,7 +36,7 @@ namespace API.Controllers
          }
 
          [HttpPut("{patientId}/doctor/{doctorId}")]
-        public async Task<IActionResult> AddDoctor(string patientId, string doctorId) {
+         public async Task<IActionResult> AddDoctor(string patientId, string doctorId) {
             return Ok(await Mediator.Send(new AddDoctor.Command{PatientId = patientId, DoctorId = doctorId}));
          }
     }

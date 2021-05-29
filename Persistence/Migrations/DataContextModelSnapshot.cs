@@ -104,6 +104,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PatientId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ProblemProportion")
                         .HasColumnType("TEXT");
 
@@ -116,10 +119,18 @@ namespace Persistence.Migrations
                     b.Property<string>("Sample")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("doctor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patient")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("status")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("LabResults");
                 });
@@ -345,6 +356,13 @@ namespace Persistence.Migrations
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
+            modelBuilder.Entity("Domain.LabResult", b =>
+                {
+                    b.HasOne("Domain.Patient", null)
+                        .WithMany("LabResults")
+                        .HasForeignKey("PatientId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -408,6 +426,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Doctor", b =>
                 {
                     b.Navigation("Patients");
+                });
+
+            modelBuilder.Entity("Domain.Patient", b =>
+                {
+                    b.Navigation("LabResults");
                 });
 #pragma warning restore 612, 618
         }

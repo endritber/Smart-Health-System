@@ -26,7 +26,7 @@ export default  observer (function DoctorNavBar() {
                     {/* <Image src= {user?.image || '/dika'} avatar spaced='right' /> */}
                     <Dropdown pointing="top left" text={user?.displayName}>
                         <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to={`/profile/${user?.userName}`} text='My Profile' icon='user'/>
+                        <Dropdown.Item as={Link} to={`/profiles/${user?.userName}`} text='My Profile' icon='user'/>
                         <Dropdown.Item onClick={logout} text='Log out' icon='power'/>
                         </Dropdown.Menu>
                         

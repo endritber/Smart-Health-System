@@ -11,7 +11,6 @@ namespace Persistence
         }
         
         public DbSet<LabResult> LabResults { get; set; }
-
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -24,6 +23,8 @@ namespace Persistence
             builder.Entity<Doctor>()
             .HasMany(x=>x.Patients)
             .WithOne(x=>x.doctor);
+
+        
         }
 
     }

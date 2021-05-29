@@ -3,7 +3,7 @@ using Application.Profiles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
-{
+{ 
     public class ProfilesController: BaseApiController
     {
         [Route("api/[controller]")]
@@ -18,7 +18,7 @@ namespace API.Controllers
         {
           return await Mediator.Send(new DoctorDetails.Query{UserName = username});
         }
-
+      
         
     }
 }

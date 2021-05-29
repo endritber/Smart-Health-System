@@ -16,6 +16,9 @@ import { useEffect } from 'react';
 import ModalContainer from '../modals/ModalContainer';
 import DoctorNavBar from './DoctorNavBar';
 import PatientProfilePage from '../../features/Profiles/PatientProfilePage';
+import PatientForm from '../../features/Profiles/patientForm/PatientForm';
+import DoctorProfilePage from '../../features/Profiles/DoctorProfilePage';
+import DoctorForm from '../../features/Profiles/doctorForm/DoctorForm';
 
 
 
@@ -35,7 +38,6 @@ function App() {
 
 
   return (
-
 
     <>
     {userStore.user?.roleId === 1 ? (
@@ -57,6 +59,7 @@ function App() {
         <Route path='/profiles/:username' component={PatientProfilePage}/>
         <Route path='/myhealthlist/prescriptions' component={Prescriptions}/>
         <Route path='/login' component={LoginForm}/>
+        <Route path='/addInformation/:id'  component={PatientForm}/>
     </Container>
     </>
   )}
@@ -64,6 +67,7 @@ function App() {
   
   </>) : (
     <>
+
     
     <Route exact path='/' component={HomePage}/>
         <ModalContainer/>
@@ -73,8 +77,9 @@ function App() {
             <>
     <DoctorNavBar/>
         <Container style={{marginTop:"7em"}}> 
-  
         <Route />
+        <Route path='/profiles/:username' component={DoctorProfilePage}/>
+        <Route path='/addDoctorInformation/:id' component={DoctorForm}/>
 
         </Container>
         </>

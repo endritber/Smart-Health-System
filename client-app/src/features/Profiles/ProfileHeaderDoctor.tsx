@@ -1,27 +1,32 @@
 import { observer } from "mobx-react-lite";
 import { Button, Card, Divider, Grid, Header, Icon, Item, Label, Reveal, Segment, Statistic } from "semantic-ui-react";
+import { doctorprofile } from "../../app/models/doctorprofile";
 import { patientprofile } from "../../app/models/patientprofile";
 
 interface Props {
-    profile: patientprofile;
+   profile : doctorprofile;
 }
 
-export default  observer (function ProfileHeaderPatient ({profile}: Props){
+export default  observer (function ProfileHeaderDoctor ({profile}: Props){
     return (
         <Segment>
             <Grid>
                 <Grid.Column width={10}>
                     <Item.Group>
-                    
                         <Item>
                             <Icon name='user' size='massive'></Icon>
                             
-                            <Card
-                                    href=''
-                                    header={`${profile.name} ${profile.lastName}`}
-                                    meta='Patient'
-                                    description={`Profession: ${profile.profession}`}
-                                />
+                            <Card>
+                                <Card.Header>
+                                    {profile.name === null ? <>{profile.userName} {profile.lastName}</>
+                                        :
+                                     <>{profile.name} {profile.lastName}</>
+
+                                    } 
+                                </Card.Header>
+                                ...
+                            </Card>
+
                             <Item.Content verticalAlign='middle'>
                             </Item.Content>
                         </Item>
@@ -32,12 +37,14 @@ export default  observer (function ProfileHeaderPatient ({profile}: Props){
                     <Item>
 
                     <Item.Content style={{marginTop:20}}>
-                        <Item.Header as='a'>Address: {profile.address}</Item.Header>
+                        <Item.Header as='a'>Experience: {profile.yearsExperience} Years</Item.Header>
+                        <Divider/>
+                        <Item.Header as='a'>Education: {profile.education}</Item.Header>
                         <Item.Meta>
-                        <span className='cinema'>Language: {profile.language}</span>
+                        <span className='cinema'>Gender: {profile.gender}</span>
                         </Item.Meta>
                         <Item.Extra>
-                        <Label icon='chevron right' content='Disease: Here is going to be the disease' />
+                        <Label icon='chevron right' content='Description...' />
                         </Item.Extra>
                     </Item.Content>
                     </Item>

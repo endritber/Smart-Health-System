@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Divider, Icon, Item } from 'semantic-ui-react';
-import LoadingComponent from '../../app/layout/LoadingComponent';
+import {Button, Divider, Icon, Item } from 'semantic-ui-react';
+
 import { useStore } from '../../app/stores/store';
 
 
@@ -10,7 +10,6 @@ import { useStore } from '../../app/stores/store';
 export default observer(function MyHealthList() {
     return (
         <Item.Group relaxed>
-  
         <Item>
           <Divider/>
         <Icon name='calendar check' size='massive'/>

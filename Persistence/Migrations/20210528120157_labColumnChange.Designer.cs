@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210523091629_RemovedProperty")]
-    partial class RemovedProperty
+    [Migration("20210528120157_labColumnChange")]
+    partial class labColumnChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,25 +97,6 @@ namespace Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
                 });
 
-            modelBuilder.Entity("Domain.DoctorPatient", b =>
-                {
-                    b.Property<string>("DoctorId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PatientId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("isDoctor")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("DoctorId", "PatientId");
-
-                    b.HasIndex("PatientId")
-                        .IsUnique();
-
-                    b.ToTable("DoctorPatients");
-                });
-
             modelBuilder.Entity("Domain.LabResult", b =>
                 {
                     b.Property<Guid>("Id")
@@ -123,6 +104,9 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PatientId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProblemProportion")
@@ -137,10 +121,18 @@ namespace Persistence.Migrations
                     b.Property<string>("Sample")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("doctor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patient")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("status")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("LabResults");
                 });
@@ -358,29 +350,19 @@ namespace Persistence.Migrations
                     b.Property<string>("Profession")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("isRemoved")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("doctorId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("doctorId");
 
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
-            modelBuilder.Entity("Domain.DoctorPatient", b =>
+            modelBuilder.Entity("Domain.LabResult", b =>
                 {
-                    b.HasOne("Domain.Doctor", "doctor")
-                        .WithMany("Patients")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Patient", "patient")
-                        .WithOne("doctor")
-                        .HasForeignKey("Domain.DoctorPatient", "PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("doctor");
-
-                    b.Navigation("patient");
+                    b.HasOne("Domain.Patient", null)
+                        .WithMany("LabResults")
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -434,6 +416,15 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Patient", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany("Patients")
+                        .HasForeignKey("doctorId");
+
+                    b.Navigation("doctor");
+                });
+
             modelBuilder.Entity("Domain.Doctor", b =>
                 {
                     b.Navigation("Patients");
@@ -441,7 +432,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Patient", b =>
                 {
-                    b.Navigation("doctor");
+                    b.Navigation("LabResults");
                 });
 #pragma warning restore 612, 618
         }

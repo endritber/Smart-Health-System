@@ -18,5 +18,9 @@ namespace Domain
 
         public string status {get; set;}
 
+        public string patient { get;set;}
+
+        public string doctor {get; set;}
+
     }
 }

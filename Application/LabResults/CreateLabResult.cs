@@ -6,11 +6,15 @@ using Persistence;
 
 namespace Application.LabResults
 {
-    public class CreateLabResult
-    {
+    public class CreateLabResult {
+
         public class Command : IRequest
         {
             public LabResult LabResult { get; set; }
+
+            public string PatientId { get; set; }
+
+            public string DoctorId { get; set; }
         }
 
     public class Handler : IRequestHandler<Command>
@@ -25,9 +29,24 @@ namespace Application.LabResults
     
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.LabResults.Add(request.LabResult);
 
-                await _context.SaveChangesAsync();
+
+        
+                var patient = await _context.Patients.FindAsync(request.PatientId);
+
+                var doctor = await _context.Doctors.FindAsync(request.DoctorId);
+
+                
+                //logic error
+                // request.LabResult.patient = patient.Id;
+
+                // request.LabResult.doctor = doctor.Id;
+
+                // _context.LabResults.Add(request.LabResult);
+
+                // patient.LabResults.Add(request.LabResult);
+
+                // await _context.SaveChangesAsync();
 
                 return Unit.Value;
             }

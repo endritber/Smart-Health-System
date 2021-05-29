@@ -33,7 +33,6 @@ namespace Application.Patients
                     doctor.Patients.Add(patient);
 
                     await _context.SaveChangesAsync();
-
                     return Unit.Value;
 
                 }

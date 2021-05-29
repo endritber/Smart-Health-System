@@ -30,12 +30,15 @@ namespace API
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync();
                 await Seed.SeedData(context, userManager);
+                Console.WriteLine(context);
                 }
             catch (Exception ex)
             {
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 logger.LogError(ex, "An error occured during migraiton");
             }
+
+            
             
             await host.RunAsync();
             

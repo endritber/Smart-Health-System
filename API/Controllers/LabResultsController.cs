@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Doctors;
 using Application.LabResults;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -19,8 +20,7 @@ namespace API.Controllers
             return await Mediator.Send(new ListLabResults.Query());
         }
 
-        
-        [Authorize]
+    
         [HttpGet("{id}")] //labresults/id
 
         public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
@@ -29,10 +29,11 @@ namespace API.Controllers
 
         }
 
-        [HttpPost]
-
-        public async Task<IActionResult> CreateLabResult(LabResult labresult) {
-            return Ok(await Mediator.Send(new CreateLabResult.Command{LabResult= labresult}));
+        [HttpPost("{patientId}/{doctorId}")]
+        public async Task<IActionResult> CreateLabResult(LabResult labresult, string patientId, string doctorId) {
+            return Ok(await Mediator.Send(new CreateLabResult.Command{LabResult= labresult,
+            PatientId = patientId, DoctorId = doctorId }
+            ));
         }
 
         [HttpPut("{id}")]

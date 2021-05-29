@@ -1,7 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
+import { Doctor } from '../models/doctor';
 import { LabResult } from '../models/labresult';
+import { Patient } from '../models/patient';
+import { patientprofile } from '../models/patientprofile';
 import { Prescription } from '../models/prescription';
-import { patientUser, User, userFormValues } from '../models/user';
+import {doctorUser, patientUser, User, userFormValues } from '../models/user';
 
 
 const sleep = (delay: number) => {
@@ -68,11 +71,35 @@ const Profile = {
     get: (username:string) => requests.get<patientUser>(`/profiles/patient/${username}`)
 }
 
+const DocProfile = {
+    get: (username:string) => requests.get<doctorUser>(`/profiles/doctor/${username}`)
+}
+
+const Patients = {
+
+    list: () => requests.get<Patient[]>('/patient'),
+    details: (id: string) => requests.get<Patient>(`/patient/${id}`),
+    update: (patient: Patient) => axios.put<void>(`/patient/${patient.id}`, patient),
+    delete:(id:string) => axios.delete<void>(`/patient/${id}`),
+    addDoctor:(patientId: string, doctorId:string) => axios.put<void>(`/patient/${patientId}/doctor/${doctorId}`)
+}
+
+const Doctors = {
+    list: () => requests.get<Doctor[]>('/doctor'),
+    details: (id: string) => requests.get<Doctor>(`/doctor/${id}`),
+    update: (doctor: Doctor) => axios.put<void>(`/doctor/${doctor.id}`, doctor),
+    delete:(id:string) => axios.delete<void>(`/doctor/${id}`),
+    
+}
+
 const agent ={
     labresults,
     Account, 
     prescriptions,
-    Profile
+    Profile,
+    Patients,
+    Doctors, 
+    DocProfile
 }
 
 export default agent;
