@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210525210713_HeightWeight")]
+    partial class HeightWeight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,9 +120,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PatientId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("ProblemProportion")
                         .HasColumnType("TEXT");
 
@@ -133,18 +132,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Sample")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("doctor")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("patient")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("status")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("LabResults");
                 });
@@ -176,34 +167,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prescriptions");
-                });
-
-            modelBuilder.Entity("Domain.Steps", b =>
-                {
-                    b.Property<Guid>("stepsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("mySteps")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("stepsId");
-
-                    b.ToTable("Stepss");
-                });
-
-            modelBuilder.Entity("Domain.WaterIntake", b =>
-                {
-                    b.Property<Guid>("waterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("literPerHour")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("waterId");
-
-                    b.ToTable("WaterIntakes");
                 });
 
             modelBuilder.Entity("Domain.Weight", b =>
@@ -412,13 +375,6 @@ namespace Persistence.Migrations
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
-            modelBuilder.Entity("Domain.LabResult", b =>
-                {
-                    b.HasOne("Domain.Patient", null)
-                        .WithMany("LabResults")
-                        .HasForeignKey("PatientId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -482,11 +438,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Doctor", b =>
                 {
                     b.Navigation("Patients");
-                });
-
-            modelBuilder.Entity("Domain.Patient", b =>
-                {
-                    b.Navigation("LabResults");
                 });
 #pragma warning restore 612, 618
         }

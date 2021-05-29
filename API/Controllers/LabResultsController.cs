@@ -20,8 +20,7 @@ namespace API.Controllers
             return await Mediator.Send(new ListLabResults.Query());
         }
 
-    
-        [HttpGet("{id}")] //labresults/id
+        [HttpGet("{id}")] 
 
         public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
         {
