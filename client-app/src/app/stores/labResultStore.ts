@@ -2,6 +2,8 @@ import { makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import { LabResult } from "../models/labresult";
 import {v4 as uuid} from'uuid';
+import { Patient } from "../models/patient";
+import { Doctor } from "../models/doctor";
 
 
 export default class labResultStore {
@@ -62,18 +64,17 @@ export default class labResultStore {
         this.editMode = false;
     }
 
-    createLabResult= async (labresult:LabResult) => {
+    createLabResult= async (labresult:LabResult, patient:Patient, doctor: Doctor) => {
         this.loading =true;
         labresult.id = uuid();
         try {
-            await agent.labresults.create(labresult);
+            await agent.labresults.create(labresult, patient.id, doctor.id);
             runInAction(()=> {
                 this.labresultsRegistry.set(labresult.id, labresult);
                 this.selectedLabResult = labresult;
                 this.editMode = false;
                 this.loading = false;
             })
-
         } catch(error) {
             console.log(error);
             runInAction (()=> {

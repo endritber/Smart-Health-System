@@ -24,7 +24,7 @@ namespace Application.LabResults
 
             public async Task<List<LabResult>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.LabResults.ToListAsync();
+                return await _context.LabResults.ToListAsync(cancellationToken);
             }
         }
     }

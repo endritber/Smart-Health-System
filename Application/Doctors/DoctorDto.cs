@@ -27,6 +27,8 @@ namespace Application.Doctors
         public string Gender {get; set;}  
 
         public ICollection<PatientProfile> Patients {get; set;} = new List<PatientProfile>();
+
+        public ICollection<LabResult> PostingResults {get; set;} = new List<LabResult>();
         
     }
 }

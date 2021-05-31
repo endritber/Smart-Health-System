@@ -30,7 +30,7 @@ export default observer ( function GetCareDoctorList() {
                                 <div>Qualification: {doctor.qualification}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button loading = {loading}floated ='right' onClick = {()=>addDoctor(userStore.user?.id!, doctor.id)} content= 'Add Doctor' color='blue'/>
+                                <Button loading = {loading} floated ='right' onClick = {()=>addDoctor(userStore.user?.id!, doctor.id)} content= 'Add Doctor' color='blue'/>
                                 <Label basic> Gender: {doctor.gender}</Label>
                             </Item.Extra>
                         </Item.Content>

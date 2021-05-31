@@ -31,22 +31,22 @@ namespace Application.LabResults
             {
 
 
-        
+    
                 var patient = await _context.Patients.FindAsync(request.PatientId);
 
                 var doctor = await _context.Doctors.FindAsync(request.DoctorId);
 
-                
-                //logic error
-                // request.LabResult.patient = patient.Id;
+                request.LabResult.patient = patient;
 
-                // request.LabResult.doctor = doctor.Id;
+                request.LabResult.doctor = doctor;
 
-                // _context.LabResults.Add(request.LabResult);
+                patient.LabResults.Add(request.LabResult);
 
-                // patient.LabResults.Add(request.LabResult);
+                doctor.PostingResults.Add(request.LabResult);
 
-                // await _context.SaveChangesAsync();
+                _context.LabResults.Add(request.LabResult);
+
+                await _context.SaveChangesAsync();
 
                 return Unit.Value;
             }

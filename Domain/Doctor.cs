@@ -23,6 +23,8 @@ namespace Domain
 
         public ICollection<Patient> Patients {get; set;} = new List<Patient>();
 
+        public ICollection<LabResult> PostingResults {get; set;} = new List<LabResult>();
+
         
         
     }

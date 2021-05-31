@@ -95,6 +95,25 @@ namespace Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
                 });
 
+            modelBuilder.Entity("Domain.Appointments", b =>
+                {
+                    b.Property<Guid>("AppointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("dateOfAppointment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("doctorNameId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AppointmentId");
+
+                    b.HasIndex("doctorNameId");
+
+                    b.ToTable("Appointmentss");
+                });
+
             modelBuilder.Entity("Domain.Height", b =>
                 {
                     b.Property<Guid>("heightId")
@@ -118,9 +137,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PatientId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("ProblemProportion")
                         .HasColumnType("TEXT");
 
@@ -133,10 +149,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Sample")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("doctor")
+                    b.Property<string>("doctorId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("patient")
+                    b.Property<string>("patientId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("status")
@@ -144,7 +160,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("doctorId");
+
+                    b.HasIndex("patientId");
 
                     b.ToTable("LabResults");
                 });
@@ -176,20 +194,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prescriptions");
-                });
-
-            modelBuilder.Entity("Domain.Steps", b =>
-                {
-                    b.Property<Guid>("stepsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("mySteps")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("stepsId");
-
-                    b.ToTable("Stepss");
                 });
 
             modelBuilder.Entity("Domain.WaterIntake", b =>
@@ -412,11 +416,28 @@ namespace Persistence.Migrations
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
+            modelBuilder.Entity("Domain.Appointments", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctorName")
+                        .WithMany()
+                        .HasForeignKey("doctorNameId");
+
+                    b.Navigation("doctorName");
+                });
+
             modelBuilder.Entity("Domain.LabResult", b =>
                 {
-                    b.HasOne("Domain.Patient", null)
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany("PostingResults")
+                        .HasForeignKey("doctorId");
+
+                    b.HasOne("Domain.Patient", "patient")
                         .WithMany("LabResults")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("patientId");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -482,6 +503,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Doctor", b =>
                 {
                     b.Navigation("Patients");
+
+                    b.Navigation("PostingResults");
                 });
 
             modelBuilder.Entity("Domain.Patient", b =>

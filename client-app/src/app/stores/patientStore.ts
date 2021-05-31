@@ -75,7 +75,10 @@ export default class patientStore {
         this.loading = true
         try {
             await agent.Patients.addDoctor(patientId, doctorId)
-            runInAction(()=>(this.loading=false))
+            runInAction(()=>(
+                // this.patientRegistry.set(patientId, );
+                // this.selectedPatient = patient;
+                this.loading=false))
         }
         catch(error){
             runInAction(()=> (this.loading = false))

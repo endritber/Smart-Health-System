@@ -23,7 +23,7 @@ namespace Application.Patients
 
         public DoctorProfile doctor {get; set;}
 
-        public ICollection<string> LabResults {get; set;} = new List<string>();
+        public ICollection<LabResult> LabResults {get; set;} = new List<LabResult>();
 
     }
 }

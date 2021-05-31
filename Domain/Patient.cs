@@ -21,7 +21,7 @@ namespace Domain
 
         public Doctor doctor {get; set;}
 
-        public ICollection<string> LabResults {get; set;} = new List<string>();
+        public ICollection<LabResult> LabResults {get; set;} = new List<LabResult>();
 
     }
 }
