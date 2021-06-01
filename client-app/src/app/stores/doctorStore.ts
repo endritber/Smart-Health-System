@@ -32,6 +32,9 @@ export default class doctorStore {
             this.setLoadingIntitial(false); 
         }
     }
+    selectDoctor= (id: string)=> {
+        this.selectedDoctor = this.doctorRegistry.get(id);
+    }
 
 
 

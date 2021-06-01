@@ -8,6 +8,7 @@ export default function LabResultDetail() {
   const{labResultStore} = useStore();
   const {selectedLabResult: labresult, cancelSelectedLabResult} = labResultStore;
 
+
   if (!labresult) return <LoadingComponent content="loading"/>;
 
     return (

@@ -1,3 +1,5 @@
+import { Patient } from "./patient";
+
 export interface Doctor {
     id: string;
     name: string;
@@ -8,5 +10,5 @@ export interface Doctor {
     qualification:string;
     birthDate:string;
     gender:string;
-    patients:[];
+    patients: Patient[];
 }

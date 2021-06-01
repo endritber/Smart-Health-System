@@ -19,6 +19,8 @@ import PatientProfilePage from '../../features/Profiles/PatientProfilePage';
 import PatientForm from '../../features/Profiles/patientForm/PatientForm';
 import DoctorProfilePage from '../../features/Profiles/DoctorProfilePage';
 import DoctorForm from '../../features/Profiles/doctorForm/DoctorForm';
+import MyPatients from '../../features/mypatients/MyPatients';
+import MyPatientDetail from '../../features/mypatients/patientDetail/MyPatientDetail';
 
 
 
@@ -60,6 +62,7 @@ function App() {
         <Route path='/myhealthlist/prescriptions' component={Prescriptions}/>
         <Route path='/login' component={LoginForm}/>
         <Route path='/addInformation/:id'  component={PatientForm}/>
+        <Route path='/patientDetail/:id'  component={MyPatientDetail}/>
     </Container>
     </>
   )}
@@ -80,6 +83,7 @@ function App() {
         <Route />
         <Route path='/profiles/:username' component={DoctorProfilePage}/>
         <Route path='/addDoctorInformation/:id' component={DoctorForm}/>
+        <Route exact path='/myPatients/:id' component={MyPatients}/>
 
         </Container>
         </>

@@ -15,7 +15,7 @@ export default  observer (function DoctorNavBar() {
                 <Image className = 'navbarphoto'src='/logohealth.png' alt = 'logo' />
                 </Menu.Item>
 
-                <Menu.Item as={NavLink} to = '/patients' name ="MyPatients" />
+                <Menu.Item as={NavLink} to={`/myPatients/${user?.id}`} name ="MyPatients" />
                 <Menu.Item as={NavLink} to = '/messages' name ="Message"/>
                 <Menu.Item>
                     <Button content = 'Add Patient'/>

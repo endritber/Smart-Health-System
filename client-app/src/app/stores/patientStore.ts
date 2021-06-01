@@ -19,6 +19,19 @@ export default class patientStore {
     }
 
 
+    loadPatients = async () => { 
+        this.setLoadingIntitial(true);
+        try {
+            const patients = await agent.Patients.list();    
+                patients.forEach(patient=> {
+                this.patientRegistry.set(patient.id, patient)
+            })
+            this.setLoadingIntitial(false);
+        }catch(error) {
+            console.log(error); 
+            this.setLoadingIntitial(false); 
+        }
+    }
 
     loadPatient = async(id:string)=> {
         let patient = this.getPatient(id);
@@ -69,6 +82,9 @@ export default class patientStore {
                 this.loading=false;
             })
         }
+    }
+    selectPatient= (id: string)=> {
+        this.selectedPatient = this.patientRegistry.get(id);
     }
 
     addDoctor = async (patientId:string, doctorId:string) => {
