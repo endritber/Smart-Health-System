@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Doctors;
 using Application.LabResults;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -8,28 +9,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
+    
     public class LabResultsController : BaseApiController
     {
 
+        
         [HttpGet]
         public async Task<ActionResult<List<LabResult>>> GetLabResults()
         {
             return await Mediator.Send(new ListLabResults.Query());
         }
 
-        
-        [HttpGet("{id}")] //labresults/id
+        [HttpGet("{id}")] 
 
         public async Task<ActionResult<LabResult>> GetLabResult(Guid id)
         {
           return await Mediator.Send(new LabResultsDetails.Query{Id = id});
+
         }
 
-        [HttpPost]
-
-        public async Task<IActionResult> CreateLabResult(LabResult labresult) {
-            return Ok(await Mediator.Send(new CreateLabResult.Command{LabResult= labresult}));
+        [HttpPost("{patientId}/{doctorId}")]
+        public async Task<IActionResult> CreateLabResult(LabResult labresult, string patientId, string doctorId) {
+            return Ok(await Mediator.Send(new CreateLabResult.Command{LabResult= labresult,
+            PatientId = patientId, DoctorId = doctorId }
+            ));
         }
 
         [HttpPut("{id}")]

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
     public class PrescriptionsController : BaseApiController
     {
 
@@ -28,7 +27,7 @@ namespace API.Controllers
         [HttpPost]
 
         public async Task<IActionResult> CreatePrescription(Prescription prescription) {
-            return Ok(await Mediator.Send(new CreatePrescription.Command{Prescription= prescription}));
+            return Ok(await Mediator.Send(new CreatePrescription.Command{Prescription = prescription}));
         }
 
         [HttpPut("{id}")]
