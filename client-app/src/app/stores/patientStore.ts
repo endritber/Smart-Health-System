@@ -39,7 +39,7 @@ export default class patientStore {
             this.selectedPatient = patient;
             return patient;
         } else{
-            this.loadingInitial=true;
+            this.setLoadingIntitial(true);
             try {
                 patient = await agent.Patients.details(id);
                 this.setPatient(patient);

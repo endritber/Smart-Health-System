@@ -17,9 +17,6 @@ export default  observer (function DoctorNavBar() {
 
                 <Menu.Item as={NavLink} to={`/myPatients/${user?.id}`} name ="MyPatients" />
                 <Menu.Item as={NavLink} to = '/messages' name ="Message"/>
-                <Menu.Item>
-                    <Button content = 'Add Patient'/>
-                </Menu.Item>
 
                 <Menu.Item position="right">
                     <Icon name='user'/>

@@ -10,5 +10,6 @@ export interface Patient {
     language:string;
     profession:string;
     doctor:doctorprofile;
+    labResults: LabResult[];
     
 }

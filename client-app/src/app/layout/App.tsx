@@ -22,6 +22,9 @@ import DoctorForm from '../../features/Profiles/doctorForm/DoctorForm';
 import MyPatients from '../../features/mypatients/MyPatients';
 import MyPatientDetail from '../../features/mypatients/patientDetail/MyPatientDetail';
 
+import LabResultsList from '../../features/mypatients/patientLabResults/LabResultsList';
+import LabResultForm from '../../features/mypatients/labresultForm/LabResultForm';
+
 
 
 function App() {
@@ -83,7 +86,9 @@ function App() {
         <Route />
         <Route path='/profiles/:username' component={DoctorProfilePage}/>
         <Route path='/addDoctorInformation/:id' component={DoctorForm}/>
-        <Route exact path='/myPatients/:id' component={MyPatients}/>
+        <Route path='/myPatients/labResults/:patientId/:doctorId' component={LabResultsList}/>
+        <Route path='/labResultForm/:patientId/:doctorId' component={LabResultForm}/>
+        
 
         </Container>
         </>

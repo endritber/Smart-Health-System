@@ -146,9 +146,6 @@ namespace Persistence
                         Provider = "Barnes",
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
-
- 
-                 
                 };
                 await context.Heights.AddRangeAsync(heights);
                 await context.LabResults.AddRangeAsync(labresults);

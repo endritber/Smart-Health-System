@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { Button, Card, Divider, Icon } from "semantic-ui-react";
+import { Button, Card, Divider, Icon, Image, Segment } from "semantic-ui-react";
+import { Link, useParams } from "react-router-dom";
 import { Doctor } from "../../../app/models/doctor";
 import patientStore from "../../../app/stores/patientStore";
 import { useStore } from "../../../app/stores/store";
@@ -10,42 +11,48 @@ import { useStore } from "../../../app/stores/store";
 export default function MyPatientDetail() {
 
   const{patientStore} = useStore();
-  const {selectedPatient: patient} = patientStore;
-  console.log(patient)
+  const {selectedPatient: patient, cancelSelectedPatient} = patientStore;
+  const {id} = useParams<{id: string}>();
+  console.log(id)
 
-
-//   if (!labresult) return <LoadingComponent content="loading"/>;
     return (
-    <Card centered style={{marginLeft:"130px"}}>
-    <Icon name="file text outline" size='huge'></Icon>
-    <Card.Content>
-      <Card.Header>Name: {patient?.name}
-      </Card.Header>
-      <Divider/>
-      <Card.Meta>
-        <span className=''> LastName:</span>
-      </Card.Meta>
-      <Divider/>
-      <Card.Header>Result: </Card.Header>
-      <Divider/>
-      <Card.Meta>
-        <span className=''> Result Proportion:</span>
-      </Card.Meta>
-      <Divider/>
-      <Card.Header>Date:</Card.Header>
-      <Divider/>
-      <Card.Meta>
-        <span className=''> Status:</span>
-      </Card.Meta>
-      <Divider/>
-      <Card.Description>
-        Result Description (soon to be added!)
-      </Card.Description>
+      <Segment>
+      <Card className='card'>
+      <Card.Content>
+        <Image
+          floated='right'
+          size='mini'
+          src='/images/avatar/large/steve.jpg'
+        />
+        <Card.Header>{patient?.name} {patient?.lastName}</Card.Header>
+        <Card.Meta>Profession: {patient?.profession}</Card.Meta>
+        <Card.Description>
+          Patient Language : {patient?.language}
+        </Card.Description>
+      </Card.Content>
+
+    <Card.Content extra>
+      <Card.Header>Laboratory Results</Card.Header>
+    <Button color='teal' as={Link} to ={`/myPatients/labResults/${patient?.id}/${id}`} fluid>Show Lab Results</Button>
+    </Card.Content>
+
+    
+    <Card.Content extra>
+    <Card.Header>Prescriptions</Card.Header>
+    <Button color='teal' as={Link} to ={`/prescriptions/${patient?.id}`} fluid>Show Prescriptions</Button>
+    </Card.Content>
+
+    <Card.Content extra>
+    <Card.Header>Allergies</Card.Header>
+    <Button color='teal' as={Link} to ={`/allergies/${patient?.id}`} fluid>Show Allergies</Button>
+
     </Card.Content>
     <Card.Content extra>
     <Button basic content = 'Cancel'color='red'>
     </Button>
     </Card.Content>
   </Card>
+  </Segment>
     )
+    
 }

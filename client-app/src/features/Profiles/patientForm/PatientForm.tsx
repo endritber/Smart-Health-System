@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { Doctor } from "../../../app/models/doctor";
 import { Patient } from "../../../app/models/patient";
+import { patientprofile } from "../../../app/models/patientprofile";
 import doctorStore from "../../../app/stores/doctorStore";
 import { useStore } from "../../../app/stores/store";
 
@@ -42,6 +43,8 @@ export default observer (function PatientForm(){
             bio:'',
             image:'',
         },
+        labResults: []
+        
     });
 
     useEffect(()=>{
