@@ -9,6 +9,7 @@ namespace Persistence
         public DataContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<Vitals> Vitalss {get; set;}
 
         public DbSet<Appointments> Appointmentss { get; set;}
         public DbSet<WaterIntake> WaterIntakes { get; set;}

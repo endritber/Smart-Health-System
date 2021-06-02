@@ -1,4 +1,8 @@
 using System;
+<<<<<<< HEAD
+=======
+using System.Collections.Generic;
+>>>>>>> b0173223e505c1dc3263994922ac53cc9c88de4d
 using System.Threading.Tasks;
 using Application.Heights;
 using Domain;
@@ -23,5 +27,9 @@ namespace API.Controllers
             height.heightId = id;
             return Ok(await Mediator.Send(new EditHeight.Command{Height = height}));
         }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> b0173223e505c1dc3263994922ac53cc9c88de4d
     }
 }
