@@ -9,5 +9,7 @@ namespace Domain
         public Guid waterId { get; set; }
 
         public int literPerHour { get; set; }
+
+        public Patient patient { get; set; }
     }
 }

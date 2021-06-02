@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.WaterI;
 using Domain;
@@ -10,7 +11,7 @@ namespace API.Controllers
     public class WaterIntakeController :BaseApiController
     {
         
-        [Authorize]
+        // [Authorize]
         [HttpGet("{id}")] 
 
         public async Task<ActionResult<WaterIntake>> GetWaterIntake(Guid id)
@@ -23,5 +24,25 @@ namespace API.Controllers
             waterIntake.waterId = id;
             return Ok(await Mediator.Send(new EditWaterI.Command{Water = waterIntake}));
         }
+        [HttpGet]
+        public async Task<ActionResult<List<WaterIntake>>> ListWaterI()
+        {
+            return await Mediator.Send(new ListWater.Query());
+        }
+
+        [HttpPost("{patientId}")]
+        public async Task<IActionResult> CreateWaterIntake(WaterIntake waterIntake, string patientId) {
+
+            return Ok(await Mediator.Send(new CreateWaterI.Command{WaterI= waterIntake,
+            PatientId = patientId}
+            ));
+        }
+        
+         [HttpDelete("{id}")]
+         public async Task<IActionResult> DeleteWaterIntake(Guid id) {
+             return Ok(await Mediator.Send(new DeleteWaterI.Command{Id = id}));
+         }
+
+
     }
 }

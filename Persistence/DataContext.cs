@@ -38,6 +38,20 @@ namespace Persistence
             .HasMany(x=>x.PostingResults)
             .WithOne(x=>x.doctor);
 
+            builder.Entity<Patient>()
+            .HasMany(x => x.Height)
+            .WithOne(x => x.patient);
+
+             builder.Entity<Patient>()
+            .HasMany(x => x.Weight)
+            .WithOne(x => x.patient);
+
+            builder.Entity<Patient>()
+            .HasMany(x => x.WaterIntake)
+            .WithOne(x => x.patient);
+
+            
+
         
         }
 

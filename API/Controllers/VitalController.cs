@@ -14,13 +14,13 @@ namespace API.Controllers
         [Authorize]
         [HttpGet("{id}")] 
 
-        public async Task<ActionResult<Vitals>> ReadHeight(Guid id)
+        public async Task<ActionResult<Vitals>> ReadVital(Guid id)
         {
           return await Mediator.Send(new ReadVitals.Query{Id = id});
 
         }
           [HttpPut("{id}")]
-        public async Task<IActionResult> EditHeight(Guid id, Vitals vitals) {
+        public async Task<IActionResult> EditVital(Guid id, Vitals vitals) {
             vitals.Id = id;
             return Ok(await Mediator.Send(new EditVitals.Command{Vital = vitals}));
         }

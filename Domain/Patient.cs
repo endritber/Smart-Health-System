@@ -23,5 +23,11 @@ namespace Domain
 
         public ICollection<LabResult> LabResults {get; set;} = new List<LabResult>();
 
+        public ICollection<Height> Height { get; set; } = new List<Height>();
+
+        public ICollection<Weight> Weight { get; set; } = new List<Weight>();
+
+        public ICollection<WaterIntake> WaterIntake { get; set; } = new List<WaterIntake>();
+
     }
 }

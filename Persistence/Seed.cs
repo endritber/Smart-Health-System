@@ -28,6 +28,19 @@ namespace Persistence
                 }
             
 
+            if(!context.Heights.Any()){
+                var heights = new List<Height> {
+                    new Height{
+                        myHeight = 2.2
+                    },
+                     new Height{
+                        myHeight = 6.2
+                    },
+                     new Height{
+                        myHeight = 2.7
+                    },
+                };
+            
 
             if (!context.LabResults.Any())
             {
@@ -134,14 +147,10 @@ namespace Persistence
                         Prescribed = DateTime.Now.AddMonths(0)
                     },
 
-
-                    
-                    
+ 
                  
                 };
-
-
-            
+                await context.Heights.AddRangeAsync(heights);
                 await context.LabResults.AddRangeAsync(labresults);
                 await context.Prescriptions.AddRangeAsync(prescriptions);
                 await context.SaveChangesAsync();
@@ -151,3 +160,4 @@ namespace Persistence
     }
 
     }
+}

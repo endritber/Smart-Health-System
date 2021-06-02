@@ -7,5 +7,7 @@ namespace Domain
         public Guid weightId { get; set; }
 
         public double myWeight { get; set; }
+
+        public Patient patient { get; set; }
     }
 }

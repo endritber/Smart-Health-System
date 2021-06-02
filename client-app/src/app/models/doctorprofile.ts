@@ -1,4 +1,4 @@
-import { StringifyOptions } from "node:querystring";
+// import { StringifyOptions } from "node:querystring";
 import { doctorUser, patientUser, User } from "./user";
 
 export interface doctorprofile {
