@@ -52,4 +52,23 @@ body {
   height: 37px;
   width: 37px; 
 }
- 
+
+.height {
+  height: 150px;
+  width: 150px;
+}
+
+.water {
+  height: 150px;
+  width: 150px;
+}
+
+.weight {
+  height: 150px;
+  width: 150px;
+}
+
+.vitals  {
+  height: 150px;
+  width: 150px; 
+}
