@@ -33,6 +33,11 @@ export default class patientStore {
         }
     }
 
+    cancelSelectedPatient = () => {
+        this.selectedPatient = undefined;
+    }
+
+
     loadPatient = async(id:string)=> {
         let patient = this.getPatient(id);
         if(patient) {

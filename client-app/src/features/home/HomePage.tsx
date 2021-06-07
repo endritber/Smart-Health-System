@@ -40,7 +40,7 @@ export default observer(function HomePage() {
                 {userStore.isLoggedIn ? (
                          <>
                         <Header as='h2' inverted content={`Everything you need about your Patients! - ${userStore.user?.displayName}`}/> 
-                       <Button primary as={Link} to='/patients' size='massive' >
+                       <Button primary as={Link} to={`/myPatients/${userStore.user?.id}`} size='massive' >
                                 Get Started
                         </Button>
 

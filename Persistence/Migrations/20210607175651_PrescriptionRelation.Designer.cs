@@ -2,55 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210607175651_PrescriptionRelation")]
+    partial class PrescriptionRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.6");
-
-            modelBuilder.Entity("Domain.Allergy", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Causes")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CommonFoodTriggers")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NaturalRemedies")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Treatments")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("doctorId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("patientId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("doctorId");
-
-                    b.HasIndex("patientId");
-
-                    b.ToTable("Allergies");
-                });
 
             modelBuilder.Entity("Domain.AppUser", b =>
                 {
@@ -497,21 +463,6 @@ namespace Persistence.Migrations
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
-            modelBuilder.Entity("Domain.Allergy", b =>
-                {
-                    b.HasOne("Domain.Doctor", "doctor")
-                        .WithMany("postingAllergies")
-                        .HasForeignKey("doctorId");
-
-                    b.HasOne("Domain.Patient", "patient")
-                        .WithMany("Allergies")
-                        .HasForeignKey("patientId");
-
-                    b.Navigation("doctor");
-
-                    b.Navigation("patient");
-                });
-
             modelBuilder.Entity("Domain.Appointments", b =>
                 {
                     b.HasOne("Domain.Doctor", "doctorName")
@@ -642,8 +593,6 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Patients");
 
-                    b.Navigation("postingAllergies");
-
                     b.Navigation("PostingResults");
 
                     b.Navigation("Prescribed");
@@ -651,8 +600,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Patient", b =>
                 {
-                    b.Navigation("Allergies");
-
                     b.Navigation("Height");
 
                     b.Navigation("LabResults");

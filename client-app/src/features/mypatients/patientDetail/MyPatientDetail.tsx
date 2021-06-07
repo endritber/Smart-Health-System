@@ -8,7 +8,7 @@ import { useStore } from "../../../app/stores/store";
 
 
 
-export default function MyPatientDetail() {
+export default observer( function MyPatientDetail() {
 
   const{patientStore} = useStore();
   const {selectedPatient: patient, cancelSelectedPatient} = patientStore;
@@ -48,11 +48,11 @@ export default function MyPatientDetail() {
 
     </Card.Content>
     <Card.Content extra>
-    <Button basic content = 'Cancel'color='red'>
+    <Button onClick={cancelSelectedPatient} basic content = 'Cancel'color='red'>
     </Button>
     </Card.Content>
   </Card>
   </Segment>
     )
     
-}
+})

@@ -11,12 +11,7 @@ namespace API.Controllers
 {
     public class HeightController : BaseApiController
     {
-       [HttpGet]
-        public async Task<ActionResult<List<Height>>> GetHeights()
-        {
-            return await Mediator.Send(new ListHeight.Query());
-        }
-        // [Authorize]
+        [Authorize]
         [HttpGet("{id}")] 
 
         public async Task<ActionResult<Height>> ReadHeight(Guid id)

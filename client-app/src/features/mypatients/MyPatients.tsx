@@ -11,6 +11,7 @@ export default observer(function MyPatients() {
     const {doctorStore, patientStore} = useStore();
 
     const {selectedDoctor} = doctorStore
+   const {selectedPatient} = patientStore
 
     const {id} = useParams<{id: string}>();
 
@@ -25,7 +26,9 @@ export default observer(function MyPatients() {
         <>
         <Container style={{marginTop:"7em"}}>
             { selectedDoctor &&
-            <MyPatientsDashBoard doctor = {selectedDoctor}
+            <MyPatientsDashBoard 
+            selectedPatient = {selectedPatient}
+            doctor = {selectedDoctor}
             />}
         </Container>
         </>

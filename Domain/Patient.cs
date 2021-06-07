@@ -29,5 +29,9 @@ namespace Domain
 
         public ICollection<WaterIntake> WaterIntake { get; set; } = new List<WaterIntake>();
 
+        public ICollection<Prescription> Prescriptions {get; set;} = new List<Prescription>();
+
+        public ICollection<Allergy> Allergies {get; set;} = new List<Allergy>();
+
     }
 }

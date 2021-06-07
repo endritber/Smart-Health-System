@@ -10,19 +10,21 @@ import MyPatientDetail from './patientDetail/MyPatientDetail';
 
 interface Props {
     doctor: Doctor
+    selectedPatient: Patient | undefined
 }
 
-export default observer (function MyPatientsDashBoard({doctor}: Props) {
+export default observer (function MyPatientsDashBoard({doctor, selectedPatient}: Props) {
 
     const {doctorStore} = useStore();
     return (
         <Grid>
             <Grid.Column width='10'>
-                {doctor &&
-                <MyPatientsList doctor = {doctor}/>}
+            {doctor &&
+            <MyPatientsList doctor = {doctor}/>}
             </Grid.Column>
             <Grid.Column width='6'>
-                <MyPatientDetail/>
+            {selectedPatient &&
+            <MyPatientDetail/>}
             </Grid.Column>
         </Grid>
 

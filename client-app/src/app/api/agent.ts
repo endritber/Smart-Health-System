@@ -46,7 +46,7 @@ const requests = {
 const labresults = {
     list: () => requests.get<LabResult[]>('/labresults'),
     details: (id: string) => requests.get<LabResult>(`/labresults/${id}`),
-    create: (labresult: LabResult, patientId: string, doctorId:string)=>requests.post<void>(`labresults/${patientId}/${doctorId}`,labresult ),
+    create: (LabResult: LabResult, patientId: string, doctorId:string)=>requests.post<void>(`/labresults/${patientId}/${doctorId}`,LabResult),
     update: (LabResult: LabResult)=>axios.put<void>(`/labresults/${LabResult.id}`, LabResult),
     delete: (id: string)=>axios.delete<void>(`/labresults/${id}`)
 

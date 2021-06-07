@@ -24,10 +24,11 @@ namespace API.Controllers
           return await Mediator.Send(new PrescriptionsDetails.Query{Id = id});
         }
 
-        [HttpPost]
-
-        public async Task<IActionResult> CreatePrescription(Prescription prescription) {
-            return Ok(await Mediator.Send(new CreatePrescription.Command{Prescription = prescription}));
+        [HttpPost("{patientId}/{doctorId}")]
+        public async Task<IActionResult> CreatePrescription(Prescription prescription, string patientId, string doctorId) {
+            return Ok(await Mediator.Send(new CreatePrescription.Command{Prescription= prescription,
+            PatientId = patientId, DoctorId = doctorId }
+            ));
         }
 
         [HttpPut("{id}")]

@@ -19,5 +19,10 @@ namespace Domain
         public DateTime Prescribed { get; set; }
 
 
+        public Patient patient { get;set;}
+
+        public Doctor doctor {get; set;}
+
+
     }
 }

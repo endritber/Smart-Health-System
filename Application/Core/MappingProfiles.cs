@@ -13,6 +13,7 @@ namespace Application.Core
         {
             CreateMap<LabResult, LabResult>();
             CreateMap<Prescription, Prescription>();
+            CreateMap<Allergy, Allergy>();
 
             CreateMap<Doctor, DoctorDto>();
             CreateMap<Doctor, DoctorProfile>();

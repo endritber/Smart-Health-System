@@ -11,7 +11,7 @@ import { useStore } from "../../../app/stores/store";
 
 export default observer (function LabResultsList() {
 
-    const {patientStore} = useStore();
+    const {patientStore, labResultStore} = useStore();
 
     const {loadPatient, selectedPatient} = patientStore
     const {patientId} = useParams<{patientId: string}>();
@@ -19,7 +19,8 @@ export default observer (function LabResultsList() {
 
     useEffect(() => {
         loadPatient(patientId)
-      }, [loadPatient])
+        patientStore.loadPatients();
+      }, [loadPatient, labResultStore])
 
       if (patientStore.loadingInitial) return <LoadingComponent content='Loading Lab Results...'/>
 

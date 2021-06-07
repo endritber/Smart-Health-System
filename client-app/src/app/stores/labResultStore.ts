@@ -43,6 +43,36 @@ export default class labResultStore {
 
     }
 
+    loadLabResult = async(id:string)=> {
+        let labresult = this.getLabResult(id);
+        if(labresult) {
+            this.selectedLabResult = labresult;
+            return labresult;
+        } else{
+            this.loadingInitial=true;
+            try {
+                labresult = await agent.labresults.details(id);
+                this.setLabResult(labresult);
+                runInAction(()=>{
+                    this.selectedLabResult=labresult;
+                })
+                this.setLoadingInitial(false);
+                return labresult;
+            } catch(error) {
+                console.log(error);
+                this.setLoadingInitial(false);
+            }
+        }
+    }
+
+    private getLabResult = (id: string) => {
+        return this.labresultsRegistry.get(id);
+    }
+
+    private setLabResult = (labresult: LabResult) => {
+        this.labresultsRegistry.set(labresult.id, labresult);
+    }
+
     setLoadingInitial  = (state:boolean) => {
         this.loadingInitial = state;
     }
@@ -64,11 +94,11 @@ export default class labResultStore {
         this.editMode = false;
     }
 
-    createLabResult= async (labresult:LabResult, patient:Patient, doctor: Doctor) => {
+    createLabResult= async (labresult:LabResult, patientId:string, doctorId: string) => {
         this.loading =true;
         labresult.id = uuid();
         try {
-            await agent.labresults.create(labresult, patient.id, doctor.id);
+            await agent.labresults.create(labresult, patientId, doctorId);
             runInAction(()=> {
                 this.labresultsRegistry.set(labresult.id, labresult);
                 this.selectedLabResult = labresult;
@@ -100,9 +130,7 @@ export default class labResultStore {
                 this.loading = false;
             })
         }
-
     }
-
     deleteLabResult = async(id: string) => {
         this.loading = true;
         try {

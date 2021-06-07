@@ -4,13 +4,13 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Prescriptions
+namespace Application.Allergies
 {
-    public class CreatePrescription {
-
+    public class CreateAllergy
+    {
         public class Command : IRequest
         {
-            public Prescription Prescription { get; set; }
+            public Allergy Allergy { get; set; }
 
             public string PatientId { get; set; }
 
@@ -30,20 +30,19 @@ namespace Application.Prescriptions
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
 
-
                 var patient = await _context.Patients.FindAsync(request.PatientId);
 
                 var doctor = await _context.Doctors.FindAsync(request.DoctorId);
 
-                request.Prescription.patient = patient;
+                request.Allergy.patient = patient;
 
-                request.Prescription.doctor = doctor;
+                request.Allergy.doctor = doctor;
 
-                patient.Prescriptions.Add(request.Prescription);
+                patient.Allergies.Add(request.Allergy);
 
-                doctor.Prescribed.Add(request.Prescription);
+                doctor.postingAllergies.Add(request.Allergy);
 
-                _context.Prescriptions.Add(request.Prescription);
+                _context.Allergies.Add(request.Allergy);
 
                 await _context.SaveChangesAsync();
 
@@ -52,3 +51,4 @@ namespace Application.Prescriptions
         }
     }
 }
+

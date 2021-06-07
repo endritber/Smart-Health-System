@@ -16,10 +16,9 @@ export default observer (function LabResultForm(){
 
     const history = useHistory();
 
-    const {doctorStore, userStore, labResultStore} = useStore();
+    const {doctorStore, labResultStore} = useStore();
 
-    const {loading,loadLabResult, createLabResult} = labResultStore;
-    const {selectedDoctor} = doctorStore;
+    const {loading, createLabResult} = labResultStore;
 
     const {patientId} = useParams<{patientId: string}>();
     const {doctorId} = useParams<{doctorId: string}>();
@@ -34,12 +33,12 @@ export default observer (function LabResultForm(){
      status:''
     });
 
-    useEffect(()=>{
-        if (patientId) loadLabResult(patientId).then(labResult=>setLabResult(labResult!))
-},[patientId, loadLabResult]);
+//     useEffect(()=>{
+//         if (patientId) loadLabResult(patientId).then(labResult=>setLabResult(labResult!))
+// },[patientId, loadLabResult]);
     
     function handleSubmit() {
-        createLabResult(labResult,patientId,doctorId).then(()=> history.push(``) )
+        createLabResult(labResult,patientId,doctorId).then(()=> history.push(`/myPatients/labResults/${patientId}/${doctorId}`) )
         
     }
 
@@ -62,7 +61,7 @@ export default observer (function LabResultForm(){
             <Form.Input label='Result Proportion' placeholder='Proportion...'name = 'resultProportion' value = {labResult.resultProportion} onChange={handleInputChange} />
             </Form.Group>
     
-            <Button as={Link} to ={``} type='cancel' color='red'>Cancle</Button>
+            <Button as={Link} to ={`/myPatients/labResults/${patientId}/${doctorId}`} type='cancel' color='red'>Cancel</Button>
             <Button loading={loading} type='submit' color='blue'>Submit</Button>
             
         </Form>

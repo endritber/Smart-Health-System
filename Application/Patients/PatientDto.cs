@@ -25,6 +25,10 @@ namespace Application.Patients
 
         public ICollection<LabResult> LabResults {get; set;} = new List<LabResult>();
 
+        public ICollection<Prescription> Prescriptions {get; set;} = new List<Prescription>();
+
+        public ICollection<Allergy> Allergies {get; set;} = new List<Allergy>();
+
     }
 }
  

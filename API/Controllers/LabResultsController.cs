@@ -45,5 +45,7 @@ namespace API.Controllers
              return Ok(await Mediator.Send(new DeleteLabResult.Command{Id = id}));
          }
 
+         
+
     }
 }

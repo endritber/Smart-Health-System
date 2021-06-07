@@ -96,8 +96,6 @@ def NaiveBayes(Symptom1, Symptom2, Symptom3, Symptom4, Symptom5):
     predict = gnb.predict(inputtest)
     predicted=predict[0]
 
-
-
     h='no'
     for a in range(0,len(disease)):
         if(disease[predicted] == disease[a]):
