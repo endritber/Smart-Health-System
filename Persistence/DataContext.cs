@@ -69,6 +69,12 @@ namespace Persistence
             .WithOne(x => x.patient);
 
             
+            builder.Entity<Patient>()
+            .HasMany(x => x.Vitals)
+            .WithOne(x => x.patient);
+
+
+            
 
         
         }
