@@ -11,10 +11,10 @@ namespace API.Controllers
 {
     public class HeightController : BaseApiController
     {
-        [Authorize]
+        // [Authorize]
         [HttpGet("{id}")] 
 
-        public async Task<ActionResult<Height>> ReadHeight(Guid id)
+        public async Task<ActionResult<Height>> GetHeight(Guid id)
         {
           return await Mediator.Send(new ReadHeight.Query{Id = id});
 
@@ -34,6 +34,12 @@ namespace API.Controllers
          public async Task<IActionResult> DeleteHeight(Guid id) {
              return Ok(await Mediator.Send(new DeleteHeight.Command{Id = id}));
          }
+           
+        [HttpGet]
+        public async Task<ActionResult<List<Height>>> ListHeight()
+        {
+            return await Mediator.Send(new ListHeight.Query());
+        }
 
     }
 }
