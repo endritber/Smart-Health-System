@@ -25,7 +25,7 @@ namespace Application.Appointment
 
                 public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
                 {
-                    var appointment = await _context.Appointmentss.FindAsync(request.Appointment.AppointmentId);
+                    var appointment = await _context.Appointments.FindAsync(request.Appointment.AppointmentId);
 
                     _mapper.Map(request.Appointment, appointment);
 

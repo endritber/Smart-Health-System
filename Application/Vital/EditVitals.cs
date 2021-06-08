@@ -25,7 +25,7 @@ namespace Application.Vital
 
                 public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
                 {
-                    var vital = await _context.Vitalss.FindAsync(request.Vital.Id);
+                    var vital = await _context.Vitals.FindAsync(request.Vital.Id);
 
                     _mapper.Map(request.Vital, vital);
 

@@ -45,7 +45,6 @@ namespace Persistence.Migrations
                     Language = table.Column<string>(type: "TEXT", nullable: true),
                     Profession = table.Column<string>(type: "TEXT", nullable: true),
                     doctorId = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -54,6 +53,7 @@ namespace Persistence.Migrations
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
                     SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
@@ -72,56 +72,17 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Heights",
-                columns: table => new
-                {
-                    heightId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    myHeight = table.Column<double>(type: "REAL", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Heights", x => x.heightId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Prescriptions",
+                name: "Vitals",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Medication = table.Column<string>(type: "TEXT", nullable: true),
-                    Dose = table.Column<string>(type: "TEXT", nullable: true),
-                    Frequency = table.Column<string>(type: "TEXT", nullable: true),
-                    Quantity = table.Column<string>(type: "TEXT", nullable: true),
-                    Provider = table.Column<string>(type: "TEXT", nullable: true),
-                    Prescribed = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    heartRate = table.Column<int>(type: "INTEGER", nullable: false),
+                    bodyTemperature = table.Column<double>(type: "REAL", nullable: false),
+                    bloodPressure = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Prescriptions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WaterIntakes",
-                columns: table => new
-                {
-                    waterId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    literPerHour = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WaterIntakes", x => x.waterId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Weights",
-                columns: table => new
-                {
-                    weightId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    myWeight = table.Column<double>(type: "REAL", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Weights", x => x.weightId);
+                    table.PrimaryKey("PK_Vitals", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,7 +107,37 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointmentss",
+                name: "Allergies",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Info = table.Column<string>(type: "TEXT", nullable: true),
+                    Causes = table.Column<string>(type: "TEXT", nullable: true),
+                    Treatments = table.Column<string>(type: "TEXT", nullable: true),
+                    NaturalRemedies = table.Column<string>(type: "TEXT", nullable: true),
+                    CommonFoodTriggers = table.Column<string>(type: "TEXT", nullable: true),
+                    patientId = table.Column<string>(type: "TEXT", nullable: true),
+                    doctorId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allergies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Allergies_AspNetUsers_doctorId",
+                        column: x => x.doctorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Allergies_AspNetUsers_patientId",
+                        column: x => x.patientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Appointments",
                 columns: table => new
                 {
                     AppointmentId = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -155,9 +146,9 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointmentss", x => x.AppointmentId);
+                    table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
                     table.ForeignKey(
-                        name: "FK_Appointmentss_AspNetUsers_doctorNameId",
+                        name: "FK_Appointments_AspNetUsers_doctorNameId",
                         column: x => x.doctorNameId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -250,6 +241,25 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Heights",
+                columns: table => new
+                {
+                    heightId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    myHeight = table.Column<double>(type: "REAL", nullable: false),
+                    patientId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Heights", x => x.heightId);
+                    table.ForeignKey(
+                        name: "FK_Heights_AspNetUsers_patientId",
+                        column: x => x.patientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LabResults",
                 columns: table => new
                 {
@@ -280,9 +290,88 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Prescriptions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Medication = table.Column<string>(type: "TEXT", nullable: true),
+                    Dose = table.Column<string>(type: "TEXT", nullable: true),
+                    Frequency = table.Column<string>(type: "TEXT", nullable: true),
+                    Quantity = table.Column<string>(type: "TEXT", nullable: true),
+                    Provider = table.Column<string>(type: "TEXT", nullable: true),
+                    Prescribed = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    patientId = table.Column<string>(type: "TEXT", nullable: true),
+                    doctorId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prescriptions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Prescriptions_AspNetUsers_doctorId",
+                        column: x => x.doctorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Prescriptions_AspNetUsers_patientId",
+                        column: x => x.patientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WaterIntakes",
+                columns: table => new
+                {
+                    waterId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    literPerHour = table.Column<int>(type: "INTEGER", nullable: false),
+                    patientId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WaterIntakes", x => x.waterId);
+                    table.ForeignKey(
+                        name: "FK_WaterIntakes_AspNetUsers_patientId",
+                        column: x => x.patientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Weights",
+                columns: table => new
+                {
+                    weightId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    myWeight = table.Column<double>(type: "REAL", nullable: false),
+                    patientId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Weights", x => x.weightId);
+                    table.ForeignKey(
+                        name: "FK_Weights_AspNetUsers_patientId",
+                        column: x => x.patientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Appointmentss_doctorNameId",
-                table: "Appointmentss",
+                name: "IX_Allergies_doctorId",
+                table: "Allergies",
+                column: "doctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Allergies_patientId",
+                table: "Allergies",
+                column: "patientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_doctorNameId",
+                table: "Appointments",
                 column: "doctorNameId");
 
             migrationBuilder.CreateIndex(
@@ -328,6 +417,11 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Heights_patientId",
+                table: "Heights",
+                column: "patientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LabResults_doctorId",
                 table: "LabResults",
                 column: "doctorId");
@@ -336,12 +430,35 @@ namespace Persistence.Migrations
                 name: "IX_LabResults_patientId",
                 table: "LabResults",
                 column: "patientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescriptions_doctorId",
+                table: "Prescriptions",
+                column: "doctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescriptions_patientId",
+                table: "Prescriptions",
+                column: "patientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WaterIntakes_patientId",
+                table: "WaterIntakes",
+                column: "patientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Weights_patientId",
+                table: "Weights",
+                column: "patientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Appointmentss");
+                name: "Allergies");
+
+            migrationBuilder.DropTable(
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -366,6 +483,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Prescriptions");
+
+            migrationBuilder.DropTable(
+                name: "Vitals");
 
             migrationBuilder.DropTable(
                 name: "WaterIntakes");

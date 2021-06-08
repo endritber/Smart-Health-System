@@ -25,7 +25,7 @@ namespace Application.Appointment
             }
             public async Task<Appointments> Handle(Query request, CancellationToken cancellationToken)
             {
-                    return await _context.Appointmentss.FindAsync(request.Id);
+                    return await _context.Appointments.FindAsync(request.Id);
 
             }
 

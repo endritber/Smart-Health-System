@@ -23,7 +23,7 @@ namespace Application.Appointment
 
             public async Task<List<Appointments>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Appointmentss.ToListAsync(cancellationToken);
+                return await _context.Appointments.ToListAsync(cancellationToken);
             }
         }
     }

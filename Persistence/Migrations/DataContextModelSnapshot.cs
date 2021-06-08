@@ -147,7 +147,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("doctorNameId");
 
-                    b.ToTable("Appointmentss");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Domain.Height", b =>
@@ -264,7 +264,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vitalss");
+                    b.ToTable("Vitals");
                 });
 
             modelBuilder.Entity("Domain.WaterIntake", b =>

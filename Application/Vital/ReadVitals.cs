@@ -26,7 +26,7 @@ namespace Application.Vital
             }
             public async Task<Vitals> Handle(Query request, CancellationToken cancellationToken)
             {
-                    return await _context.Vitalss.FindAsync(request.Id);
+                    return await _context.Vitals.FindAsync(request.Id);
 
             }
 

@@ -24,7 +24,7 @@ namespace Application.Vital
 
             public async Task<List<Vitals>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Vitalss.ToListAsync(cancellationToken);
+                return await _context.Vitals.ToListAsync(cancellationToken);
             }
         }
     }
