@@ -33,5 +33,7 @@ namespace Domain
 
         public ICollection<Allergy> Allergies {get; set;} = new List<Allergy>();
 
+        public ICollection<Vitals> Vitals {get; set;} = new List<Vitals>();
+
     }
 }

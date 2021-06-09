@@ -55,7 +55,7 @@ const labresults = {
 const prescriptions = {
     list: () => requests.get<Prescription[]>('/prescriptions'),
     details: (id: string) => requests.get<Prescription>(`/prescriptions/${id}`),
-    create: (Prescription: Prescription)=>axios.post<void>('/prescriptions', Prescription),
+    create: (Prescription: Prescription, patientId: string, doctorId: string)=>axios.post<void>(`/prescriptions/${patientId}/${doctorId}`, Prescription),
     update: (Prescription: Prescription)=>axios.put<void>(`/prescriptions/${Prescription.id}`, Prescription),
     delete: (id: string)=>axios.delete<void>(`/prescriptions/${id}`)
 

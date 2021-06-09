@@ -13,7 +13,6 @@ export default observer( function MyPatientDetail() {
   const{patientStore} = useStore();
   const {selectedPatient: patient, cancelSelectedPatient} = patientStore;
   const {id} = useParams<{id: string}>();
-  console.log(id)
 
     return (
       <Segment>
@@ -39,7 +38,7 @@ export default observer( function MyPatientDetail() {
     
     <Card.Content extra>
     <Card.Header>Prescriptions</Card.Header>
-    <Button color='teal' as={Link} to ={`/prescriptions/${patient?.id}`} fluid>Show Prescriptions</Button>
+    <Button color='teal' as={Link} to ={`/myPatients/prescriptions/${patient?.id}/${id}`} fluid>Show Prescriptions</Button>
     </Card.Content>
 
     <Card.Content extra>

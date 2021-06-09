@@ -12,5 +12,7 @@ namespace Domain
         public double bodyTemperature { get; set; }
 
         public double bloodPressure { get; set; }
+
+        public Patient patient {get; set;}
     }
 }

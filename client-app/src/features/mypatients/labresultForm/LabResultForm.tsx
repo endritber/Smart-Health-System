@@ -3,12 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
-import { Doctor } from "../../../app/models/doctor";
 import { LabResult } from "../../../app/models/labresult";
-import { Patient } from "../../../app/models/patient";
-import { patientprofile } from "../../../app/models/patientprofile";
-import doctorStore from "../../../app/stores/doctorStore";
-import labResultStore from "../../../app/stores/labResultStore";
 import { useStore } from "../../../app/stores/store";
 
 
@@ -16,12 +11,13 @@ export default observer (function LabResultForm(){
 
     const history = useHistory();
 
-    const {doctorStore, labResultStore} = useStore();
+    const { labResultStore} = useStore();
 
-    const {loading, createLabResult} = labResultStore;
+    const {loading, createLabResult, updateLabResult, loadLabResult} = labResultStore;
 
     const {patientId} = useParams<{patientId: string}>();
     const {doctorId} = useParams<{doctorId: string}>();
+    const {id} = useParams<{id: string}>();
 
     const [labResult, setLabResult]= useState<LabResult>({
      id:'',
@@ -32,13 +28,15 @@ export default observer (function LabResultForm(){
      resultProportion:'',
      status:''
     });
-
-//     useEffect(()=>{
-//         if (patientId) loadLabResult(patientId).then(labResult=>setLabResult(labResult!))
-// },[patientId, loadLabResult]);
+    
+    useEffect(()=>{
+        if (id) loadLabResult(id).then(labResult=>setLabResult(labResult!))
+},[id, loadLabResult]);
     
     function handleSubmit() {
-        createLabResult(labResult,patientId,doctorId).then(()=> history.push(`/myPatients/labResults/${patientId}/${doctorId}`) )
+        labResult.id? updateLabResult(labResult).then(()=> history.push(`/myPatients/labResults/${patientId}/${doctorId}`))
+        
+        : createLabResult(labResult,patientId,doctorId).then(()=> history.push(`/myPatients/labResults/${patientId}/${doctorId}`) )
         
     }
 
@@ -48,8 +46,9 @@ export default observer (function LabResultForm(){
     }
 
     return (
-        <Segment>
-            <Header content='Add Results from Laboratory'></Header>
+        <Segment> { labResult.id?
+            <Header content='Edit Results from Laboratory'></Header> :
+            <Header content='Add Results from Laboratory'></Header> }
             <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Group unstackable widths={2}>
             <Form.Input label='Sample' placeholder='Sample...' name = 'sample' value = {labResult.sample} onChange={handleInputChange}  />

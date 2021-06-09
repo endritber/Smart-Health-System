@@ -1,6 +1,7 @@
 import { Doctor } from "./doctor";
 import { doctorprofile } from "./doctorprofile";
 import { LabResult } from "./labresult";
+import { Prescription } from "./prescription";
 
 export interface Patient {
     id:string;
@@ -12,5 +13,6 @@ export interface Patient {
     profession:string;
     doctor:doctorprofile;
     labResults: LabResult[];
+    prescriptions: Prescription[];
     
 }

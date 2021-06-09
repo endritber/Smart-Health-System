@@ -39,14 +39,14 @@ export default class patientStore {
 
 
     loadPatient = async(id:string)=> {
-        let patient = this.getPatient(id);
-        if(patient) {
-            this.selectedPatient = patient;
-            return patient;
-        } else{
+        // let patient = this.getPatient(id);
+        // if(patient) {
+        //     this.selectedPatient = patient;
+        //     return patient;
+        // } else{
             this.setLoadingIntitial(true);
             try {
-                patient = await agent.Patients.details(id);
+                const patient = await agent.Patients.details(id);
                 this.setPatient(patient);
                 runInAction(()=>{
                     this.selectedPatient=patient;
@@ -58,7 +58,7 @@ export default class patientStore {
                 this.setLoadingIntitial(false);
             }
         }
-    }
+    
 
     private getPatient = (id: string) => {
         return this.patientRegistry.get(id);

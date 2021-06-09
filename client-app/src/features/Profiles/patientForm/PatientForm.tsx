@@ -43,7 +43,8 @@ export default observer (function PatientForm(){
             bio:'',
             image:'',
         },
-        labResults: []
+        labResults: [],
+        prescriptions:[],
         
     });
 

@@ -9,15 +9,15 @@ import { useStore } from "../../../app/stores/store";
 
 
 
-export default observer (function LabResultsList() {
+export default observer (function PrescriptionsList() {
     const [target, setTarget] = useState('');
     const [open, setOpen] = React.useState(false)
     const history = useHistory();
 
-    const {patientStore, labResultStore} = useStore();
+    const {patientStore, prescriptionStore} = useStore();
 
     const {loadPatient, selectedPatient} = patientStore
-    const {deleteLabResult, loading} = labResultStore
+    const {deletePrescription, loading} = prescriptionStore
     const {patientId} = useParams<{patientId: string}>();
     const {doctorId} = useParams<{doctorId: string}>();
 
@@ -25,54 +25,47 @@ export default observer (function LabResultsList() {
         loadPatient(patientId)
       }, [loadPatient])
 
-      if (patientStore.loadingInitial) return <LoadingComponent content={`Loading Lab Results...`}/>
+      if (patientStore.loadingInitial) return <LoadingComponent content={`Loading Prescriptions...`}/>
 
       
 
-      function handleLabResultDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+      function handlePrescriptionDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
             setTarget(e.currentTarget.name)
-            deleteLabResult(id).then(()=> history.push(`/myPatients/${doctorId}`));
+            deletePrescription(id).then(()=> history.push(`/myPatients/${doctorId}`));
       }
 
     return (
-        <Segment>   
-          <Segment>
-        <Button size ='huge' color='teal' as={Link} to={`/labResultForm/${patientId}/${doctorId}`}>
-                Add Lab Result for {selectedPatient?.name} {selectedPatient?.lastName}
+        <Segment>    
+        <Button size ='huge' color='teal' as={Link} to={`/prescriptionsForm/${patientId}/${doctorId}`}>
+                Add Prescription for {selectedPatient?.name} {selectedPatient?.lastName}
         </Button>
-        <Header>
-        <Header>View {selectedPatient?.name}'s Graph Laboratory Results</Header>
-        <Button size='large' positive as={Link} to={`/graph/${patientId}/${doctorId}`}>
-                    View Graph
-          </Button></Header></Segment> 
-        {selectedPatient?.labResults.map(labresult=> (
-            <Card  fluid>
+        {selectedPatient?.prescriptions.map(prescription=> (
+            <Card fluid>
             <Card.Content>
-                <Card.Header>Sample: {labresult.sample}</Card.Header>
+                <Card.Header style={{display:'inline'}}>Medication: <Card.Content>{prescription.medication}</Card.Content></Card.Header>
                 <Divider/>
-                <Card.Header>Proportion of Sample: <Card.Content>{labresult.problemProportion}</Card.Content></Card.Header>
+                <Card.Header>Prescription Dose: <Card.Content>{prescription.dose}</Card.Content></Card.Header>
+                <Divider/>
+                <Card.Header>Prescription Provider: <Card.Content>{prescription.provider}</Card.Content></Card.Header>
                 <Divider/>
                 <Card.Header>
                 Date Added: 
                 <Card.Meta>
-                {labresult.date}
+                {prescription.prescribed}
                 </Card.Meta>
                 <Divider/>
                 </Card.Header>
 
-                <Card.Header>Lab Result: <Card.Content>{labresult.result}</Card.Content></Card.Header>
+                <Card.Header>Dose: <Card.Content>{prescription.dose}</Card.Content></Card.Header>
                 <Divider/>
-                <Card.Header>Proportion of Result: <Card.Content>{labresult.resultProportion}
-                
-              
-                </Card.Content></Card.Header>
-                
-                <Card.Description>Status: <Card.Content>{labresult.status}</Card.Content></Card.Description>
+                <Card.Header>Frequency: <Card.Content>{prescription.frequency}</Card.Content></Card.Header>
+                <Divider/>
+                <Card.Header>Quantity: <Card.Content>{prescription.quantity}</Card.Content></Card.Header>
             </Card.Content>
             <Card.Content extra>
             <Button.Group>
-                <Button as={Link} to={`/manage/${patientId}/${doctorId}/${labresult.id}`} color='blue'>
-                    Edit Lab Result
+                <Button as={Link} to={`/managePrescription/${patientId}/${doctorId}/${prescription.id}`} color='blue'>
+                    Edit Prescription
                     </Button>
                 <Button.Or/>
                 <Modal
@@ -81,7 +74,7 @@ export default observer (function LabResultsList() {
       open={open}
       trigger={<Button
         color='red'>
-            Delete Lab Result
+            Delete Prescription
         </Button> }
         > <Modal.Header>Are you sure ?</Modal.Header>
         <Modal.Actions>
@@ -90,9 +83,9 @@ export default observer (function LabResultsList() {
           </Button>
           <Button
             content="Yes!"
-            name={labresult.id}
-            loading={loading && target===labresult.id}
-            onClick={(e)=>handleLabResultDelete(e, labresult.id) }
+            name={prescription.id}
+            loading={loading && target===prescription.id}
+            onClick={(e)=>handlePrescriptionDelete(e, prescription.id) }
             color='red'
           />
         </Modal.Actions>

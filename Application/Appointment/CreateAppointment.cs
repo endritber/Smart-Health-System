@@ -25,17 +25,16 @@ namespace Application.Appointment
             }
 
     
-    
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
     
                 var patient = await _context.Patients.FindAsync(request.PatientId);
 
 
-                request.Appointment.patient = patient;
+                // request.Appointment.patient = patient;
 
 
-                patient.Appointments.Add(request.Appointment);
+                // patient.Appointments.Add(request.Appointment);
 
 
                 _context.Appointments.Add(request.Appointment);

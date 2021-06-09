@@ -1,7 +1,7 @@
 import NavBar from './NavBar';
 import { Container } from 'semantic-ui-react';
 import MyHealthList from '../../features/myhealth/MyHealthList';
-import { Route } from 'react-router';
+import { Route,useLocation } from 'react-router';
 import HomePage from '../../features/home/HomePage';
 import SummaryList from '../../features/summary/SummaryList';
 import GetCare from '../../features/getcare/GetCare';
@@ -23,6 +23,11 @@ import MyPatients from '../../features/mypatients/MyPatients';
 import MyPatientDetail from '../../features/mypatients/patientDetail/MyPatientDetail';
 import LabResultsList from '../../features/mypatients/patientLabResults/LabResultsList';
 import LabResultForm from '../../features/mypatients/labresultForm/LabResultForm';
+import LoadingComponent from './LoadingComponent';
+import PrescriptionsList from '../../features/mypatients/patientPrescriptions/PrescriptionsList';
+import PrescriptionForm from '../../features/mypatients/prescriptionForm/PrescriptionForm';
+import LabResultGraph from '../../features/mypatients/labresultGraph/LabResultGraph';
+
 
 
 
@@ -42,7 +47,9 @@ function App() {
     }
   },[commonStore, userStore])
 
+  const location = useLocation();
 
+  if (!commonStore.appLoaded) return <LoadingComponent content='Loading app...' />
   return (
 
     <>
@@ -87,8 +94,11 @@ function App() {
         <Route exact path='/myPatients/:id' component={MyPatients}/>
         <Route path='/profiles/:username' component={DoctorProfilePage}/>
         <Route path='/addDoctorInformation/:id' component={DoctorForm}/>
+        <Route path='/graph/:patientId/:doctorId' component={LabResultGraph}/>
         <Route path='/myPatients/labResults/:patientId/:doctorId' component={LabResultsList}/>
-        <Route path='/labResultForm/:patientId/:doctorId' component={LabResultForm}/>
+        <Route key = {location.key} path={['/labResultForm/:patientId/:doctorId', '/manage/:patientId/:doctorId/:id']} component={LabResultForm}/>
+        <Route path='/myPatients/prescriptions/:patientId/:doctorId' component={PrescriptionsList}/>
+        <Route path={['/prescriptionsForm/:patientId/:doctorId', '/managePrescription/:patientId/:doctorId/:prescriptionId']} component={PrescriptionForm}/>
         
 
         </Container>
