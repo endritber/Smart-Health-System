@@ -29,7 +29,7 @@ export default class UserStore {
             if (user.roleId===1) { 
                 history.push('/myhealthlist');
             } else if (user.roleId === 2) {
-                history.push('/patients');
+                history.push(`/myPatients/${user.id}`);
             } 
             store.modalStore.closeModal();
             

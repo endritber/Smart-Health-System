@@ -27,6 +27,8 @@ import LoadingComponent from './LoadingComponent';
 import PrescriptionsList from '../../features/mypatients/patientPrescriptions/PrescriptionsList';
 import PrescriptionForm from '../../features/mypatients/prescriptionForm/PrescriptionForm';
 import LabResultGraph from '../../features/mypatients/labresultGraph/LabResultGraph';
+import AllergiesList from '../../features/mypatients/patientAllergies/AllergiesList';
+import AllergyForm from '../../features/mypatients/allergyForm/AllergyForm';
 
 
 
@@ -99,6 +101,9 @@ function App() {
         <Route key = {location.key} path={['/labResultForm/:patientId/:doctorId', '/manage/:patientId/:doctorId/:id']} component={LabResultForm}/>
         <Route path='/myPatients/prescriptions/:patientId/:doctorId' component={PrescriptionsList}/>
         <Route path={['/prescriptionsForm/:patientId/:doctorId', '/managePrescription/:patientId/:doctorId/:prescriptionId']} component={PrescriptionForm}/>
+        <Route path='/myPatients/allergies/:patientId/:doctorId' component={AllergiesList}/>
+        <Route path={['/allergyForm/:patientId/:doctorId', '/manageAllergy/:patientId/:doctorId/:allergyId']} component={AllergyForm}/>
+        
         
 
         </Container>

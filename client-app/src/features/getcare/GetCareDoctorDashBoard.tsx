@@ -12,7 +12,7 @@ export default observer (function GetCareDoctorDashBoard() {
 
     return (
         <Grid>
-            <Grid.Column width='10'>
+            <Grid.Column width='16'>
                 <GetCareDoctorList/>
             </Grid.Column>
         </Grid>

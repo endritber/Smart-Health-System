@@ -43,7 +43,7 @@ export default observer( function MyPatientDetail() {
 
     <Card.Content extra>
     <Card.Header>Allergies</Card.Header>
-    <Button color='teal' as={Link} to ={`/allergies/${patient?.id}`} fluid>Show Allergies</Button>
+    <Button color='teal' as={Link} to ={`/myPatients/allergies/${patient?.id}/${id}`} fluid>Show Allergies</Button>
 
     </Card.Content>
     <Card.Content extra>

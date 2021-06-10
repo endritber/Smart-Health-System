@@ -14,7 +14,7 @@ export default observer (function NavBar() {
         <Menu inverted secondary fixed='top'>
             <Container>
                 <Menu.Item as={NavLink} to= '/' header>
-                    <Image className='navbarphoto' src='/logohealth.png' alt = 'logo' />
+                    <Image className='navbarphoto' src='/logohealth.png' alt = 'logo' style={{"border-radius":"20px"}} />
                 </Menu.Item>
                 <Menu.Item as={NavLink} to = '/myhealthlist' name ="My Health" />
                 <Menu.Item as={NavLink} to = '/summarylist' name ="Summary"/>

@@ -1,3 +1,4 @@
+import { Allergy } from "./allergy";
 import { Doctor } from "./doctor";
 import { doctorprofile } from "./doctorprofile";
 import { LabResult } from "./labresult";
@@ -14,5 +15,6 @@ export interface Patient {
     doctor:doctorprofile;
     labResults: LabResult[];
     prescriptions: Prescription[];
+    allergies: Allergy[];
     
 }

@@ -45,6 +45,7 @@ export default observer (function PatientForm(){
         },
         labResults: [],
         prescriptions:[],
+        allergies:[],
         
     });
 

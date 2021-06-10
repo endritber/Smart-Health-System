@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Allergy } from '../models/allergy';
 import { Doctor } from '../models/doctor';
 import { LabResult } from '../models/labresult';
 import { Patient } from '../models/patient';
@@ -51,6 +52,14 @@ const labresults = {
     delete: (id: string)=>axios.delete<void>(`/labresults/${id}`)
 
 }
+const allergies = {
+    list: () => requests.get<Allergy[]>('/allergy'),
+    details: (id: string) => requests.get<Allergy>(`/allergy/${id}`),
+    create: (Allergy: Allergy, patientId: string, doctorId:string)=>requests.post<void>(`/allergy/${patientId}/${doctorId}`,Allergy),
+    update: (Allergy: Allergy)=>axios.put<void>(`/allergy/${Allergy.id}`, Allergy),
+    delete: (id: string)=>axios.delete<void>(`/allergy/${id}`)
+
+}
 
 const prescriptions = {
     list: () => requests.get<Prescription[]>('/prescriptions'),
@@ -99,7 +108,8 @@ const agent ={
     Profile,
     Patients,
     Doctors, 
-    DocProfile
+    DocProfile,
+    allergies
 }
 
 export default agent;

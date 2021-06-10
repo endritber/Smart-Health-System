@@ -37,12 +37,14 @@ export default observer (function LabResultsList() {
     return (
         <Segment>   
           <Segment>
+            <Header>
+          <Header>Add {selectedPatient?.name}'s Laboratory Results</Header>
         <Button size ='huge' color='teal' as={Link} to={`/labResultForm/${patientId}/${doctorId}`}>
-                Add Lab Result for {selectedPatient?.name} {selectedPatient?.lastName}
-        </Button>
+                Add Lab Result
+        </Button></Header>
         <Header>
         <Header>View {selectedPatient?.name}'s Graph Laboratory Results</Header>
-        <Button size='large' positive as={Link} to={`/graph/${patientId}/${doctorId}`}>
+        <Button size='large' color='teal' as={Link} to={`/graph/${patientId}/${doctorId}`}>
                     View Graph
           </Button></Header></Segment> 
         {selectedPatient?.labResults.map(labresult=> (

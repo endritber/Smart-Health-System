@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import allergyStore from "./allergyStore";
 import CommonStore from "./commonStore";
 import doctorStore from "./doctorStore";
 import labResultStore from "./labResultStore";
@@ -17,6 +18,7 @@ interface Store {
     patientStore: patientStore;
     doctorStore: doctorStore;
     prescriptionStore: prescriptionStore;
+    allergyStore: allergyStore;
 }
 
 export const store: Store = {
@@ -28,6 +30,7 @@ export const store: Store = {
     patientStore: new patientStore(),
     doctorStore: new doctorStore(),
     prescriptionStore: new prescriptionStore(),
+    allergyStore: new allergyStore(),
 }
 
 export const StoreContext = createContext(store)
