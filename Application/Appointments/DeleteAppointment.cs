@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using MediatR;
 using Persistence;
 
-namespace Application.Appointment
+namespace Application.Appointments
 {
     public class DeleteAppointment
     {
-         public class Command : IRequest
+        public class Command : IRequest
         {
             public Guid Id{get; set;}
 

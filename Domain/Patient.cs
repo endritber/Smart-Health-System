@@ -35,5 +35,7 @@ namespace Domain
 
         public ICollection<Vitals> Vitals {get; set;} = new List<Vitals>();
 
+         public ICollection<Appointment> Appointments {get; set;} = new List<Appointment>();
+
     }
 }

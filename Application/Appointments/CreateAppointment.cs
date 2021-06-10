@@ -4,16 +4,17 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Appointment
+namespace Application.Appointments
 {
-    public class CreateAppointment
-    {
-            public class Command : IRequest
+    public class CreateAppointment {
+
+        public class Command : IRequest
         {
-            public Appointments Appointment { get; set; }
+            public Appointment Appointment { get; set; }
 
             public string PatientId { get; set; }
 
+            public string DoctorId { get; set; }
         }
 
     public class Handler : IRequestHandler<Command>
@@ -25,19 +26,25 @@ namespace Application.Appointment
             }
 
     
+    
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+
+
     
                 var patient = await _context.Patients.FindAsync(request.PatientId);
 
+                var doctor = await _context.Doctors.FindAsync(request.DoctorId);
 
-                // request.Appointment.patient = patient;
+                request.Appointment.patient = patient;
 
+                request.Appointment.doctor = doctor;
 
-                // patient.Appointments.Add(request.Appointment);
+                patient.Appointments.Add(request.Appointment);
+                
+                doctor.Appointments.Add(request.Appointment);
 
-
-                _context.Appointments.Add(request.Appointment);
+                 _context.Appointments.Add(request.Appointment);
 
                 await _context.SaveChangesAsync();
 

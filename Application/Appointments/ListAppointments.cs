@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Persistence;
 
-namespace Application.Appointment
+namespace Application.Appointments
 {
-    public class ListAppointment
+    public class ListAppointments
     {
-        public class Query : IRequest<List<Appointments>> {}
+        public class Query : IRequest<List<Appointment>> {}
 
-        public class Handler : IRequestHandler<Query, List<Appointments>>
+        public class Handler : IRequestHandler<Query, List<Appointment>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -21,7 +22,7 @@ namespace Application.Appointment
 
             }
 
-            public async Task<List<Appointments>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Appointment>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _context.Appointments.ToListAsync(cancellationToken);
             }

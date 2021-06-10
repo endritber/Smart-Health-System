@@ -5,16 +5,16 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Appointment
+namespace Application.Appointments
 {
-    public class ReadAppointment
+    public class AppointmentsDetails
     {
-          public class Query : IRequest<Appointments>
+        public class Query : IRequest<Appointment>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Appointments>
+        public class Handler : IRequestHandler<Query, Appointment>
         {
             private readonly DataContext _context;
 
@@ -23,12 +23,11 @@ namespace Application.Appointment
                 _context = context;
 
             }
-            public async Task<Appointments> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Appointment> Handle(Query request, CancellationToken cancellationToken)
             {
                     return await _context.Appointments.FindAsync(request.Id);
 
             }
-
         }
     }
 }

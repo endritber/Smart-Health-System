@@ -11,8 +11,9 @@ namespace Persistence
         }
         public DbSet<Vitals> Vitals {get; set;}
 
-        public DbSet<Appointments> Appointments { get; set;}
+    
         public DbSet<Allergy> Allergies { get; set;}
+         public DbSet<Appointment> Appointments { get; set;}
         public DbSet<WaterIntake> WaterIntakes { get; set;}
         public DbSet<Weight> Weights { get; set;}
         public DbSet<Height> Heights { get; set;}
@@ -72,6 +73,14 @@ namespace Persistence
             builder.Entity<Patient>()
             .HasMany(x => x.Vitals)
             .WithOne(x => x.patient);
+
+            builder.Entity<Patient>()
+            .HasMany(x => x.Appointments)
+            .WithOne(x => x.patient);
+
+            builder.Entity<Doctor>()
+            .HasMany(x => x.Appointments)
+            .WithOne(x => x.doctor);
         
         }
 

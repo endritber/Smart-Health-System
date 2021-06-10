@@ -5,13 +5,13 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Appointment
+namespace Application.Appointments
 {
     public class EditAppointment
     {
         public class Command : IRequest
         {
-            public Appointments Appointment { get; set; }
+            public Appointment Appointment { get; set; }
 
             public class Handler : IRequestHandler<Command>
             {
@@ -25,7 +25,7 @@ namespace Application.Appointment
 
                 public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
                 {
-                    var appointment = await _context.Appointments.FindAsync(request.Appointment.AppointmentId);
+                    var appointment = await _context.Appointments.FindAsync(request.Appointment.Id);
 
                     _mapper.Map(request.Appointment, appointment);
 
@@ -33,8 +33,6 @@ namespace Application.Appointment
 
                     return Unit.Value;
                 }
-
-            
             }
         }
     }

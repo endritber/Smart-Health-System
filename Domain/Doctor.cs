@@ -27,6 +27,8 @@ namespace Domain
         public ICollection<Prescription> Prescribed {get; set;} = new List<Prescription>();
 
         public ICollection<Allergy> postingAllergies {get; set;} = new List<Allergy>();
+        public ICollection<Appointment> Appointments {get; set;} = new List<Appointment>();
+
 
         
         

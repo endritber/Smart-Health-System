@@ -28,6 +28,7 @@ namespace Application.Patients
         public ICollection<Prescription> Prescriptions {get; set;} = new List<Prescription>();
 
         public ICollection<Allergy> Allergies {get; set;} = new List<Allergy>();
+        public ICollection<Appointment> Appointments {get; set;} = new List<Appointment>();
 
     }
 }
