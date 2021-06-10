@@ -1,10 +1,20 @@
-* {
-  font-family: 'Roboto', sans-serif;
-}
 
 body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: #EAEAEA !important;
 }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 
 .ui.inverted.top.fixed.menu {
   background-image: linear-gradient(135deg, rgb(11, 36, 44) 0%, rgb(17, 61, 75) 69%, rgb(20, 84, 104) 89%) !important;
@@ -12,6 +22,38 @@ body {
   font-size: 16px;
   height: 10vh;
 }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: grayscale;
+}
+
+
+
+.ui.container > .ui.message {
+  box-shadow: none;
+  padding: 3rem 3rem;
+}
+
+.ui.container h1.ui.header {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .ui.container h1.ui.header {
+    font-size: 3.2rem;
+  }
+}
+
+.ui.container .ui.grid .row {
+  margin-bottom: 1.0rem;
+}
+
+.lead {
+  margin-top: 30px;
+}
+
 /*home page styles*/
 
 .masthead {
@@ -78,4 +120,8 @@ body {
 
 .textsize {
   font-size: 30px;
+}
+
+p {
+  margin-top: 100px;
 }

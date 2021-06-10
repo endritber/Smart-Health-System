@@ -1,63 +1,101 @@
 import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
-import {Button, Divider, Icon, Item } from 'semantic-ui-react';
+import {Button, Divider, Grid, Header, Icon, Item, Message } from 'semantic-ui-react';
 
 
 
 
 export default observer(function MyHealthList() {
     return (
-        <Item.Group divided>
-        <Item>
-        <Icon name='calendar check' size='massive'/>
-          <Item.Content verticalAlign='bottom'>
-            <Item.Header>Appointments</Item.Header>
-            <Item.Description>Check the latest appointments you made</Item.Description>
-            <Item.Extra>
-              <Button  style={{marginRight:"450px"}}  floated='right'>View</Button>
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-        <Item>
-        <Icon name='file alternate outline' size='massive'/>
-          <Item.Content verticalAlign='bottom'>
-            <Item.Header>Lab Results</Item.Header>
-            <Item.Description>The result of tests done in laboratory</Item.Description>
-            <Item.Extra>
-              <Button as={Link} to = '/myhealthlist/labresults' style={{marginRight:"450px"}} floated='right'>View</Button>
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-        <Item>
-        <Icon name='pen square' size='massive'/>
-          <Item.Content verticalAlign='bottom'>
-            <Item.Header>Prescriptions</Item.Header>
-            <Item.Description>Medicines ordered by the Doctor</Item.Description>
-            <Item.Extra>
-              <Button as={Link} to = '/myhealthlist/prescriptions' style={{marginRight:"450px"}} floated='right'>View</Button>
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-        <Item>
-        <Icon name='heartbeat' size='massive'/>
-          <Item.Content verticalAlign='bottom'>
-            <Item.Header>Vitals</Item.Header>
-            <Item.Description>Status of the body's vital functions</Item.Description>
-            <Item.Extra>
-              <Button style={{marginRight:"450px"}} floated='right'>View</Button>
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-        <Item>
-        <Icon name='chart bar' size='massive'/>
-          <Item.Content verticalAlign='bottom'>
-            <Item.Header>Medical Images</Item.Header>
-            <Item.Description>Images for diagnostics and treatment</Item.Description>
-            <Item.Extra>
-              <Button style={{marginRight:"450px"}} floated='right'>View</Button>
-            </Item.Extra>
-          </Item.Content>
-        </Item>        
-      </Item.Group>
+
+<>
+      <Message floating>
+      <Grid textAlign="center">
+      <Icon name='calendar check' size='massive'/>
+        <Header size="huge" as="h1"style={{marginTop:30}}>
+          Appointments
+        </Header>
+        <Header>
+        <p className="lead"style={{marginTop:100, marginRight:100}}>
+        Check the latest appointments you made
+        </p></Header>
+      <Button animated='vertical' style={{marginTop:30, marginRight:310}}>
+      <Button.Content visible>View Appointments</Button.Content>
+      <Button.Content hidden><Icon name='arrow down' /></Button.Content>
+      </Button>
+      </Grid>
+    </Message>
+
+    <Message>
+      <Grid textAlign="center" style={{marginRight:100}}>
+     <Icon name='file alternate outline' size='massive'/>
+        <Header size="huge" as="h1" style={{marginTop:30}}>
+          Lab Results
+        </Header>
+        <Header>
+        <p className="lead" style={{marginTop:100, marginRight:70}}>
+        The result of tests done in laboratory
+        </p></Header>
+        <Button animated='vertical' style={{marginTop:30, marginRight:210}}>
+      <Button.Content visible>View Lab Results</Button.Content>
+      <Button.Content hidden><Icon name='arrow down' /></Button.Content>
+    </Button>
+      </Grid>
+    </Message>
+
+    <Message>
+      <Grid textAlign="center" style={{marginRight:60}}>
+      <Icon name='pen square' size='massive'/>
+        <Header size="huge" as="h1" style={{marginTop:30}} >
+          Prescriptions
+        </Header>
+        <Header>
+        <p className="lead" style={{marginTop:100, marginRight:100}}>
+        Medicines ordered by the Doctor
+        </p></Header>
+        <Button animated='vertical' style={{marginTop:30, marginRight:230}}>
+      <Button.Content visible>View Prescriptions</Button.Content>
+      <Button.Content hidden><Icon name='arrow down' /></Button.Content>
+    </Button>
+      </Grid>
+    </Message>
+
+    <Message>
+      <Grid textAlign="center" style={{marginRight:40}}>
+      <Icon name='heartbeat' size='massive'/>
+        <Header size="huge" as="h1" style={{marginTop:30}}>
+          Allergies
+        </Header>
+        <Header>
+        <p className="lead" style={{marginTop:100, marginRight:100}}>
+        An immune response by the body to a substance
+        </p></Header>
+        <Button animated='vertical' style={{marginTop:30, marginRight:270}}>
+      <Button.Content visible>View Allergies</Button.Content>
+      <Button.Content hidden><Icon name='arrow down' /></Button.Content>
+    </Button>
+      </Grid>
+    </Message>
+
+    <Message>
+      <Grid textAlign="center" style={{marginLeft:-100}}>
+      <Icon name='chart bar' size='massive' />
+        <Header size="huge" as="h1" style={{marginTop:20}}>
+          Medical Images
+        </Header>
+        <Header>
+        <p className="lead"  style={{marginTop:100}}>
+        Images for diagnostics and treatment
+        </p></Header>
+        <Button animated='vertical' style={{marginTop:30, marginRight:220}}>
+      <Button.Content visible>View Med Images</Button.Content>
+      <Button.Content hidden><Icon name='arrow down' /></Button.Content>
+    </Button>
+      </Grid>
+    </Message>
+    
+
+
+      </>
     )
 })
