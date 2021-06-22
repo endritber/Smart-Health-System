@@ -17,10 +17,14 @@ namespace Persistence
         public DbSet<WaterIntake> WaterIntakes { get; set;}
         public DbSet<Weight> Weights { get; set;}
         public DbSet<Height> Heights { get; set;}
-        public DbSet<LabResult> LabResults { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
+
+        public DbSet<CBC> CBCs { get; set;}
+        public DbSet<Urinalysis> UrinalysisList { get; set; }
+        public DbSet<MetabolicPanel> MetabolicPanels { get; set; }
+        public DbSet<LiverPanel> LiverPanels { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -28,13 +32,49 @@ namespace Persistence
             // builder.Entity<DoctorPatient> (x=>x.HasKey( xx=> new {xx.DoctorId, xx.PatientId}));
 
             builder.Entity<Doctor>()
+            .HasMany(x=>x.CBCsAdded)
+            .WithOne(x=>x.doctor);
+
+            builder.Entity<Patient>()
+            .HasMany(x=>x.CBCs)
+            .WithOne(x=>x.patient);
+
+                 builder.Entity<Doctor>()
+            .HasMany(x=>x.LiverPanelsAdded)
+            .WithOne(x=>x.doctor);
+
+            builder.Entity<Patient>()
+            .HasMany(x=>x.LiverPanels)
+            .WithOne(x=>x.patient);
+
+                 builder.Entity<Doctor>()
+            .HasMany(x=>x.MetabolicPanelsAdded)
+            .WithOne(x=>x.doctor);
+
+            builder.Entity<Patient>()
+            .HasMany(x=>x.MetabolicPanels)
+            .WithOne(x=>x.patient);
+
+                 builder.Entity<Doctor>()
+            .HasMany(x=>x.UrinalysisListAdded)
+            .WithOne(x=>x.doctor);
+
+            builder.Entity<Patient>()
+            .HasMany(x=>x.UrinalysisList)
+            .WithOne(x=>x.patient);
+
+
+
+
+
+
+
+
+            builder.Entity<Doctor>()
             .HasMany(x=>x.Patients)
             .WithOne(x=>x.doctor);
 
 
-            builder.Entity<Patient>()
-            .HasMany(x=>x.LabResults)
-            .WithOne(x=>x.patient);
 
             builder.Entity<Patient>()
             .HasMany(x=>x.Prescriptions)
@@ -53,9 +93,6 @@ namespace Persistence
             .HasMany(x=>x.postingAllergies)
             .WithOne(x=>x.doctor);
 
-             builder.Entity<Doctor>()
-            .HasMany(x=>x.PostingResults)
-            .WithOne(x=>x.doctor);
 
             builder.Entity<Patient>()
             .HasMany(x => x.Height)

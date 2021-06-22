@@ -18,6 +18,19 @@ export default class patientStore {
         makeAutoObservable(this)
     }
 
+     sortUrinalysis= async() =>{
+        return this.selectedPatient?.urinalysisList.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
+    sortMetabolicPanel= async() =>{
+        return this.selectedPatient?.metabolicPanels.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
+    sortLiverPanel= async() => {
+        return this.selectedPatient?.liverPanels.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
+    sortCBC= async() =>{
+        return this.selectedPatient?.cbCs.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
+
 
     loadPatients = async () => { 
         this.setLoadingIntitial(true);
@@ -39,17 +52,31 @@ export default class patientStore {
 
 
     loadPatient = async(id:string)=> {
-        // let patient = this.getPatient(id);
-        // if(patient) {
-        //     this.selectedPatient = patient;
-        //     return patient;
-        // } else{
             this.setLoadingIntitial(true);
             try {
                 const patient = await agent.Patients.details(id);
                 this.setPatient(patient);
                 runInAction(()=>{
                     this.selectedPatient=patient;
+                    this.selectedPatient.liverPanels.forEach(lp=> {
+                        lp.date = lp.date.split('T')[0];
+                    })
+                    this.selectedPatient.metabolicPanels.forEach(mp=> {
+                        mp.date = mp.date.split('T')[0];
+                    })
+                    this.selectedPatient.urinalysisList.forEach(u=> {
+                        u.date = u.date.split('T')[0];
+                    })
+                    this.selectedPatient.cbCs.forEach(cbc=> {
+                        cbc.date = cbc.date.split('T')[0];
+                    })
+                    this.sortUrinalysis();
+                    this.sortMetabolicPanel();
+                    this.sortLiverPanel();
+                    this.sortCBC();
+                    
+
+
                 })
                 this.setLoadingIntitial(false);
                 return patient;

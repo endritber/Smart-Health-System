@@ -140,7 +140,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Place")
+                    b.Property<string>("Place")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ReasonOfVisit")
@@ -159,6 +159,57 @@ namespace Persistence.Migrations
                     b.HasIndex("patientId");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("Domain.CBC", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("BandForms")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Basoghilis")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Hematocrit")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Hemoglobin")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Lymphocytes")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Monocytes")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("PlateletCount")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("SegmentedNeutrofilis")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("WBC")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("doctorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patientId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("doctorId");
+
+                    b.HasIndex("patientId");
+
+                    b.ToTable("CBCs");
                 });
 
             modelBuilder.Entity("Domain.Height", b =>
@@ -180,34 +231,34 @@ namespace Persistence.Migrations
                     b.ToTable("Heights");
                 });
 
-            modelBuilder.Entity("Domain.LabResult", b =>
+            modelBuilder.Entity("Domain.LiverPanel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<float>("AlkalinePhosPhatase")
+                        .HasColumnType("REAL");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ProblemProportion")
-                        .HasColumnType("TEXT");
+                    b.Property<float>("DirectBiliRubin")
+                        .HasColumnType("REAL");
 
-                    b.Property<string>("Result")
-                        .HasColumnType("TEXT");
+                    b.Property<float>("SGOT")
+                        .HasColumnType("REAL");
 
-                    b.Property<string>("ResultProportion")
-                        .HasColumnType("TEXT");
+                    b.Property<float>("SGPT")
+                        .HasColumnType("REAL");
 
-                    b.Property<string>("Sample")
-                        .HasColumnType("TEXT");
+                    b.Property<float>("TotalBiliRubin")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("doctorId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("patientId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("status")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -216,7 +267,52 @@ namespace Persistence.Migrations
 
                     b.HasIndex("patientId");
 
-                    b.ToTable("LabResults");
+                    b.ToTable("LiverPanels");
+                });
+
+            modelBuilder.Entity("Domain.MetabolicPanel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Albumin")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Bun")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Calcium")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("CarbonDioxide")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Globulin")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Glucose")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Protein")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("doctorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patientId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("doctorId");
+
+                    b.HasIndex("patientId");
+
+                    b.ToTable("MetabolicPanels");
                 });
 
             modelBuilder.Entity("Domain.Prescription", b =>
@@ -256,6 +352,60 @@ namespace Persistence.Migrations
                     b.HasIndex("patientId");
 
                     b.ToTable("Prescriptions");
+                });
+
+            modelBuilder.Entity("Domain.Urinalysis", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("BloodUreaNitrogen")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Calcium")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Chloride")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Creatinine")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("FastingGlucose")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("HCO3")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Magnesium")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Phosphate")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Potassium")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Sodium")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("doctorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patientId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("doctorId");
+
+                    b.HasIndex("patientId");
+
+                    b.ToTable("UrinalysisList");
                 });
 
             modelBuilder.Entity("Domain.Vitals", b =>
@@ -543,6 +693,21 @@ namespace Persistence.Migrations
                     b.Navigation("patient");
                 });
 
+            modelBuilder.Entity("Domain.CBC", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany("CBCsAdded")
+                        .HasForeignKey("doctorId");
+
+                    b.HasOne("Domain.Patient", "patient")
+                        .WithMany("CBCs")
+                        .HasForeignKey("patientId");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
+                });
+
             modelBuilder.Entity("Domain.Height", b =>
                 {
                     b.HasOne("Domain.Patient", "patient")
@@ -552,14 +717,29 @@ namespace Persistence.Migrations
                     b.Navigation("patient");
                 });
 
-            modelBuilder.Entity("Domain.LabResult", b =>
+            modelBuilder.Entity("Domain.LiverPanel", b =>
                 {
                     b.HasOne("Domain.Doctor", "doctor")
-                        .WithMany("PostingResults")
+                        .WithMany("LiverPanelsAdded")
                         .HasForeignKey("doctorId");
 
                     b.HasOne("Domain.Patient", "patient")
-                        .WithMany("LabResults")
+                        .WithMany("LiverPanels")
+                        .HasForeignKey("patientId");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
+                });
+
+            modelBuilder.Entity("Domain.MetabolicPanel", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany("MetabolicPanelsAdded")
+                        .HasForeignKey("doctorId");
+
+                    b.HasOne("Domain.Patient", "patient")
+                        .WithMany("MetabolicPanels")
                         .HasForeignKey("patientId");
 
                     b.Navigation("doctor");
@@ -575,6 +755,21 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Patient", "patient")
                         .WithMany("Prescriptions")
+                        .HasForeignKey("patientId");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
+                });
+
+            modelBuilder.Entity("Domain.Urinalysis", b =>
+                {
+                    b.HasOne("Domain.Doctor", "doctor")
+                        .WithMany("UrinalysisListAdded")
+                        .HasForeignKey("doctorId");
+
+                    b.HasOne("Domain.Patient", "patient")
+                        .WithMany("UrinalysisList")
                         .HasForeignKey("patientId");
 
                     b.Navigation("doctor");
@@ -673,13 +868,19 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Appointments");
 
+                    b.Navigation("CBCsAdded");
+
+                    b.Navigation("LiverPanelsAdded");
+
+                    b.Navigation("MetabolicPanelsAdded");
+
                     b.Navigation("Patients");
 
                     b.Navigation("postingAllergies");
 
-                    b.Navigation("PostingResults");
-
                     b.Navigation("Prescribed");
+
+                    b.Navigation("UrinalysisListAdded");
                 });
 
             modelBuilder.Entity("Domain.Patient", b =>
@@ -688,11 +889,17 @@ namespace Persistence.Migrations
 
                     b.Navigation("Appointments");
 
+                    b.Navigation("CBCs");
+
                     b.Navigation("Height");
 
-                    b.Navigation("LabResults");
+                    b.Navigation("LiverPanels");
+
+                    b.Navigation("MetabolicPanels");
 
                     b.Navigation("Prescriptions");
+
+                    b.Navigation("UrinalysisList");
 
                     b.Navigation("Vitals");
 

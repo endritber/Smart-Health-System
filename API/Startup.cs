@@ -5,7 +5,6 @@ using System.Net;
 using System.Threading.Tasks;
 using API.Extensions;
 using Application.Core;
-using Application.LabResults;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;

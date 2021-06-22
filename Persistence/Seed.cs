@@ -42,62 +42,7 @@ namespace Persistence
                 };
             
 
-            if (!context.LabResults.Any())
-            {
-                var labresults = new List<LabResult>
-                {
-                    new LabResult
-                    {
-                        Sample = "HyperTension",
-                        ProblemProportion = ".67%",
-                        Date= DateTime.Now.AddMonths(0),
-                        Result = "Hematocrit",
-                        ResultProportion="4.32%",
-                        status = "True"
-
-                    },
-                    new LabResult
-                    {
-                        Sample = "Depression",
-                        ProblemProportion = "3.67%",
-                        Date= DateTime.Now.AddMonths(0),
-                        Result = "Pottasium",
-                        ResultProportion="4.32%",
-                        status = "False"
-
-                    },
-                    new LabResult
-                    {
-                        Sample = "Asthma",
-                        ProblemProportion = "2.67%",
-                        Date= DateTime.Now.AddMonths(-2),
-                        Result = "Hemoglobin",
-                        ResultProportion="4.32%",
-                        status = "True"
-
-                    },
-                             new LabResult
-                    {
-                        Sample = "Breast Cancer",
-                        ProblemProportion = "3.64%",
-                        Date= DateTime.Now.AddMonths(-1),
-                        Result = "Platelets",
-                        ResultProportion="4.32%",
-                        status = "False"
-
-                    },
-                             new LabResult
-                    {
-                        Sample = "HyperLipidemia",
-                        ProblemProportion = "2.67%",
-                        Date= DateTime.Now.AddMonths(-1),
-                        Result = "Hemoglobin",
-                        ResultProportion="4.32%",
-                        status = "False"
-
-                    },
-                 
-                };
+            
                 if (!context.Prescriptions.Any())
             {
                 var prescriptions= new List<Prescription>
@@ -148,7 +93,6 @@ namespace Persistence
                     },
                 };
                 await context.Heights.AddRangeAsync(heights);
-                await context.LabResults.AddRangeAsync(labresults);
                 await context.Prescriptions.AddRangeAsync(prescriptions);
                 await context.SaveChangesAsync();
             }
@@ -157,4 +101,3 @@ namespace Persistence
     }
 
     }
-}

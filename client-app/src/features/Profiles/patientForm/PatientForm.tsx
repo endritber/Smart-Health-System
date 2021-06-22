@@ -43,9 +43,12 @@ export default observer (function PatientForm(){
             bio:'',
             image:'',
         },
-        labResults: [],
         prescriptions:[],
         allergies:[],
+        cbCs:[],
+        liverPanels:[],
+        metabolicPanels:[],
+        urinalysisList: [],
         
     });
 

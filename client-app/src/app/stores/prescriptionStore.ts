@@ -1,6 +1,5 @@
 import { makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
-import { LabResult } from "../models/labresult";
 import {v4 as uuid} from'uuid';
 import { Patient } from "../models/patient";
 import { Doctor } from "../models/doctor";

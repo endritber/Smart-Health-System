@@ -7,7 +7,7 @@ import LoginForm from '../users/LoginForm';
 
 
 export default observer(function HomePage() {
-    const {userStore, modalStore, labResultStore} = useStore();
+    const {userStore, modalStore} = useStore();
 
     return (
         <>

@@ -28,13 +28,19 @@ namespace Application.Doctors
 
         public ICollection<PatientProfile> Patients {get; set;} = new List<PatientProfile>();
 
-        public ICollection<LabResult> PostingResults {get; set;} = new List<LabResult>();
-
         public ICollection<Prescription> Prescribed {get; set;} = new List<Prescription>();
 
         public ICollection<Allergy> postingAllergies {get; set;} = new List<Allergy>();
 
         public ICollection<Appointment> Appointments {get; set;} = new List<Appointment>();
+
+          public ICollection<CBC> CBCsAdded {get; set;} = new List<CBC>();
+
+        public ICollection<Urinalysis> UrinalysisListAdded {get; set;} = new List<Urinalysis>();
+
+        public ICollection<MetabolicPanel> MetabolicPanelsAdded {get; set;} = new List<MetabolicPanel>();
+
+         public ICollection<LiverPanel> LiverPanelsAdded {get; set;} = new List<LiverPanel>();
 
         
     }

@@ -1,10 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
 import { Allergy } from '../models/allergy';
+import { CBC } from '../models/cbc';
 import { Doctor } from '../models/doctor';
-import { LabResult } from '../models/labresult';
+import { LiverPanel } from '../models/liverpanel';
+import { MetabolicPanel } from '../models/metabolicpanel';
 import { Patient } from '../models/patient';
 import { patientprofile } from '../models/patientprofile';
 import { Prescription } from '../models/prescription';
+import { Urinalysis } from '../models/urinalysis';
 import {doctorUser, patientUser, User, userFormValues } from '../models/user';
 
 
@@ -43,13 +46,39 @@ const requests = {
     delete:<T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
 
+const liverpanel = {
+    list: () => requests.get<LiverPanel[]>('/liverpanel'),
+    details: (id: string) => requests.get<LiverPanel>(`/liverpanel/${id}`),
+    create: (LiverPanel: LiverPanel, patientId: string, doctorId:string)=>requests.post<void>(`/liverpanel/${patientId}/${doctorId}`,LiverPanel),
+    update: (LiverPanel: LiverPanel)=>axios.put<void>(`/liverpanel/${LiverPanel.id}`, LiverPanel),
+    delete: (id: string)=>axios.delete<void>(`/liverpanel/${id}`)
 
-const labresults = {
-    list: () => requests.get<LabResult[]>('/labresults'),
-    details: (id: string) => requests.get<LabResult>(`/labresults/${id}`),
-    create: (LabResult: LabResult, patientId: string, doctorId:string)=>requests.post<void>(`/labresults/${patientId}/${doctorId}`,LabResult),
-    update: (LabResult: LabResult)=>axios.put<void>(`/labresults/${LabResult.id}`, LabResult),
-    delete: (id: string)=>axios.delete<void>(`/labresults/${id}`)
+}
+
+const metabolicpanel = {
+    list: () => requests.get<MetabolicPanel[]>('/metabolicpanel'),
+    details: (id: string) => requests.get<MetabolicPanel>(`/metabolicpanel/${id}`),
+    create: (MetabolicPanel: MetabolicPanel, patientId: string, doctorId:string)=>requests.post<void>(`/metabolicpanel/${patientId}/${doctorId}`,MetabolicPanel),
+    update: (MetabolicPanel: MetabolicPanel)=>axios.put<void>(`/metabolicpanel/${MetabolicPanel.id}`, MetabolicPanel),
+    delete: (id: string)=>axios.delete<void>(`/metabolicpanel/${id}`)
+
+}
+
+const cbc = {
+    list: () => requests.get<CBC[]>('/cbc'),
+    details: (id: string) => requests.get<CBC>(`/cbc/${id}`),
+    create: (CBC: CBC, patientId: string, doctorId:string)=>requests.post<void>(`/cbc/${patientId}/${doctorId}`,CBC),
+    update: (CBC: CBC)=>axios.put<void>(`/cbc/${CBC.id}`, CBC),
+    delete: (id: string)=>axios.delete<void>(`/cbc/${id}`)
+
+}
+
+const urinalysis = {
+    list: () => requests.get<Urinalysis[]>('/urinalysis'),
+    details: (id: string) => requests.get<Urinalysis>(`/urinalysis/${id}`),
+    create: (Urinalysis: Urinalysis, patientId: string, doctorId:string)=>requests.post<void>(`/urinalysis/${patientId}/${doctorId}`,Urinalysis),
+    update: (Urinalysis: Urinalysis)=>axios.put<void>(`/urinalysis/${Urinalysis.id}`, Urinalysis),
+    delete: (id: string)=>axios.delete<void>(`/urinalysis/${id}`)
 
 }
 const allergies = {
@@ -102,14 +131,18 @@ const Doctors = {
 }
 
 const agent ={
-    labresults,
+
     Account, 
     prescriptions,
     Profile,
     Patients,
     Doctors, 
     DocProfile,
-    allergies
+    allergies,
+    cbc,
+    metabolicpanel,
+    liverpanel,
+    urinalysis
 }
 
 export default agent;

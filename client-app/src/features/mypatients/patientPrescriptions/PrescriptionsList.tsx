@@ -33,39 +33,41 @@ export default observer (function PrescriptionsList() {
             setTarget(e.currentTarget.name)
             deletePrescription(id).then(()=> history.push(`/myPatients/${doctorId}`));
       }
-
+      var count = 0;
     return (
+      <>
+      <Header sub>{selectedPatient?.name} {selectedPatient?.lastName}'s Prescriptions</Header> 
+      <br/>  
+              <Button size ='huge' color='teal' as={Link} to={`/prescriptionsForm/${patientId}/${doctorId}`}>
+                Add Prescription
+        </Button> 
         <Segment>    
-        <Button size ='huge' color='teal' as={Link} to={`/prescriptionsForm/${patientId}/${doctorId}`}>
-                Add Prescription for {selectedPatient?.name} {selectedPatient?.lastName}
-        </Button>
+ 
         {selectedPatient?.prescriptions.map(prescription=> (
-            <Card fluid>
-            <Card.Content>
-                <Card.Header style={{display:'inline'}}>Medication: <Card.Content>{prescription.medication}</Card.Content></Card.Header>
-                <Divider/>
-                <Card.Header>Prescription Dose: <Card.Content>{prescription.dose}</Card.Content></Card.Header>
-                <Divider/>
-                <Card.Header>Prescription Provider: <Card.Content>{prescription.provider}</Card.Content></Card.Header>
-                <Divider/>
-                <Card.Header>
-                Date Added: 
-                <Card.Meta>
-                {prescription.prescribed}
-                </Card.Meta>
-                <Divider/>
-                </Card.Header>
-
-                <Card.Header>Dose: <Card.Content>{prescription.dose}</Card.Content></Card.Header>
-                <Divider/>
-                <Card.Header>Frequency: <Card.Content>{prescription.frequency}</Card.Content></Card.Header>
-                <Divider/>
-                <Card.Header>Quantity: <Card.Content>{prescription.quantity}</Card.Content></Card.Header>
+          <>
+          
+            <Card style={{display:"inline-block", width:"325.5px",marginRight:"40px", "border-radius": "15px"}}>
+            <Card.Content fluid>
+              <Card.Description><Header sub >Prescription {count+=1}</Header></Card.Description>
+              <br></br>
+               <Card.Description>Medication: {prescription.medication}</Card.Description>
+               <Divider />
+                <Card.Description>Prescription Dose: {prescription.dose}</Card.Description>
+                <Divider  />
+                <Card.Description>Prescription Provider: {prescription.provider}</Card.Description>
+                <Divider  />
+                <Card.Description>Date Added: {prescription.prescribed}</Card.Description>
+                <Divider  />
+                <Card.Description>Dose: {prescription.dose}</Card.Description>
+                <Divider  />
+                <Card.Description>Frequency: {prescription.frequency}</Card.Description>
+                <Divider  />
+                <Card.Description>Quantity: {prescription.quantity}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-            <Button.Group>
+            <Button.Group fluid>
                 <Button as={Link} to={`/managePrescription/${patientId}/${doctorId}/${prescription.id}`} color='blue'>
-                    Edit Prescription
+                    Edit
                     </Button>
                 <Button.Or/>
                 <Modal
@@ -74,9 +76,9 @@ export default observer (function PrescriptionsList() {
       open={open}
       trigger={<Button
         color='red'>
-            Delete Prescription
+            Delete
         </Button> }
-        > <Modal.Header>Are you sure ?</Modal.Header>
+        > <Modal.Description>Are you sure ?</Modal.Description>
         <Modal.Actions>
           <Button color='black' onClick={() => setOpen(false)}>
             No!
@@ -94,13 +96,12 @@ export default observer (function PrescriptionsList() {
                 </Button.Group>
                 
             </Card.Content>
-            
             </Card>
-           
             
+          </>
+         
         ))}
-        <Divider/>
         </Segment>
-
+</>
     )
 })

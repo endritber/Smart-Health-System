@@ -11,9 +11,13 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
-            CreateMap<LabResult, LabResult>();
+            
             CreateMap<Prescription, Prescription>();
             CreateMap<Allergy, Allergy>();
+            CreateMap<Urinalysis, Urinalysis>();
+            CreateMap<CBC, CBC>();
+            CreateMap<LiverPanel, LiverPanel>();
+            CreateMap<MetabolicPanel, MetabolicPanel>();
 
             CreateMap<Doctor, DoctorDto>();
             CreateMap<Doctor, DoctorProfile>();

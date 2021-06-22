@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { Allergy } from "../../../app/models/allergy";
-import { LabResult } from "../../../app/models/labresult";
 import { useStore } from "../../../app/stores/store";
 
 

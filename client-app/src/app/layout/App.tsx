@@ -8,8 +8,6 @@ import GetCare from '../../features/getcare/GetCare';
 import Messages from '../../features/messages/Messages';
 import DiseasePrediction from '../../features/diseaseprediction/DiseasePrediction';
 import { observer } from 'mobx-react-lite';
-import LabResults from '../../features/myhealth/labresults/LabResults';
-import Prescriptions from '../../features/myhealth/prescriptions/Prescriptions';
 import LoginForm from '../../features/users/LoginForm';
 import { useStore } from '../stores/store';
 import { useEffect } from 'react';
@@ -22,13 +20,20 @@ import DoctorForm from '../../features/Profiles/doctorForm/DoctorForm';
 import MyPatients from '../../features/mypatients/MyPatients';
 import MyPatientDetail from '../../features/mypatients/patientDetail/MyPatientDetail';
 import LabResultsList from '../../features/mypatients/patientLabResults/LabResultsList';
-import LabResultForm from '../../features/mypatients/labresultForm/LabResultForm';
 import LoadingComponent from './LoadingComponent';
 import PrescriptionsList from '../../features/mypatients/patientPrescriptions/PrescriptionsList';
 import PrescriptionForm from '../../features/mypatients/prescriptionForm/PrescriptionForm';
-import LabResultGraph from '../../features/mypatients/labresultGraph/LabResultGraph';
 import AllergiesList from '../../features/mypatients/patientAllergies/AllergiesList';
 import AllergyForm from '../../features/mypatients/allergyForm/AllergyForm';
+import CBCForm from '../../features/mypatients/cbcForm/CBCForm';
+import LiverPanelForm from '../../features/mypatients/liverpanelForm/LiverPanelForm';
+import MetabolicPanelForm from '../../features/mypatients/metabolicpanelForm/MetabolicPanelForm';
+import UrinalysisForm from '../../features/mypatients/urinalysisForm/UrinalysisForm';
+import CBCGraphs from '../../features/mypatients/labresultGraph/CBCGraphs';
+import LiverPanelGraphs from '../../features/mypatients/labresultGraph/LiverPanelGraphs';
+import LabResults from '../../features/myhealth/labresults/LabResults';
+import MyPrescriptions from '../../features/myhealth/prescriptions/MyPrescriptions';
+import PatientAllergyTable from '../../features/myhealth/allergies/PatientAllergyTable';
 
 
 
@@ -70,9 +75,10 @@ function App() {
         <Route path='/getcare' component={GetCare}/>
         <Route path='/messages' component={Messages}/>
         <Route path='/diseaseprediction' component={DiseasePrediction}/>
-        <Route path='/myhealthlist/labresults' component={LabResults}/>
+        <Route path='/myhealthlist/labresults/:id' component={LabResults}/>
         <Route path='/profiles/:username' component={PatientProfilePage}/>
-        <Route path='/myhealthlist/prescriptions' component={Prescriptions}/>
+        <Route path='/myhealthlist/prescriptions/:id' component={MyPrescriptions}/>
+        <Route path='/myhealthlist/allergies/:patientId' component={PatientAllergyTable}/>
         <Route path='/login' component={LoginForm}/>
         <Route path='/addInformation/:id'  component={PatientForm}/>
         <Route path='/patientDetail/:id'  component={MyPatientDetail}/>
@@ -96,16 +102,20 @@ function App() {
         <Route exact path='/myPatients/:id' component={MyPatients}/>
         <Route path='/profiles/:username' component={DoctorProfilePage}/>
         <Route path='/addDoctorInformation/:id' component={DoctorForm}/>
-        <Route path='/graph/:patientId/:doctorId' component={LabResultGraph}/>
         <Route path='/myPatients/labResults/:patientId/:doctorId' component={LabResultsList}/>
-        <Route key = {location.key} path={['/labResultForm/:patientId/:doctorId', '/manage/:patientId/:doctorId/:id']} component={LabResultForm}/>
+        <Route path={['/cbcForm/:patientId/:doctorId', '/manageCBC/:patientId/:doctorId/:CBCId']} component={CBCForm}/>
+        <Route path={['/liverPanelForm/:patientId/:doctorId', '/manageLiverPanel/:patientId/:doctorId/:LiverPanelId']} component={LiverPanelForm}/>
+        <Route path={['/metabolicPanelForm/:patientId/:doctorId', '/manageMetabolicPanel/:patientId/:doctorId/:MetabolicPanelId']} component={MetabolicPanelForm}/>
+        <Route path={['/urinalysisForm/:patientId/:doctorId', '/manageUrinalysis/:patientId/:doctorId/:UrinalysisId']} component={UrinalysisForm}/>
         <Route path='/myPatients/prescriptions/:patientId/:doctorId' component={PrescriptionsList}/>
         <Route path={['/prescriptionsForm/:patientId/:doctorId', '/managePrescription/:patientId/:doctorId/:prescriptionId']} component={PrescriptionForm}/>
         <Route path='/myPatients/allergies/:patientId/:doctorId' component={AllergiesList}/>
+        
         <Route path={['/allergyForm/:patientId/:doctorId', '/manageAllergy/:patientId/:doctorId/:allergyId']} component={AllergyForm}/>
+        <Route path='/cbcgraph/:patientId' component={CBCGraphs}/>
+        <Route path='/liverpanelgraph/:patientId' component={LiverPanelGraphs}/>
         
         
-
         </Container>
         </>
   )}

@@ -23,12 +23,18 @@ namespace Application.Patients
 
         public DoctorProfile doctor {get; set;}
 
-        public ICollection<LabResult> LabResults {get; set;} = new List<LabResult>();
-
         public ICollection<Prescription> Prescriptions {get; set;} = new List<Prescription>();
 
         public ICollection<Allergy> Allergies {get; set;} = new List<Allergy>();
         public ICollection<Appointment> Appointments {get; set;} = new List<Appointment>();
+
+           public ICollection<CBC> CBCs {get; set;} = new List<CBC>();
+
+        public ICollection<Urinalysis> UrinalysisList {get; set;} = new List<Urinalysis>();
+
+        public ICollection<MetabolicPanel> MetabolicPanels {get; set;} = new List<MetabolicPanel>();
+
+         public ICollection<LiverPanel> LiverPanels {get; set;} = new List<LiverPanel>();
 
     }
 }

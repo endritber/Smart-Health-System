@@ -21,8 +21,6 @@ namespace Domain
 
         public Doctor doctor {get; set;}
 
-        public ICollection<LabResult> LabResults {get; set;} = new List<LabResult>();
-
         public ICollection<Height> Height { get; set; } = new List<Height>();
 
         public ICollection<Weight> Weight { get; set; } = new List<Weight>();
@@ -36,6 +34,14 @@ namespace Domain
         public ICollection<Vitals> Vitals {get; set;} = new List<Vitals>();
 
          public ICollection<Appointment> Appointments {get; set;} = new List<Appointment>();
+
+        public ICollection<CBC> CBCs {get; set;} = new List<CBC>();
+
+        public ICollection<Urinalysis> UrinalysisList {get; set;} = new List<Urinalysis>();
+
+        public ICollection<MetabolicPanel> MetabolicPanels {get; set;} = new List<MetabolicPanel>();
+
+         public ICollection<LiverPanel> LiverPanels {get; set;} = new List<LiverPanel>();
 
     }
 }

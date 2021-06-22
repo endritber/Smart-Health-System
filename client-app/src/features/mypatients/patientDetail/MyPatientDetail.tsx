@@ -15,8 +15,7 @@ export default observer( function MyPatientDetail() {
   const {id} = useParams<{id: string}>();
 
     return (
-      <Segment>
-      <Card className='card'>
+      <Card className='card' style={{width:"400px", "border-radius": "15px", marginTop:"100px"}}>
       <Card.Content>
         <Image
           floated='right'
@@ -51,7 +50,6 @@ export default observer( function MyPatientDetail() {
     </Button>
     </Card.Content>
   </Card>
-  </Segment>
     )
     
 })

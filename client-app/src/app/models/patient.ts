@@ -1,8 +1,11 @@
 import { Allergy } from "./allergy";
+import { CBC } from "./cbc";
 import { Doctor } from "./doctor";
 import { doctorprofile } from "./doctorprofile";
-import { LabResult } from "./labresult";
+import { LiverPanel } from "./liverpanel";
+import { MetabolicPanel } from "./metabolicpanel";
 import { Prescription } from "./prescription";
+import { Urinalysis } from "./urinalysis";
 
 export interface Patient {
     id:string;
@@ -13,8 +16,11 @@ export interface Patient {
     language:string;
     profession:string;
     doctor:doctorprofile;
-    labResults: LabResult[];
     prescriptions: Prescription[];
     allergies: Allergy[];
+    cbCs: CBC[];
+    liverPanels:LiverPanel[];
+    metabolicPanels:MetabolicPanel[];
+    urinalysisList: Urinalysis[];
     
 }

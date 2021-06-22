@@ -74,16 +74,12 @@ def message(Symptom1, Symptom2, Symptom3, Symptom4, Symptom5):
         if (Symptom1 == "" and  Symptom2 == "" and Symptom3 == "" and Symptom4 == "" and Symptom5 == ""):
             print("ENTER  SYMPTOMS PLEASE")
         else :
-            NaiveBayes(Symptom1, Symptom2, Symptom3, Symptom4, Symptom5)
+            return NaiveBayes(Symptom1, Symptom2, Symptom3, Symptom4, Symptom5)
 
 def NaiveBayes(Symptom1, Symptom2, Symptom3, Symptom4, Symptom5):
     from sklearn.naive_bayes import MultinomialNB
     gnb = MultinomialNB()
     gnb=gnb.fit(X,np.ravel(y))
-    from sklearn.metrics import accuracy_score
-    y_pred = gnb.predict(X_test)
-    print(accuracy_score(y_test, y_pred))
-    print(accuracy_score(y_test, y_pred, normalize=False))
 
     psymptoms = [Symptom1,Symptom2,Symptom3,Symptom4,Symptom5]
 
@@ -103,9 +99,11 @@ def NaiveBayes(Symptom1, Symptom2, Symptom3, Symptom4, Symptom5):
             break
 
     if (h=='yes'):
-        print(disease[a])
+        
+        return str(disease[a])
+        
     else:
-       print("No Disease")
+       return "Predicting the Disease was: Unsuccessful"
 
 
 
