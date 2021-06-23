@@ -35,6 +35,7 @@ namespace Application.Patients
         public ICollection<MetabolicPanel> MetabolicPanels {get; set;} = new List<MetabolicPanel>();
 
          public ICollection<LiverPanel> LiverPanels {get; set;} = new List<LiverPanel>();
+         public ICollection<Symptoms> Symptoms {get; set;} = new List<Symptoms>();
 
     }
 }

@@ -72,9 +72,10 @@ function App() {
     <Container style={{marginTop:"7em"}}> 
         <Route exact path='/myhealthlist' component={MyHealthList}/>
         <Route path='/summarylist' component={SummaryList}/>
+    
         <Route path='/getcare' component={GetCare}/>
         <Route path='/messages' component={Messages}/>
-        <Route path='/diseaseprediction' component={DiseasePrediction}/>
+        <Route path='/diseaseprediction/:patientId' component={DiseasePrediction}/>
         <Route path='/myhealthlist/labresults/:id' component={LabResults}/>
         <Route path='/profiles/:username' component={PatientProfilePage}/>
         <Route path='/myhealthlist/prescriptions/:id' component={MyPrescriptions}/>

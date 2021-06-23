@@ -354,6 +354,40 @@ namespace Persistence.Migrations
                     b.ToTable("Prescriptions");
                 });
 
+            modelBuilder.Entity("Domain.Symptoms", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symptom1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symptom2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symptom3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symptom4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symptom5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("patientIdId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("patientIdId");
+
+                    b.ToTable("Symptoms");
+                });
+
             modelBuilder.Entity("Domain.Urinalysis", b =>
                 {
                     b.Property<Guid>("Id")
@@ -762,6 +796,15 @@ namespace Persistence.Migrations
                     b.Navigation("patient");
                 });
 
+            modelBuilder.Entity("Domain.Symptoms", b =>
+                {
+                    b.HasOne("Domain.Patient", "patientId")
+                        .WithMany("Symptoms")
+                        .HasForeignKey("patientIdId");
+
+                    b.Navigation("patientId");
+                });
+
             modelBuilder.Entity("Domain.Urinalysis", b =>
                 {
                     b.HasOne("Domain.Doctor", "doctor")
@@ -898,6 +941,8 @@ namespace Persistence.Migrations
                     b.Navigation("MetabolicPanels");
 
                     b.Navigation("Prescriptions");
+
+                    b.Navigation("Symptoms");
 
                     b.Navigation("UrinalysisList");
 

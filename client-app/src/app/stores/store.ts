@@ -7,6 +7,7 @@ import liverpanelStore from "./liverpanelStore";
 import metabolicpanelStore from "./metabolicpanelStore";
 import modalStore from "./modalStore";
 import patientStore from "./patientStore";
+import predictionStore from "./predictionStore";
 import prescriptionStore from "./prescriptionStore";
 import profileStore from "./profileStore";
 import urinalysisStore from "./urinalysisStore";
@@ -25,6 +26,7 @@ interface Store {
     liverpanelStore: liverpanelStore;
     metabolicpanelStore: metabolicpanelStore;
     urinalysisStore: urinalysisStore;
+    predictionStore: predictionStore;
 }
 
 export const store: Store = {
@@ -40,6 +42,7 @@ export const store: Store = {
     liverpanelStore: new liverpanelStore(),
     metabolicpanelStore: new metabolicpanelStore(),
     urinalysisStore:new  urinalysisStore(),
+    predictionStore : new predictionStore()
 }
 
 export const StoreContext = createContext(store)

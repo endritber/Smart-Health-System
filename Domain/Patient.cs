@@ -43,5 +43,7 @@ namespace Domain
 
          public ICollection<LiverPanel> LiverPanels {get; set;} = new List<LiverPanel>();
 
+         public ICollection<Symptoms> Symptoms {get; set;} = new List<Symptoms>();
+
     }
 }

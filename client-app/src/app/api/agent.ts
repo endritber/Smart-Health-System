@@ -7,6 +7,7 @@ import { MetabolicPanel } from '../models/metabolicpanel';
 import { Patient } from '../models/patient';
 import { patientprofile } from '../models/patientprofile';
 import { Prescription } from '../models/prescription';
+import { Symptoms } from '../models/symptoms';
 import { Urinalysis } from '../models/urinalysis';
 import {doctorUser, patientUser, User, userFormValues } from '../models/user';
 
@@ -46,12 +47,25 @@ const requests = {
     delete:<T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
 
+const symRequests = {
+    get: <T> (sym: string) => axios.get<T>("http://localhost:8080").then(responseBody), 
+    post: <T>(sym: string, body : {}) => axios.post<T>("http://localhost:8080", body).then(responseBody), 
+    delete:<T>(sym: string) => axios.delete<T>("http://localhost:8080").then(responseBody),
+}
+
 const liverpanel = {
     list: () => requests.get<LiverPanel[]>('/liverpanel'),
     details: (id: string) => requests.get<LiverPanel>(`/liverpanel/${id}`),
     create: (LiverPanel: LiverPanel, patientId: string, doctorId:string)=>requests.post<void>(`/liverpanel/${patientId}/${doctorId}`,LiverPanel),
     update: (LiverPanel: LiverPanel)=>axios.put<void>(`/liverpanel/${LiverPanel.id}`, LiverPanel),
     delete: (id: string)=>axios.delete<void>(`/liverpanel/${id}`)
+}
+
+const prediction = {
+    list: () => symRequests.get<Symptoms[]>('/getPredictions'),
+    details: (id: number) => symRequests.get<Symptoms>(`/getPrediction/${id}`),
+    create: (Symptom: Symptoms, patientId: string)=>symRequests.post<void>(`/addPrediction/${patientId}`,Symptom),
+    delete: (id: number)=>symRequests.delete<void>(`/delete/${id}`)
 
 }
 
@@ -142,7 +156,8 @@ const agent ={
     cbc,
     metabolicpanel,
     liverpanel,
-    urinalysis
+    urinalysis,
+    prediction
 }
 
 export default agent;

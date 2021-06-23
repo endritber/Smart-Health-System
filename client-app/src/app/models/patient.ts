@@ -5,6 +5,7 @@ import { doctorprofile } from "./doctorprofile";
 import { LiverPanel } from "./liverpanel";
 import { MetabolicPanel } from "./metabolicpanel";
 import { Prescription } from "./prescription";
+import { Symptoms } from "./symptoms";
 import { Urinalysis } from "./urinalysis";
 
 export interface Patient {
@@ -22,5 +23,6 @@ export interface Patient {
     liverPanels:LiverPanel[];
     metabolicPanels:MetabolicPanel[];
     urinalysisList: Urinalysis[];
+    symptoms: Symptoms[];
     
 }

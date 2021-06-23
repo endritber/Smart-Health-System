@@ -49,6 +49,7 @@ export default observer (function PatientForm(){
         liverPanels:[],
         metabolicPanels:[],
         urinalysisList: [],
+        symptoms:[],
         
     });
 

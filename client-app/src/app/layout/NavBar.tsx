@@ -20,7 +20,7 @@ export default observer (function NavBar() {
                 <Menu.Item as={NavLink} to = '/summarylist' name ="Summary"/>
                 <Menu.Item as={NavLink} to = '/getcare' name ="Get Care"/>
                 <Menu.Item as={NavLink} to = '/messages' name ="Messages"/>
-                <Menu.Item as={NavLink} to = '/diseaseprediction' name ="Disease Prediction"/>
+                <Menu.Item as={NavLink} to = {`/diseaseprediction/${user?.id}`} name ="Disease Prediction"/>
 
                 <Menu.Item position="right">
                     <Icon name='user'/>
