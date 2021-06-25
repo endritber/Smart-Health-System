@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Header, Divider, Modal, Segment } from "semantic-ui-react";
+import { Button, Header, Divider, Message, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { Patient } from "../../../app/models/patient";
 import { useStore } from "../../../app/stores/store";
@@ -120,7 +120,20 @@ export default observer (function PatientAllergyTable() {
 
 
     return (
+      
       <>
+
+
+      {selectedPatient?.allergies.length===0 ? (
+      <>
+      <Message negative>
+        <Message.Header>{selectedPatient?.name}, your doctor hasn't added any allergies yet.</Message.Header>
+        <p>Make sure to contact your doctor!</p>
+      </Message>
+      </>
+
+      ):(
+        <>
       <Header sub>Your Allergies</Header> 
         <Segment>    
         <Divider/>
@@ -175,8 +188,8 @@ export default observer (function PatientAllergyTable() {
   
        </>
 
-            
-              
-          
+       )}
+       </>
+
     )
 })

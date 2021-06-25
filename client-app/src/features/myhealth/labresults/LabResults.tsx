@@ -61,8 +61,8 @@ export default observer( function LabResults() {
     {(selectedPatient?.cbCs.length === 0 && selectedPatient.metabolicPanels.length ===0 && selectedPatient.liverPanels.length===0 && selectedPatient.urinalysisList.length ===0) ? (
 
       <Message negative>
-    <Message.Header>{selectedPatient?.name}, your Doctor hasn't added your Laboratory Results yet.</Message.Header>
-    <p>Make sure to contact your doctor</p>
+    <Message.Header>{selectedPatient?.name}, your doctor hasn't added your laboratory results yet.</Message.Header>
+    <p>Make sure to contact your doctor!</p>
   </Message>
     ) :(
       <>

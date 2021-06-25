@@ -118,7 +118,7 @@ function scrollToMetabolicPanel() {
         </Button></Header>
         <Header>
         <Header>View {selectedPatient?.name}'s CBCs Graph Results</Header>
-        <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<CBCGraphs/>)}}>
+        <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<CBCGraphs/>, 'large')}}>
                     View Graph
           </Button></Header></Segment> 
     <TableContainer component={Paper}>
@@ -281,7 +281,7 @@ function scrollToMetabolicPanel() {
         </Button></Header>
         <Header>
         <Header>View {selectedPatient?.name}'s Liver Panel Graph Results</Header>
-        <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<LiverPanelGraphs/>)}}>
+        <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<LiverPanelGraphs/>, 'large')}}>
                     View Graph
           </Button></Header></Segment> 
     <TableContainer component={Paper}>

@@ -1,10 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { Button, Card, Checkbox, Divider, Header, Icon, Image, Item, Modal, Segment } from "semantic-ui-react";
+import { Card, Divider, Header, Message } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { Patient } from "../../../app/models/patient";
 import { useStore } from "../../../app/stores/store";
 
 
@@ -17,7 +15,6 @@ export default observer (function MyPrescriptions() {
     const {patientStore, prescriptionStore} = useStore();
 
     const {loadPatient, selectedPatient} = patientStore
-    const {deletePrescription, loading} = prescriptionStore
     const {id} = useParams<{id: string}>();
 
     useEffect(() => {
@@ -29,6 +26,15 @@ export default observer (function MyPrescriptions() {
       var count = 0;
     return (
       <>
+
+{(selectedPatient?.prescriptions.length === 0) ? (
+
+<Message negative>
+<Message.Header>{selectedPatient?.name}, your doctor hasn't added any prescriptions yet.</Message.Header>
+<p>Make sure to contact your doctor!</p>
+</Message>
+) :(
+    <>
       <Header sub>Your Prescriptions</Header> 
       <br/>  
 
@@ -58,6 +64,7 @@ export default observer (function MyPrescriptions() {
             </Card>
           </>
         ))}
-</>
+  </>)}
+        </>
     )
 })

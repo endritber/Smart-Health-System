@@ -44,7 +44,7 @@ export default observer(function HomePage() {
                 <Button color='teal' as={Link} to={'/myhealthlist'} size='massive' >
                 Get started {userStore.user.userName}
               </Button>
-              </>):( <Button floated='right' color='teal' onClick={()=>{modalStore.openModal(<LoginForm/>)}} size='large' error >
+              </>):( <Button floated='right' color='teal' onClick={()=>{modalStore.openModal(<LoginForm/>,'tiny')}} size='large' error >
                     Log In
                      </Button>
                )}
@@ -59,7 +59,7 @@ export default observer(function HomePage() {
 
                         </>   
                    ) : (
-                    <Button color='teal' onClick={()=>{modalStore.openModal(<LoginForm/>)}} size='large' error >
+                    <Button color='teal' onClick={()=>{modalStore.openModal(<LoginForm/>, 'tiny')}} size='large' error >
                          Log In
                       </Button>
                              )}

@@ -192,7 +192,7 @@ const useStyles = makeStyles({
         </Table>
       </TableContainer>
       <Header>
-      <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<CBCGraphs/>)}} floated='right' style={{marginRight:10}}>
+      <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<CBCGraphs/>,'large')}} floated='right' style={{marginRight:10}}>
                     View Graph
           </Button>
           </Header>
