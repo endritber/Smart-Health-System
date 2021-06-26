@@ -34,6 +34,10 @@ import LiverPanelGraphs from '../../features/mypatients/labresultGraph/LiverPane
 import LabResults from '../../features/myhealth/labresults/LabResults';
 import MyPrescriptions from '../../features/myhealth/prescriptions/MyPrescriptions';
 import PatientAllergyTable from '../../features/myhealth/allergies/PatientAllergyTable';
+import HeightResults from '../../features/summary/height/HeightResults';
+import WeightResults from '../../features/summary/weight/WeightResults';
+import WaterResults from '../../features/summary/water/WaterResults';
+
 
 
 
@@ -83,6 +87,9 @@ function App() {
         <Route path='/login' component={LoginForm}/>
         <Route path='/addInformation/:id'  component={PatientForm}/>
         <Route path='/patientDetail/:id'  component={MyPatientDetail}/>
+        <Route path='/height' component={HeightResults}/>
+        <Route path='/weight' component={WeightResults}/>
+        <Route path='/water' component={WaterResults}/>
     </Container>
     </>
   )}

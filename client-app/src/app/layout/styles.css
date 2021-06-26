@@ -54,22 +54,42 @@ body {
 }
 
 .height {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 
 .water {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 
 .weight {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 
 .vitals  {
-  height: 150px;
-  width: 150px; 
+  height: 100px;
+  width: 100px; 
+}
+
+.Height {
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.Water {
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.Weight {
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.Vitals  {
+  margin-bottom: 10px;
+  font-size: 30px;
 }
 
