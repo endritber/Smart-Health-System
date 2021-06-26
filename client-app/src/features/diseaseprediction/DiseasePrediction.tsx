@@ -1,13 +1,18 @@
 import { observer } from "mobx-react-lite";
+import { ErrorMessage, Form, Formik } from 'formik';
+import { SyntheticEvent } from "react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Form, Header, Segment, Divider } from "semantic-ui-react";
+import { Button, Header, Segment, Divider, Message, Table, Icon } from "semantic-ui-react";
+import { JsxAttribute } from "typescript";
 import SymptomsAPIService from "../../app/api/SymptomsAPIService";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { Symptoms } from "../../app/models/symptoms";
 import patientStore from "../../app/stores/patientStore";
 import { useStore } from "../../app/stores/store";
+import MySelectInput from '../../app/form/MySelectInput';
+import * as Yup from 'yup';
 
 
 
@@ -17,6 +22,8 @@ export default observer (function DiseasePrediction(){
 
     const history = useHistory();
 
+    var index=0;
+
     const { patientStore} = useStore();
 
     const {loadPatient, selectedPatient} = patientStore;
@@ -24,7 +31,7 @@ export default observer (function DiseasePrediction(){
 
     var loading = false;
 
-    const [prediction, setPrediction]= useState<Symptoms>({
+    const [prediction]= useState<Symptoms>({
         id: parseInt(''),
         symptom1:'',
         symptom2:'',
@@ -35,6 +42,14 @@ export default observer (function DiseasePrediction(){
 
     });
 
+    const validationSchema = Yup.object({
+        symptom1: Yup.string().required('Symptom is required for prediction'),
+        symptom2: Yup.string().required('Symptom is required for prediction'),
+        symptom3: Yup.string().required('Symptom is required for prediction'),
+        symptom4: Yup.string().required('Symptom is required for prediction'),
+        symptom5: Yup.string().required('Symptom is required for prediction'),
+    })
+
     const refreshPage = ()=>{
      window.location.reload();
   }
@@ -43,46 +58,141 @@ export default observer (function DiseasePrediction(){
         loadPatient(patientId)
     },[loadPatient])
 
-    function handleSubmit() {
+    function handleFormSubmit(prediction: Symptoms) {
         loading = true
         SymptomsAPIService.addPrediction(patientId,prediction)
-        window.location.reload();
+        window.location.reload()
     }
 
-    function handleInputChange(event:ChangeEvent<HTMLInputElement>) {
-        const {name, value} = event.target;
-        setPrediction({...prediction, [name]:value})
-    }
+    if (patientStore.loadingInitial) return <LoadingComponent content={`Processing your symptoms...`}/>
+    const countryOptions = [
+        { text: 'itching',value: 'itching' },
+        { text: 'weight_loss',value: 'weight_loss' },
+  
+      ]
+
     
     return (
+        <>
+        <Message>
+            <Message.Header>Disease Prediction</Message.Header>
+            <Message.List>
+            <Message.Item>We predict, you prevent & we are healthy</Message.Item>
+            <Message.Item>Get in contact with a doctor </Message.Item><Button as ={Link} to ='/messages'color='blue'>Contact</Button>
+            </Message.List>
+        </Message>
         <Segment> 
-            <Header content='Predict Disease'></Header> 
-            <Form onSubmit={handleSubmit} autoComplete="off">
-            <Form.Group unstackable widths={2}>
-            <Form.Input label='Symptom 1' placeholder='symptom1...' name = 'symptom1' value = {prediction.symptom1} onChange={handleInputChange}  />
-            <Form.Input label='Symptom 2' placeholder='symptom2...' name = 'symptom2' value = {prediction.symptom2} onChange={handleInputChange}/>
-            </Form.Group>
-            <Form.Group widths={3}>
-            <Form.Input label='Symptom 3' placeholder='symptom3...' name = 'symptom3' value = {prediction.symptom3} onChange={handleInputChange}/>
-            <Form.Input label=' Symptom 4' placeholder='symptom4...'name = 'symptom4' value = {prediction.symptom4} onChange={handleInputChange} />
-            <Form.Input label=' Symptom 5' placeholder='symptom5...'name = 'symptom5' value = {prediction.symptom5} onChange={handleInputChange} />
-            </Form.Group>
-            <Button loading = {loading}  type='submit' color='blue'>Submit</Button>
-        </Form>
-
+            <Message
+                info
+                header='PREDICT THE DISEASE'
+                content="Get possible diagnose to match your symptoms."
+            />
+             <Formik 
+                validationSchema={validationSchema}
+                enableReinitialize 
+                initialValues={prediction} 
+                onSubmit={handleFormSubmit}>
+                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
+                    <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
+                         <Header content='Symptom 1' sub color='teal' />
+                        <MySelectInput name='symptom1' placeholder='Select your first symptom.' options={countryOptions} />
+                        <Header content='Symptom 2' sub color='teal' />
+                        <MySelectInput placeholder='Select your second symptom.' name='symptom2' options={countryOptions}/>
+                        <Header content='Symptom 3' sub color='teal' />
+                        <MySelectInput options={countryOptions} placeholder='Select your third symptom.'  name='symptom3' />
+                        <Header content='Symptom 4' sub color='teal' />
+                        <MySelectInput placeholder='Select your fourth symptom.'  name='symptom4'options={countryOptions} />
+                        <Header content='Symptom 5' sub color='teal' />
+                        <MySelectInput placeholder='Select your fifth symptom.' name='symptom5' options={countryOptions}/>
+                        <Button style={{width:' 200px'}} 
+                            disabled={isSubmitting || !dirty || !isValid }
+                            loading={isSubmitting}
+                            color='teal' type='submit' content='Predict'
+                             />
+                    </Form>
+                )}
+            </Formik>
+            </Segment>
         <Segment>
+            <Table celled striped>
+        <Table.Header>
+        <Table.Row>
+            <Table.HeaderCell colSpan='7'><h1>My Predictions</h1></Table.HeaderCell>
+        </Table.Row>
+        </Table.Header>
+        <Table.Header>
+        <Table.Row>
+            <Table.HeaderCell colSpan='1'>No</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Symptom 1</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Symptom 2</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Symptom 3</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Symptom 4</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Symptom 5</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Prediction</Table.HeaderCell>
+        </Table.Row>
+        </Table.Header>
             {selectedPatient?.symptoms.map(s=>(
                 <>
-                    <Header key={s.id}>
-                        <Header.Content> My Predictions: {s.result}</Header.Content>
-                        <Divider/>
-                    </Header>
+             <Table.Body>
+             
+            {(index+1 === selectedPatient.symptoms.length)? (
+                <>
+                <Table.Row positive>
+                <Table.Cell> 
+                    {index+=1} - 
+                    Recently Added
+                    </Table.Cell>
+                    <Table.Cell> 
+                        {s.symptom1}
+                    </Table.Cell>
+                    <Table.Cell>{s.symptom2}</Table.Cell>
+                    <Table.Cell>
+                    {s.symptom3}
+                    </Table.Cell>
+                    <Table.Cell>
+                    {s.symptom4}
+                    </Table.Cell>
+                    <Table.Cell>
+                    {s.symptom5}
+                    </Table.Cell>
+                    <Table.Cell>
+                       You might have {s.result}
+                    </Table.Cell>
+                    </Table.Row>
+                </>
+            ):(
+
+             
+                <>
+                <Table.Row>
+                <Table.Cell> 
+                        {index+=1}
+                    </Table.Cell>
+                    <Table.Cell> 
+                        {s.symptom1}
+                    </Table.Cell>
+                    <Table.Cell>{s.symptom2}</Table.Cell>
+                    <Table.Cell>
+                    {s.symptom3}
+                    </Table.Cell>
+                    <Table.Cell>
+                    {s.symptom4}
+                    </Table.Cell>
+                    <Table.Cell>
+                    {s.symptom5}
+                    </Table.Cell>
+                    <Table.Cell>
+                     <h5>{s.result}</h5>
+                    </Table.Cell>
+                    </Table.Row>
+                    </>)}
+                </Table.Body>
+          
                 </>
             ))}
-
+            </Table>
         </Segment>
 
-
-        </Segment>
+    </>
     )
 })

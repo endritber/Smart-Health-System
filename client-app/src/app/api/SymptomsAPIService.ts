@@ -3,7 +3,7 @@ export default class SymptomsAPIService {
         return fetch(`http://localhost:8080/addPrediction/${patientId}`,{
 
             'method':'POST',
-            headers:{
+             headers:{
                 'Content-Type':'application/json'
             },
             body: JSON.stringify(body)
