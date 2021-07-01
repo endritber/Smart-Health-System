@@ -2,6 +2,7 @@ import { Allergy } from "./allergy";
 import { CBC } from "./cbc";
 import { Doctor } from "./doctor";
 import { doctorprofile } from "./doctorprofile";
+import { Height } from "./height";
 import { LiverPanel } from "./liverpanel";
 import { MetabolicPanel } from "./metabolicpanel";
 import { Prescription } from "./prescription";
@@ -26,5 +27,6 @@ export interface Patient {
     urinalysisList: Urinalysis[];
     symptoms: Symptoms[];
     weight : Weight [];
+    height : Height [];
     
 }

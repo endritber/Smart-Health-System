@@ -21,7 +21,7 @@ export default function SummaryList() {
         </Item>
 
 
-        <Item as={Link} to='/height'>
+        <Item as={Link} to={`/height/${userStore.user?.id}`}>
 
         <Image className='height' src='/height.png' alt = 'logo' />
 

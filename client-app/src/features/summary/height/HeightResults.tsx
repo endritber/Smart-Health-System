@@ -2,39 +2,41 @@ import { Header, Segment, Button} from 'semantic-ui-react';
 import {LineChart, CartesianGrid, Tooltip, XAxis, YAxis, Legend, Line } from "recharts";
 import { useStore } from '../../../app/stores/store';
 import CBCGraphs from '../../mypatients/labresultGraph/CBCGraphs';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import HeightForm from './HeightForm';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 export default function HeightResults(){
     const data = [
         {
-          "name": "26.06.2021",
-          "Height(m)": 1.88
-        },
-        {
-            "name": "23.06.2022",
-            "Height(m)": 1.99
-        },
-        {
-            "name": "23.06.2022",
-            "Height(m)": 2.01
-        },
-        {
-            "name": "23.06.2022",
-            "Height(m)": 2.10
-        },
-        {
-            "name": "23.06.2022",
-            "Height(m)": 2.12
-        },
+          "name": "",
+          "Height": parseInt('')
+        }
+
+
       ]
-    const{modalStore}=useStore()
+      const {id} = useParams<{id: string}>();
+      const{modalStore,heightStore,patientStore}=useStore()
+      const {loadPatient,selectedPatient} = patientStore;
+       useEffect(() => {
+        loadPatient(id)
+      }, [loadPatient])
+
+      if (patientStore.loadingInitial) return <LoadingComponent content={`Loading Graph...`}/>
+      selectedPatient?.height.map(h => (
+        data.push({name: (h.date),Height: (h.myHeight)})
+    )) ;
+
+   
     return (
         <>
         <Header sub>Height</Header>
         <br></br>
         <Button.Group>
-        <Button content='Add Data' color='teal' ></Button>
+        <Button content='Add Data' onClick={()=>{modalStore.openModal(<HeightForm id={id}/>,'large')}} color='teal' ></Button>
         <Button.Or/>
-        <Button content='Show all data' onClick={()=>{modalStore.openModal(<CBCGraphs/>,'large')}} color='twitter'></Button>
+        <Button content='Show all data'  color='twitter'></Button>
         </Button.Group>
         <Segment>
         <LineChart width={1050} height={500} data={data}

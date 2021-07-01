@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Allergy } from '../models/allergy';
 import { CBC } from '../models/cbc';
 import { Doctor } from '../models/doctor';
+import { Height } from '../models/height';
 import { LiverPanel } from '../models/liverpanel';
 import { MetabolicPanel } from '../models/metabolicpanel';
 import { Patient } from '../models/patient';
@@ -11,6 +12,7 @@ import { Symptoms } from '../models/symptoms';
 import { Urinalysis } from '../models/urinalysis';
 import {doctorUser, patientUser, User, userFormValues } from '../models/user';
 import { Weight } from '../models/weight';
+
 
 
 
@@ -155,6 +157,15 @@ const Weights = {
     
 }
 
+const Heights = {
+    list: () => requests.get<Height[]>('/height'),
+    details: (id: string) => requests.get<Height>(`/height/${id}`),
+    update: (height: Height) => axios.put<void>(`/height/${height.heightId}`, height),
+    delete:(id:string) => axios.delete<void>(`/height/${id}`),
+    create : (height: Height,patientId: string) => axios.post<void>(`/height/${patientId}`,height)
+    
+}
+
 const agent ={
 
     Account, 
@@ -169,7 +180,9 @@ const agent ={
     liverpanel,
     urinalysis,
     prediction,
-    Weights
+    Weights,
+    Heights
+
 }
 
 export default agent;

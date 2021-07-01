@@ -31,13 +31,13 @@ namespace Persistence
             if(!context.Heights.Any()){
                 var heights = new List<Height> {
                     new Height{
-                        myHeight = 2.2
+                        myHeight = 2.2F
                     },
                      new Height{
-                        myHeight = 6.2
+                        myHeight = 6.2F
                     },
                      new Height{
-                        myHeight = 2.7
+                        myHeight = 2.7F
                     },
                 };
             

@@ -51,6 +51,7 @@ export default observer (function PatientForm(){
         urinalysisList: [],
         symptoms:[],
         weight:[],
+        height: [],
         
     });
 

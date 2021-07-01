@@ -39,6 +39,8 @@ namespace Application.Patients
 
          public ICollection<Weight> Weight {get; set;} = new List<Weight>();
 
+          public ICollection<Height> Height {get; set;} = new List<Height>();
+
 
 
     }

@@ -3,6 +3,7 @@ import allergyStore from "./allergyStore";
 import cbcStore from "./cbcStore";
 import CommonStore from "./commonStore";
 import doctorStore from "./doctorStore";
+import heightStore from "./heightStore";
 import liverpanelStore from "./liverpanelStore";
 import metabolicpanelStore from "./metabolicpanelStore";
 import modalStore from "./modalStore";
@@ -13,6 +14,7 @@ import profileStore from "./profileStore";
 import urinalysisStore from "./urinalysisStore";
 import UserStore from "./userStore";
 import weightStore from "./weightStore";
+
 
 interface Store {
     userStore: UserStore
@@ -29,6 +31,7 @@ interface Store {
     urinalysisStore: urinalysisStore;
     predictionStore: predictionStore;
     weightStore : weightStore;
+    heightStore : heightStore;
 }
 
 export const store: Store = {
@@ -46,6 +49,7 @@ export const store: Store = {
     urinalysisStore:new  urinalysisStore(),
     predictionStore : new predictionStore(),
     weightStore : new weightStore(),
+    heightStore : new heightStore(),
 }
 
 export const StoreContext = createContext(store)
