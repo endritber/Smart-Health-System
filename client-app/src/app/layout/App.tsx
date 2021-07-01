@@ -88,7 +88,7 @@ function App() {
         <Route path='/addInformation/:id'  component={PatientForm}/>
         <Route path='/patientDetail/:id'  component={MyPatientDetail}/>
         <Route path='/height' component={HeightResults}/>
-        <Route path='/weight' component={WeightResults}/>
+        <Route path='/weight/:id' component={WeightResults}/>
         <Route path='/water' component={WaterResults}/>
     </Container>
     </>

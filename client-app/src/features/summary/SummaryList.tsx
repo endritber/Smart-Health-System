@@ -7,12 +7,13 @@ import { useStore } from '../../app/stores/store';
 
 
 export default function SummaryList() {
+  const {userStore} = useStore()
     return (
         <Segment>
         <Item.Group relaxed divided>
 
   
-        <Item as={Link} to='/weight'>
+        <Item as={Link} to= {`/weight/${userStore.user?.id}`}>
         <Image className='weight' src='/weight.png' alt = 'logo' />
           <Item.Content verticalAlign='bottom'>
             <Item.Header style={{'margin-bottom':'40px','font-size':'30px',}}>Weight<Icon name='arrow alternate circle right outline' style={{'margin-left':'800px'}}></Icon></Item.Header>

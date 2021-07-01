@@ -11,5 +11,7 @@ namespace Domain
         public int literPerHour { get; set; }
 
         public Patient patient { get; set; }
+
+         public DateTime date { get; set;}
     }
 }

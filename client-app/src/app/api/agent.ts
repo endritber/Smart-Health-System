@@ -10,6 +10,8 @@ import { Prescription } from '../models/prescription';
 import { Symptoms } from '../models/symptoms';
 import { Urinalysis } from '../models/urinalysis';
 import {doctorUser, patientUser, User, userFormValues } from '../models/user';
+import { Weight } from '../models/weight';
+
 
 
 const sleep = (delay: number) => {
@@ -144,6 +146,15 @@ const Doctors = {
     
 }
 
+const Weights = {
+    list: () => requests.get<Weight[]>('/weight'),
+    details: (id: string) => requests.get<Weight>(`/weight/${id}`),
+    update: (weight: Weight) => axios.put<void>(`/weight/${weight.weightId}`, weight),
+    delete:(id:string) => axios.delete<void>(`/weight/${id}`),
+    create : (weight: Weight,patientId: string) => axios.post<void>(`/weight/${patientId}`,weight)
+    
+}
+
 const agent ={
 
     Account, 
@@ -157,7 +168,8 @@ const agent ={
     metabolicpanel,
     liverpanel,
     urinalysis,
-    prediction
+    prediction,
+    Weights
 }
 
 export default agent;

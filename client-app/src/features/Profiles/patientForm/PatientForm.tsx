@@ -50,6 +50,7 @@ export default observer (function PatientForm(){
         metabolicPanels:[],
         urinalysisList: [],
         symptoms:[],
+        weight:[],
         
     });
 

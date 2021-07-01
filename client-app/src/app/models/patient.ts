@@ -7,6 +7,7 @@ import { MetabolicPanel } from "./metabolicpanel";
 import { Prescription } from "./prescription";
 import { Symptoms } from "./symptoms";
 import { Urinalysis } from "./urinalysis";
+import { Weight } from "./weight";
 
 export interface Patient {
     id:string;
@@ -24,5 +25,6 @@ export interface Patient {
     metabolicPanels:MetabolicPanel[];
     urinalysisList: Urinalysis[];
     symptoms: Symptoms[];
+    weight : Weight [];
     
 }

@@ -8,5 +8,7 @@ namespace Domain
 
         public double myHeight { get; set; }
         public Patient patient { get; set; }
+
+        public DateTime date { get; set;}
     }
 }

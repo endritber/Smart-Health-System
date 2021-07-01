@@ -14,5 +14,7 @@ namespace Domain
         public double bloodPressure { get; set; }
 
         public Patient patient {get; set;}
+
+         public DateTime date { get; set;}
     }
 }
