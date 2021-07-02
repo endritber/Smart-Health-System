@@ -21,7 +21,7 @@ namespace API.Controllers
         }
           [HttpPut("{id}")]
         public async Task<IActionResult> EditWaterIntake(Guid id, WaterIntake waterIntake) {
-            waterIntake.waterId = id;
+            waterIntake.waterintakeId = id;
             return Ok(await Mediator.Send(new EditWaterI.Command{Water = waterIntake}));
         }
         [HttpGet]

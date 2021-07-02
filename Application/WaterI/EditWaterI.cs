@@ -25,7 +25,7 @@ namespace Application.WaterI
 
                 public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
                 {
-                    var water = await _context.WaterIntakes.FindAsync(request.Water.waterId);
+                    var water = await _context.WaterIntakes.FindAsync(request.Water.waterintakeId);
 
                     _mapper.Map(request.Water, water);
 

@@ -325,13 +325,13 @@ namespace Persistence.Migrations
                 name: "WaterIntakes",
                 columns: table => new
                 {
-                    waterId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    waterintakeId = table.Column<Guid>(type: "TEXT", nullable: false),
                     literPerHour = table.Column<int>(type: "INTEGER", nullable: false),
                     patientId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WaterIntakes", x => x.waterId);
+                    table.PrimaryKey("PK_WaterIntakes", x => x.waterintakeId);
                     table.ForeignKey(
                         name: "FK_WaterIntakes_AspNetUsers_patientId",
                         column: x => x.patientId,

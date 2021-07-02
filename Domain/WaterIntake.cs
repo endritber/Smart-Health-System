@@ -5,10 +5,10 @@ namespace Domain
 {
     public class WaterIntake
     {
-        [Key]
-        public Guid waterId { get; set; }
+        
+        public Guid waterintakeId { get; set; }
 
-        public int literPerHour { get; set; }
+        public float literPerHour { get; set; }
 
         public Patient patient { get; set; }
 

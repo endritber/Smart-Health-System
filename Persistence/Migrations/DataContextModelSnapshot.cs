@@ -221,7 +221,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("date")
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("myHeight")
+                    b.Property<float>("myHeight")
                         .HasColumnType("REAL");
 
                     b.Property<string>("patientId")
@@ -475,20 +475,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WaterIntake", b =>
                 {
-                    b.Property<Guid>("waterId")
+                    b.Property<Guid>("waterintakeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("literPerHour")
-                        .HasColumnType("INTEGER");
+                    b.Property<float>("literPerHour")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("patientId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("waterId");
+                    b.HasKey("waterintakeId");
 
                     b.HasIndex("patientId");
 
@@ -504,7 +504,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("date")
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("myWeight")
+                    b.Property<float>("myWeight")
                         .HasColumnType("REAL");
 
                     b.Property<string>("patientId")
