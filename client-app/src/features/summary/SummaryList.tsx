@@ -32,7 +32,7 @@ export default function SummaryList() {
         </Item>
         
 
-        <Item as={Link} to='/water'>
+        <Item as={Link} to= {`/water/${userStore.user?.id}`}>
 
 
         <Image className='water' src='/water.png' alt = 'logo' />

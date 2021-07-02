@@ -2,41 +2,42 @@ import { Header, Segment, Button, SegmentProps} from 'semantic-ui-react';
 import {LineChart, CartesianGrid, ComposedChart, Tooltip, XAxis, YAxis, Legend, Line, Area, Bar } from "recharts";
 import { useStore } from '../../../app/stores/store';
 import CBCGraphs from '../../mypatients/labresultGraph/CBCGraphs';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import WaterIntakeForm from './WaterIntakeForm';
 
 export default function WaterResults(){
     const data = [
         {
-          "name": "26.06.2021",
-          "Water(l)": 4
-        },
-        {
-            "name": "23.06.2022",
-            "Water(l)": 5
-        },
-        {
-            "name": "23.06.2022",
-            "Water(l)": 3
-        },
-        {
-            "name": "23.06.2022",
-            "Water(l)": 6
-        },
-        {
-            "name": "23.06.2022",
-            "Water(l)": 4
-        },
+          "name": "",
+          "Water": parseInt("")
+        }
       ]
 
+      const {id} = useParams<{id: string}>();
+      const{modalStore,waterintakeStore,patientStore} = useStore()
+      const {loadPatient, selectedPatient} = patientStore
+      useEffect(() => {
+        loadPatient(id)
+      }, [loadPatient])
 
-    const{modalStore}=useStore()
+
+
+      selectedPatient?.waterintake.map(wi => (
+        data.push({name: (wi.date), Water: wi.waterPerHour})
+    )) ;
+
+
+
+    
     return (
         <>
         <Header sub>Water Intake</Header>
         <br></br>
         <Button.Group>
-        <Button content='Add Data' color='teal' ></Button>
+        <Button content='Add Data' onClick={()=>{modalStore.openModal(<WaterIntakeForm id = {id} />,'large')}}  color='teal' ></Button>
         <Button.Or/>
-        <Button content='Show all data' onClick={()=>{modalStore.openModal(<CBCGraphs/>,'large')}} color='twitter'></Button>
+        <Button content='Show all data' color='twitter'></Button>
         </Button.Group>
         <Segment>
         <ComposedChart width={1050} height={500} data={data}>

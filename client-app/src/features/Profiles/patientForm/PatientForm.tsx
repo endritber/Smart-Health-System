@@ -52,6 +52,7 @@ export default observer (function PatientForm(){
         symptoms:[],
         weight:[],
         height: [],
+        waterintake: [],
         
     });
 

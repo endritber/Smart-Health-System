@@ -13,6 +13,7 @@ import prescriptionStore from "./prescriptionStore";
 import profileStore from "./profileStore";
 import urinalysisStore from "./urinalysisStore";
 import UserStore from "./userStore";
+import waterintakeStore from "./waterintakeStore";
 import weightStore from "./weightStore";
 
 
@@ -32,6 +33,7 @@ interface Store {
     predictionStore: predictionStore;
     weightStore : weightStore;
     heightStore : heightStore;
+    waterintakeStore : waterintakeStore;
 }
 
 export const store: Store = {
@@ -50,6 +52,7 @@ export const store: Store = {
     predictionStore : new predictionStore(),
     weightStore : new weightStore(),
     heightStore : new heightStore(),
+    waterintakeStore : new waterintakeStore(),
 }
 
 export const StoreContext = createContext(store)

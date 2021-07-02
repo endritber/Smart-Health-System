@@ -89,7 +89,7 @@ function App() {
         <Route path='/patientDetail/:id'  component={MyPatientDetail}/>
         <Route path='/height/:id' component={HeightResults}/>
         <Route path='/weight/:id' component={WeightResults}/>
-        <Route path='/water' component={WaterResults}/>
+        <Route path='/water/:id' component={WaterResults}/>
     </Container>
     </>
   )}

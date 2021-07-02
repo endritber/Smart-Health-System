@@ -8,6 +8,7 @@ import { MetabolicPanel } from "./metabolicpanel";
 import { Prescription } from "./prescription";
 import { Symptoms } from "./symptoms";
 import { Urinalysis } from "./urinalysis";
+import { Waterintake } from "./waterintake";
 import { Weight } from "./weight";
 
 export interface Patient {
@@ -28,5 +29,6 @@ export interface Patient {
     symptoms: Symptoms[];
     weight : Weight [];
     height : Height [];
+    waterintake : Waterintake [];
     
 }
