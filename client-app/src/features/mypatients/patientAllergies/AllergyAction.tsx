@@ -2,6 +2,7 @@ import { Button, Card, Divider, Modal, Segment } from "semantic-ui-react";
 import React, { SyntheticEvent, useState } from 'react';
 import { useStore } from "../../../app/stores/store";
 import { Link } from "react-router-dom";
+import AllergyForm from "../allergyForm/AllergyForm";
 
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 
 export default function AllergyAction ({id, patientId, doctorId}:Props){
 
-    const {allergyStore} = useStore();
+    const {allergyStore, modalStore} = useStore();
 
     const {deleteAllergy, loading} = allergyStore;
 
@@ -29,7 +30,7 @@ export default function AllergyAction ({id, patientId, doctorId}:Props){
     return (
         <Card.Content extra>
         <Button.Group>
-            <Button color='blue' as={Link} to={`/manageAllergy/${patientId}/${doctorId}/${id}`}>
+            <Button color='black' onClick={()=>{modalStore.openModal(<AllergyForm patientId={patientId} doctorId={doctorId} allergyId={id}/>, 'small')}}>
                 Edit
                 </Button>
             <Button.Or/>

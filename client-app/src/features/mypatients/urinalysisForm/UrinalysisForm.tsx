@@ -7,8 +7,12 @@ import { CBC } from "../../../app/models/cbc";
 import { Urinalysis } from "../../../app/models/urinalysis";
 import { useStore } from "../../../app/stores/store";
 
-
-export default observer (function UrinalysisForm(){
+interface Props {
+    patientId:string;
+    doctorId:string;
+    UrinalysisId:string;
+}
+export default observer (function UrinalysisForm({patientId, doctorId, UrinalysisId}:Props){
 
     const history = useHistory();
 
@@ -16,22 +20,20 @@ export default observer (function UrinalysisForm(){
 
     const {loading, createurinalysis, updateurinalysis, loadurinalysis} = urinalysisStore;
 
-    const {patientId} = useParams<{patientId: string}>();
-    const {doctorId} = useParams<{doctorId: string}>();
-    const {UrinalysisId} = useParams<{UrinalysisId: string}>();
+
 
     const [urinalysis, setUrinalysis]= useState<Urinalysis>({
         id: '',
-        sodium:parseInt(''),
-        potassium:parseInt(''),
-        chloride:parseInt(''),
-        hcO3:parseInt(''),
-        creatinine:parseInt(''),
-        bloodUreaNitrogen:parseInt(''),
-        fastingGlucose:parseInt(''),
-        calcium:parseInt(''),
-        magnesium:parseInt(''),
-        phosphate:parseInt(''),
+        sodium:0,
+        potassium:0,
+        chloride:0,
+        hcO3:0,
+        creatinine:0,
+        bloodUreaNitrogen:0,
+        fastingGlucose:0,
+        calcium:0,
+        magnesium:0,
+        phosphate:0,
         date:'',
   
     });
@@ -58,28 +60,25 @@ export default observer (function UrinalysisForm(){
             <Header content='Add Urinalysis from Laboratory'></Header> }
             <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Group unstackable widths={3}>
-            <Form.Input label='Sodium' placeholder='sodium...' name = 'sodium' value = {urinalysis.sodium} onChange={handleInputChange}  />
-            <Form.Input label='Potassium' placeholder='potassium...' name = 'potassium' value = {urinalysis.potassium} onChange={handleInputChange}/>
-            <Form.Input label='Chloride' placeholder='chloride...' name = 'chloride' value = {urinalysis.chloride} onChange={handleInputChange}/>
+            <Form.Input label='Sodium' placeholder='sodium...' type='number' step="0.1"name = 'sodium' value = {urinalysis.sodium} onChange={handleInputChange}  />
+            <Form.Input label='Potassium' placeholder='potassium...'type='number' step="0.1" name = 'potassium' value = {urinalysis.potassium} onChange={handleInputChange}/>
+            <Form.Input label='Chloride' placeholder='chloride...'type='number' step="0.1" name = 'chloride' value = {urinalysis.chloride} onChange={handleInputChange}/>
             </Form.Group>
             <Form.Group unstackable widths={3}>
-            <Form.Input label='Hco3' placeholder='hco3...' name = 'hcO3' value = {urinalysis.hcO3} onChange={handleInputChange}  />
-            <Form.Input label='Creatinine' placeholder='creatinine...' name = 'creatinine' value = {urinalysis.creatinine} onChange={handleInputChange}/>
-            <Form.Input label='BloodUreaNitrogen' placeholder='bloodUreaNitrogen...' name = 'bloodUreaNitrogen' value = {urinalysis.bloodUreaNitrogen} onChange={handleInputChange}/>
+            <Form.Input label='Hco3' placeholder='hco3...' type='number' step="0.1"name = 'hcO3' value = {urinalysis.hcO3} onChange={handleInputChange}  />
+            <Form.Input label='Creatinine' placeholder='creatinine...'type='number' step="0.1" name = 'creatinine' value = {urinalysis.creatinine} onChange={handleInputChange}/>
+            <Form.Input label='BloodUreaNitrogen' placeholder='bloodUreaNitrogen...'type='number' step="0.1" name = 'bloodUreaNitrogen' value = {urinalysis.bloodUreaNitrogen} onChange={handleInputChange}/>
             </Form.Group>
-            <Form.Group unstackable widths={3}>
-            <Form.Input label='FastingGlucose' placeholder='fastingGlucose...' name = 'fastingGlucose' value = {urinalysis.fastingGlucose} onChange={handleInputChange}  />
-            <Form.Input label='Calcium' placeholder='calcium...' name = 'calcium' value = {urinalysis.calcium} onChange={handleInputChange}/>
-            <Form.Input label='Magnesium' placeholder='magnesium...' name = 'magnesium' value = {urinalysis.magnesium} onChange={handleInputChange}/>
+            <Form.Group unstackable widths={4}>
+            <Form.Input label='FastingGlucose' placeholder='fastingGlucose...' type='number' step="0.1"name = 'fastingGlucose' value = {urinalysis.fastingGlucose} onChange={handleInputChange}  />
+            <Form.Input label='Calcium' placeholder='calcium...' type='number' step="0.1"name = 'calcium' value = {urinalysis.calcium} onChange={handleInputChange}/>
+            <Form.Input label='Phosphate' placeholder='phosphate...' type='number' step="0.1"name = 'phosphate' value = {urinalysis.phosphate} onChange={handleInputChange}  />
+            <Form.Input label='Magnesium' placeholder='magnesium...' type='number' step="0.1"name = 'magnesium' value = {urinalysis.magnesium} onChange={handleInputChange}/>
             </Form.Group>
-            <Form.Group unstackable widths={2}>
-            <Form.Input label='Phosphate' placeholder='phosphate...' name = 'phosphate' value = {urinalysis.phosphate} onChange={handleInputChange}  />
-            <Form.Input label='Date' placeholder='Date added...' name = 'date' value = {urinalysis.date} onChange={handleInputChange}/>
-            </Form.Group>
+            <Form.Input type='Date' label='Date' placeholder='Date added...' name = 'date' value = {urinalysis.date} onChange={handleInputChange}/>
             
             
-        
-            <Button as={Link} to ={`/myPatients/labResults/${patientId}/${doctorId}`} type='cancel' color='red'>Cancel</Button>
+    
             <Button loading={loading} type='submit' color='blue'>Submit</Button>
             
         </Form>

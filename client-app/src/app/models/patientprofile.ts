@@ -12,6 +12,11 @@ export interface patientprofile {
     profession:string;
     bio:string;
     image:string;
+    city :string
+    area:string
+    information :string
+    number :string
+    bloodGroup:string 
     
 }
 
@@ -29,5 +34,10 @@ export class patientprofile implements patientprofile {
         this.profession = user.profession;
         this.bio = user.bio;
         this.image = user.image;
+        this.city = user.city;
+        this.area = user.area;
+        this.information = user.information;
+        this.bloodGroup = user.bloodGroup;
+        this.number = user.number;
     }
 }

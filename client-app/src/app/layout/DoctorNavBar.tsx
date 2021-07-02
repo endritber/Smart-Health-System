@@ -5,7 +5,7 @@ import { useStore } from "../stores/store";
 
 
 export default  observer (function DoctorNavBar() {
-    const {userStore:{user, logout}} = useStore();
+    const {userStore:{user, logout, isLoggedIn} } = useStore();
 
     return (
         
@@ -17,20 +17,19 @@ export default  observer (function DoctorNavBar() {
 
                 <Menu.Item as={NavLink} to={`/myPatients/${user?.id}`} name ="MyPatients" />
                 <Menu.Item as={NavLink} to = '/messages' name ="Messages"/>
-
-                <Menu.Item position="right">
-                    <Icon name='user'/>
-                    {/* <Image src= {user?.image || '/dika'} avatar spaced='right' /> */}
-                    <Dropdown pointing="top left" text={user?.displayName}>
+            
+            {isLoggedIn &&
+                <>
+            <Menu.Item position='right'>
+                    <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
+                    <Dropdown pointing='top left' text={user?.displayName}>
                         <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to={`/profiles/${user?.userName}`} text='My Profile' icon='user'/>
-                        <Dropdown.Item onClick={logout} text='Log out' icon='power'/>
+                            <Dropdown.Item onClick={logout} text='Logout' icon='power' />
                         </Dropdown.Menu>
-                        
                     </Dropdown>
                 </Menu.Item>
-            </Container>
-
+                    </>}
+                    </Container>
         </Menu>
     )
 })

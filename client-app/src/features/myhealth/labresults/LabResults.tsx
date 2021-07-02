@@ -69,14 +69,14 @@ export default observer( function LabResults() {
       <Header sub>Your Laboratory Results</Header>
       <br/>
   <Button.Group fluid> 
-          <Button size='large' color='blue' onClick={scrollToMetabolicPanel}>
+          <Button size='large' color='black' onClick={scrollToMetabolicPanel}>
                     Scroll to Metabolic Panel</Button>
            <Button.Or/>
-            <Button size='large' color='blue' onClick={scrollToLiverPanel}>
+            <Button size='large' color='black' onClick={scrollToLiverPanel}>
                     Scroll to Liver Panel
             </Button>
             <Button.Or/>
-            <Button size='large' color='blue' onClick={scrollToUrinalysis}>
+            <Button size='large' color='black' onClick={scrollToUrinalysis}>
                     Scroll to Urinalysis
             </Button>
                     

@@ -26,7 +26,7 @@ export default observer (function HeightForm({id} : Props){
     // console.log(id)
     const [height, setHeight]= useState<Height>({
         heightId:'',
-        myHeight: parseInt(''),
+        myHeight: 0,
         date:'',
     });
     

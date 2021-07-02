@@ -1,8 +1,8 @@
-export interface Waterintake{
+export interface WaterIntake{
     
     waterintakeId : string;
 
-    waterPerHour : number;
+    literPerHour : number;
 
      date : string;
 }

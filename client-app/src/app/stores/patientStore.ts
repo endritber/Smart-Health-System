@@ -37,6 +37,7 @@ export default class patientStore {
         try {
             const patients = await agent.Patients.list();    
                 patients.forEach(patient=> {
+                patient.birthDate = patient.birthDate.split('T')[0];
                 this.patientRegistry.set(patient.id, patient)
             })
             this.setLoadingIntitial(false);
@@ -69,6 +70,9 @@ export default class patientStore {
                     })
                     this.selectedPatient.cbCs.forEach(cbc=> {
                         cbc.date = cbc.date.split('T')[0];
+                    })
+                    this.selectedPatient.prescriptions.forEach(prescription=> {
+                        prescription.prescribed = prescription.prescribed.split('T')[0];
                     })
                     this.sortUrinalysis();
                     this.sortMetabolicPanel();

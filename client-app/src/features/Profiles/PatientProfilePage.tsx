@@ -10,6 +10,7 @@ import ProfileHeaderPatient from "./ProfileHeaderPatient";
 export default observer( function PatientProfilePage (){
 
     const {username} = useParams<{username: string}>();
+    const {id} = useParams<{id: string}>();
     const {profileStore} = useStore();
 
     const {loadingProfile, loadProfile, profile} =profileStore;
@@ -23,12 +24,16 @@ export default observer( function PatientProfilePage (){
 
     return (
     <Grid>
-           <Grid.Column width={16}>
-               {profile &&
-               <ProfileHeaderPatient profile = {profile}/>}
+ 
+                   <Grid.Column width={5}>
                {profile  &&
                <ProfileContentPatient profile = {profile}/>}
-           </Grid.Column>
+               </Grid.Column>
+               <Grid.Column width={11}>
+               {id &&
+               <ProfileHeaderPatient id={id}/>}
+                   </Grid.Column>
+       
        </Grid>
     )
 })

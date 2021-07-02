@@ -34,6 +34,11 @@ export interface patientUser {
     profession:string;
     bio:string;
     image:string;
+    city :string
+    area:string
+    information :string
+    number :string
+    bloodGroup:string 
 
 }
 export interface doctorUser {

@@ -11,6 +11,7 @@ import MyPatientDetail from './patientDetail/MyPatientDetail';
 interface Props {
     doctor: Doctor
     selectedPatient: Patient | undefined
+
 }
 
 export default observer (function MyPatientsDashBoard({doctor, selectedPatient}: Props) {

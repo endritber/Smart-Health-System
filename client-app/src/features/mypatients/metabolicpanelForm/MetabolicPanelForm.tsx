@@ -7,8 +7,12 @@ import { CBC } from "../../../app/models/cbc";
 import { MetabolicPanel } from "../../../app/models/metabolicpanel";
 import { useStore } from "../../../app/stores/store";
 
-
-export default observer (function MetabolicPanelForm(){
+interface Props {
+    patientId:string;
+    doctorId:string;
+    MetabolicPanelId:string;
+}
+export default observer (function MetabolicPanelForm({patientId, doctorId, MetabolicPanelId}: Props){
 
     const history = useHistory();
 
@@ -16,20 +20,18 @@ export default observer (function MetabolicPanelForm(){
 
     const {loading, createmetabolicpanel, updatemetabolicpanel, loadmetabolicpanel} = metabolicpanelStore;
 
-    const {patientId} = useParams<{patientId: string}>();
-    const {doctorId} = useParams<{doctorId: string}>();
-    const {MetabolicPanelId} = useParams<{MetabolicPanelId: string}>();
+
 
     const [metabolicpanel, setMetabolicPanel]= useState<MetabolicPanel>({
 
         id:'',
-        glucose :parseInt(''),
-        bun:parseInt(''),
-        protein :parseInt(''),
-        albumin :parseInt(''),
-        calcium:parseInt(''),
-        globulin:parseInt(''),
-        carbonDioxide:parseInt(''),
+        glucose :0,
+        bun:0,
+        protein :0,
+        albumin :0,
+        calcium:0,
+        globulin:0,
+        carbonDioxide:0,
         date:''
     });
     
@@ -55,25 +57,19 @@ export default observer (function MetabolicPanelForm(){
             <Header content='Add Metabolic Panel from Laboratory'></Header> }
             <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Group unstackable widths={2}>
-            <Form.Input label='Glucose' placeholder='glucose...' name = 'glucose' value = {metabolicpanel.glucose} onChange={handleInputChange}  />
-            <Form.Input label='Bun' placeholder='bun...' name = 'bun' value = {metabolicpanel.bun} onChange={handleInputChange}/>
+            <Form.Input label='Glucose' type='number' step="0.1"placeholder='glucose...' name = 'glucose' value = {metabolicpanel.glucose} onChange={handleInputChange}  />
+            <Form.Input label='Bun'type='number' step="0.1" placeholder='bun...' name = 'bun' value = {metabolicpanel.bun} onChange={handleInputChange}/>
             </Form.Group>
             <Form.Group unstackable widths={2}>
-            <Form.Input label='Protein' placeholder='protein...' name = 'protein' value = {metabolicpanel.protein} onChange={handleInputChange}  />
-            <Form.Input label='albumin' placeholder='albumin...' name = 'albumin' value = {metabolicpanel.albumin} onChange={handleInputChange}/>
+            <Form.Input label='Protein' type='number' step="0.1"placeholder='protein...' name = 'protein' value = {metabolicpanel.protein} onChange={handleInputChange}  />
+            <Form.Input label='albumin' type='number' step="0.1"placeholder='albumin...' name = 'albumin' value = {metabolicpanel.albumin} onChange={handleInputChange}/>
             </Form.Group>
-            <Form.Group unstackable widths={2}>
-            <Form.Input label='Calcium' placeholder='calcium...' name = 'calcium' value = {metabolicpanel.calcium} onChange={handleInputChange}  />
-            <Form.Input label='Globulin' placeholder='globulin...' name = 'globulin' value = {metabolicpanel.globulin} onChange={handleInputChange}/>
+            <Form.Group unstackable widths={3}>
+            <Form.Input label='Calcium' type='number' step="0.1"placeholder='calcium...' name = 'calcium' value = {metabolicpanel.calcium} onChange={handleInputChange}  />
+            <Form.Input label='CarbonDioxide' type='number' step="0.1"placeholder='carbonDioxide...' name = 'carbonDioxide' value = {metabolicpanel.carbonDioxide} onChange={handleInputChange}  />
+            <Form.Input label='Globulin' type='number' step="0.1"placeholder='globulin...' name = 'globulin' value = {metabolicpanel.globulin} onChange={handleInputChange}/>
             </Form.Group>
-            <Form.Group unstackable widths={2}>
-            <Form.Input label='CarbonDioxide' placeholder='carbonDioxide...' name = 'carbonDioxide' value = {metabolicpanel.carbonDioxide} onChange={handleInputChange}  />
-            <Form.Input label='Date' placeholder='Date added...' name = 'date' value = {metabolicpanel.date} onChange={handleInputChange}/>
-            </Form.Group>
-            
-            
-        
-            <Button as={Link} to ={`/myPatients/labResults/${patientId}/${doctorId}`} type='cancel' color='red'>Cancel</Button>
+            <Form.Input label='Date'type='Date' placeholder='Date added...' name = 'date' value = {metabolicpanel.date} onChange={handleInputChange}/>
             <Button loading={loading} type='submit' color='blue'>Submit</Button>
             
         </Form>

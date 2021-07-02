@@ -14,7 +14,7 @@ namespace Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.6");
+                .HasAnnotation("ProductVersion", "5.0.7");
 
             modelBuilder.Entity("Domain.Allergy", b =>
                 {
@@ -683,9 +683,21 @@ namespace Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Area")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("TEXT")
                         .HasColumnName("Patient_BirthDate");
+
+                    b.Property<string>("BloodGroup")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Information")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Language")
                         .HasColumnType("TEXT");
@@ -697,6 +709,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT")
                         .HasColumnName("Patient_Name");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Profession")
                         .HasColumnType("TEXT");

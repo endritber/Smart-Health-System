@@ -46,7 +46,7 @@ export default function HeightResults(){
             <YAxis domain={[0,3.2]} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="Height(m)" stroke="#6a0dad" />
+            <Line type="monotone" dataKey="Height" stroke="#6a0dad" />
             </LineChart>
         </Segment>
         <br></br>

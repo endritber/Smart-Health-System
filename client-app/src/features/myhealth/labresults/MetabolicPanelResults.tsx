@@ -27,18 +27,18 @@ interface Column {
   }
 const columns : Column[] = [
     { id: 'date', label: 'Date Added', minWidth: 170 },
-    { id: 'glucose', label: 'Glucose', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
-    { id: 'bun', label: 'Bun', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'glucose', label: 'Glucose(mg/Dl)', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'bun', label: 'Bun(mg/Dl)', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
     {
       id: 'protein',
-      label: 'Protein',
+      label: 'Protein(mg/Dl)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
     },
     {
       id: 'albumin',
-      label: 'Albumin',
+      label: 'Albumin(g/Dl)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -46,7 +46,7 @@ const columns : Column[] = [
     },
     {
       id: 'calcium',
-      label: 'Calcium',
+      label: 'Calcium(g/Dl)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -54,7 +54,7 @@ const columns : Column[] = [
     },
     {
         id: 'globulin',
-        label: 'Globulin',
+        label: 'Globulin(mg/Dl)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -62,7 +62,7 @@ const columns : Column[] = [
       },
       {
         id: 'carbonDioxide',
-        label: 'Carbon Dioxide',
+        label: 'Carbon Dioxide(mmol/L)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),

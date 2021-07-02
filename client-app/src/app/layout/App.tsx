@@ -81,7 +81,7 @@ function App() {
         <Route path='/messages' component={Messages}/>
         <Route path='/diseaseprediction/:patientId' component={DiseasePrediction}/>
         <Route path='/myhealthlist/labresults/:id' component={LabResults}/>
-        <Route path='/profiles/:username' component={PatientProfilePage}/>
+        <Route path='/profiles/:username/:id' component={PatientProfilePage}/>
         <Route path='/myhealthlist/prescriptions/:id' component={MyPrescriptions}/>
         <Route path='/myhealthlist/allergies/:patientId' component={PatientAllergyTable}/>
         <Route path='/login' component={LoginForm}/>

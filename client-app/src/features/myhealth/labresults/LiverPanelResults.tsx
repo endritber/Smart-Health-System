@@ -27,18 +27,18 @@ interface Column {
   }
 const columns : Column[] = [
     { id: 'date', label: 'Date Added', minWidth: 170 },
-    { id: 'totalBiliRubin', label: 'Total BilirRubin', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
-    { id: 'directBiliRubin', label: 'Direct BiliRubin', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'totalBiliRubin', label: 'Total BilirRubin(mg/Dl)', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'directBiliRubin', label: 'Direct BiliRubin(mg/Dl)', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
     {
       id: 'sgot',
-      label: 'SGOT',
+      label: 'SGOT(IU/L)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
     },
     {
       id: 'sgpt',
-      label: 'SGPT',
+      label: 'SGPT(IU/L)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -46,7 +46,7 @@ const columns : Column[] = [
     },
     {
       id: 'alkalinePhosPhatase',
-      label: 'Alkaline PhosPhatase',
+      label: 'Alkaline PhosPhatase(IU/L)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -161,7 +161,7 @@ const useStyles = makeStyles({
         </Table>
       </TableContainer>
       <Header>
-      <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<LiverPanelGraphs/>, 'large')}} floated='right' style={{marginRight:10}}>
+      <Button size='large' color='black' onClick={()=>{modalStore.openModal(<LiverPanelGraphs/>, 'large')}} floated='right' style={{marginRight:10}}>
                     View Graph
           </Button>
           </Header>

@@ -11,7 +11,6 @@ namespace API.Controllers
     public class AllergyController : BaseApiController
     {
 
-
     [HttpGet("{id}")] 
 
         public async Task<ActionResult<Allergy>> GetLabResult(Guid id)

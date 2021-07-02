@@ -27,18 +27,18 @@ interface Column {
   }
 const columns : Column[] = [
     { id: 'date', label: 'Date Added', minWidth: 170 },
-    { id: 'sodium', label: 'Sodium', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
-    { id: 'potassium', label: 'Potassium', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'sodium', label: 'Sodium(mEq/Dl)', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'potassium', label: 'Potassium(mEq/Dl)', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
     {
       id: 'chloride',
-      label: 'Chloride',
+      label: 'Chloride(mEq/Dl)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
     },
     {
       id: 'hcO3',
-      label: 'HCOO3',
+      label: 'HCOO3(mEq/Dl)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -46,7 +46,7 @@ const columns : Column[] = [
     },
     {
       id: 'creatinine',
-      label: 'Creatinine',
+      label: 'Creatinine(mEq/Dl)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -54,7 +54,7 @@ const columns : Column[] = [
     },
     {
         id: 'bloodUreaNitrogen',
-        label: 'Blood Urea Nitrogen',
+        label: 'Blood Urea Nitrogen(mg/Dl)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -62,7 +62,7 @@ const columns : Column[] = [
       },
       {
         id: 'fastingGlucose',
-        label: 'Fasting Glucose',
+        label: 'Fasting Glucose(mg/Dl)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -70,7 +70,7 @@ const columns : Column[] = [
       },
       {
         id: 'calcium',
-        label: 'Calcium',
+        label: 'Calcium(mg/Dl)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -78,7 +78,7 @@ const columns : Column[] = [
       },
       {
         id: 'magnesium',
-        label: 'Magnesium',
+        label: 'Magnesium(mEq/Dl)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -86,7 +86,7 @@ const columns : Column[] = [
       },
       {
         id: 'phosphate',
-        label: 'Phosphate',
+        label: 'Phosphate(mEq/Dl)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),

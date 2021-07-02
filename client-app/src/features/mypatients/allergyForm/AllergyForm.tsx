@@ -6,18 +6,18 @@ import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { Allergy } from "../../../app/models/allergy";
 import { useStore } from "../../../app/stores/store";
 
-
-export default observer (function AllergyForm(){
+interface Props {
+    patientId:string;
+    doctorId:string;
+    allergyId:string;
+}
+export default observer (function AllergyForm({patientId, doctorId, allergyId}: Props){
 
     const history = useHistory();
 
     const { allergyStore} = useStore();
 
     const {loading, createAllergy, updateAllergy, loadAllergy} = allergyStore;
-
-    const {patientId} = useParams<{patientId: string}>();
-    const {doctorId} = useParams<{doctorId: string}>();
-    const {allergyId} = useParams<{allergyId: string}>();
 
     const [allergy, setAllergy]= useState<Allergy>({
         id: '',
@@ -55,7 +55,6 @@ export default observer (function AllergyForm(){
             <Form.TextArea label='Natural Remedies' placeholder='ratural remedies...'name = 'naturalRemedies' value = {allergy.naturalRemedies} onChange={handleInputChange} />
             <Form.TextArea label='Common Food Triggers' placeholder='common food triggers...'name = 'commonFoodTriggers' value = {allergy.commonFoodTriggers} onChange={handleInputChange} />
     
-            <Button as={Link} to ={`/myPatients/allergies/${patientId}/${doctorId}`} type='cancel' color='red'>Cancel</Button>
             <Button loading={loading} type='submit' color='blue'>Submit</Button>
             
         </Form>

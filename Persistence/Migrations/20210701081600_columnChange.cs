@@ -67,23 +67,8 @@ namespace Persistence.Migrations
                 name: "date",
                 table: "Heights");
 
-            migrationBuilder.RenameColumn(
-                name: "patientId",
-                table: "Symptoms",
-                newName: "patientIdId");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_Symptoms_patientId",
-                table: "Symptoms",
-                newName: "IX_Symptoms_patientIdId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Symptoms_AspNetUsers_patientIdId",
-                table: "Symptoms",
-                column: "patientIdId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            
         }
     }
 }

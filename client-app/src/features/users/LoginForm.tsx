@@ -18,7 +18,7 @@ export default observer (function LoginForm() {
 
         {({handleSubmit, isSubmitting, errors})=>(
             <Form className='ui form' onSubmit={handleSubmit} autoComplete="off">
-                <Header as='h2' color='blue' textAlign='center'>
+                <Header as='h2' color='black' textAlign='center'>
                 <Image src='/logoHealth.png' style={{"border-radius":"50px"}} />Log-in to your account
                 </Header>
                 <MyTextInput name ="email" placeholder="Email Address"/> 
@@ -27,7 +27,7 @@ export default observer (function LoginForm() {
                 name='error'
                 render={()=> <Label style={{marginBottom:10}}basic color='red' content={errors.error}/>}
                 />
-                <Button primary loading={isSubmitting} content="Login" type="submit" fluid />
+                <Button color='black'loading={isSubmitting} content="Login" type="submit" fluid />
                 <Message>
                     New to us? <a href='#'>Sign Up</a>
                 </Message>

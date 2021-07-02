@@ -46,8 +46,8 @@ export default observer (function DiseasePrediction(){
         symptom1: Yup.string().required('Symptom is required for prediction'),
         symptom2: Yup.string().required('Symptom is required for prediction'),
         symptom3: Yup.string().required('Symptom is required for prediction'),
-        symptom4: Yup.string().required('Symptom is required for prediction'),
-        symptom5: Yup.string().required('Symptom is required for prediction'),
+        symptom4: Yup.string(),
+        symptom5: Yup.string()
     })
 
     const refreshPage = ()=>{
@@ -61,6 +61,11 @@ export default observer (function DiseasePrediction(){
     function handleFormSubmit(prediction: Symptoms) {
         loading = true
         SymptomsAPIService.addPrediction(patientId,prediction)
+        window.location.reload()
+    }
+    function handleDelete(id) {
+        loading = true
+        SymptomsAPIService.deletePrediction(id)
         window.location.reload()
     }
 
@@ -218,6 +223,8 @@ export default observer (function DiseasePrediction(){
                 header='PREDICT THE DISEASE'
                 content="Get possible diagnose to match your symptoms."
             />
+            <Header sub>Add 3 to 5 Symptoms</Header>
+            <br/>
              <Formik 
                 validationSchema={validationSchema}
                 enableReinitialize 
@@ -260,6 +267,7 @@ export default observer (function DiseasePrediction(){
             <Table.HeaderCell colSpan='1'>Symptom 4</Table.HeaderCell>
             <Table.HeaderCell colSpan='1'>Symptom 5</Table.HeaderCell>
             <Table.HeaderCell colSpan='1'>Prediction</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Action</Table.HeaderCell>
         </Table.Row>
         </Table.Header>
             {selectedPatient?.symptoms.map(s=>(
@@ -270,8 +278,7 @@ export default observer (function DiseasePrediction(){
                 <>
                 <Table.Row positive>
                 <Table.Cell> 
-                    {index+=1} - 
-                    Recently Added
+                    {index+=1} 
                     </Table.Cell>
                     <Table.Cell> 
                         {s.symptom1}
@@ -287,7 +294,13 @@ export default observer (function DiseasePrediction(){
                     {s.symptom5}
                     </Table.Cell>
                     <Table.Cell>
-                       You might have {s.result}
+                       You might have <b>{s.result}</b>
+                    </Table.Cell>
+                    <Table.Cell>
+                    <Button style={{width:' 100px'}} 
+                            color='red' type='submit' content='Delete'
+                            loading={loading}
+                            onClick={()=>handleDelete(s.id)}                             />
                     </Table.Cell>
                     </Table.Row>
                 </>
@@ -315,6 +328,13 @@ export default observer (function DiseasePrediction(){
                     <Table.Cell>
                      <h5>{s.result}</h5>
                     </Table.Cell>
+                    <Table.Cell>
+                    <Button style={{width:' 100px'}} 
+                            color='red' type='submit' content='Delete'
+                            loading={loading}
+                            onClick={()=>handleDelete(s.id)}              />
+                    </Table.Cell>
+                    
                     </Table.Row>
                     </>)}
                 </Table.Body>

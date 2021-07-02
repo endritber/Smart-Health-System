@@ -1,4 +1,5 @@
 import { useField } from 'formik';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Form, Label, Select } from 'semantic-ui-react';
 
@@ -9,7 +10,7 @@ interface Props {
     label?: string;
 }
 
-export default function MySelectInput(props: Props) {
+export default observer( function MySelectInput(props: Props) {
     const [field, meta, helpers] = useField(props.name); 
     return (
         <Form.Field error={meta.touched && !!meta.error}>
@@ -27,4 +28,4 @@ export default function MySelectInput(props: Props) {
             ) : null}
         </Form.Field>
     )
-}
+})

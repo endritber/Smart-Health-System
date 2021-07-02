@@ -3,7 +3,7 @@ import { scroller } from "react-scroll";
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Card, Divider, Header, Modal, Segment } from "semantic-ui-react";
+import { Button, Card, Divider, Header, Modal, Segment , Icon} from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 import Table from '@material-ui/core/Table';
@@ -15,6 +15,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import LiverPanelGraphs from "../labresultGraph/LiverPanelGraphs";
 import CBCGraphs from "../labresultGraph/CBCGraphs";
+import CBCForm from "../cbcForm/CBCForm";
+import { stringifyConfiguration } from "tslint/lib/configuration";
+import MetabolicPanelForm from "../metabolicpanelForm/MetabolicPanelForm";
+import LiverPanelForm from "../liverpanelForm/LiverPanelForm";
+import UrinalysisForm from "../urinalysisForm/UrinalysisForm";
 
 
 
@@ -45,23 +50,23 @@ export default observer (function LabResultsList() {
 
       function handleCBCDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
             setTarget(e.currentTarget.name)
-            deletecbc(id).then(()=> history.push(`/myPatients/${doctorId}`));
+            deletecbc(id)
       }
 
       function handleMetabolicPanelDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name)
-        deletemetabolicpanel(id).then(()=> history.push(`/myPatients/${doctorId}`));
+        deletemetabolicpanel(id)
   }
 
 
   function handleLiverPanelDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
     setTarget(e.currentTarget.name)
-    deleteLiverPanel(id).then(()=> history.push(`/myPatients/${doctorId}`));
+    deleteLiverPanel(id)
 }
 
 function handleUrinalysisDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
 setTarget(e.currentTarget.name)
-deleteurinalysis(id).then(()=> history.push(`/myPatients/${doctorId}`));
+deleteurinalysis(id)
 };
 
 
@@ -95,14 +100,14 @@ function scrollToMetabolicPanel() {
       <Header sub>{selectedPatient?.name} {selectedPatient?.lastName}'s Laboratory Results</Header>
       <br/> 
       <Button.Group fluid> 
-          <Button size='large' color='blue' onClick={scrollToMetabolicPanel}>
+          <Button size='large' color='black' onClick={scrollToMetabolicPanel}>
                     Scroll to Metabolic Panel</Button>
            <Button.Or/>
-            <Button size='large' color='blue' onClick={scrollToLiverPanel}>
+            <Button size='large' color='black' onClick={scrollToLiverPanel}>
                     Scroll to Liver Panel
             </Button>
             <Button.Or/>
-            <Button size='large' color='blue' onClick={scrollToUrinalysis}>
+            <Button size='large' color='black' onClick={scrollToUrinalysis}>
                     Scroll to Urinalysis
             </Button>
                     
@@ -112,14 +117,14 @@ function scrollToMetabolicPanel() {
       <Segment>
       <Segment>
             <Header>
-          <Header>Add {selectedPatient?.name}'s CBCs Results</Header>
-        <Button size ='large' color='teal' as={Link} to={`/cbcForm/${patientId}/${doctorId}`}>
-                Add CBC
+          <Header>Add CBCs Results</Header>
+        <Button style={{width:"130px"}} color='black' onClick={()=>{modalStore.openModal(<CBCForm patientId={patientId} doctorId={doctorId} CBCId={''}/>, 'small')}}>
+                <Icon name='add'/>
         </Button></Header>
         <Header>
         <Header>View {selectedPatient?.name}'s CBCs Graph Results</Header>
         <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<CBCGraphs/>, 'large')}}>
-                    View Graph
+                    Plot Results
           </Button></Header></Segment> 
     <TableContainer component={Paper}>
       <Table  aria-label="simple table">
@@ -155,7 +160,7 @@ function scrollToMetabolicPanel() {
               <TableCell align="right">
               <Card.Content extra>
             <Button.Group>
-                <Button as={Link} to={`/manageCBC/${patientId}/${doctorId}/${cbc.id}`} color='blue'>
+                <Button  color='black' onClick={()=>{modalStore.openModal(<CBCForm patientId={patientId} doctorId={doctorId} CBCId={cbc.id}/>,'small')}} >
                     Edit
                     </Button>
                 <Button.Or/>
@@ -176,7 +181,7 @@ function scrollToMetabolicPanel() {
             content="Yes!"
             name={cbc.id}
             loading={loading && target===cbc.id}
-            onClick={(e)=>handleCBCDelete(e, cbc.id) }
+            onClick={(e)=>handleCBCDelete(e, cbc.id)}
             color='red'
           />
         </Modal.Actions>
@@ -198,14 +203,15 @@ function scrollToMetabolicPanel() {
 <Segment className="metabolicPanel">
       <Segment>
             <Header>
-          <Header>Add {selectedPatient?.name}'s Metabolic Panel Results</Header>
-        <Button size ='large' color='teal' as={Link} to={`/MetabolicPanelForm/${patientId}/${doctorId}`}>
-                Add Metabolic Panel
+          <Header>Add Metabolic Panel Results</Header>
+        <Button style={{width:"130px"}} color='black' onClick={()=>{modalStore.openModal(<MetabolicPanelForm patientId={patientId} doctorId={doctorId} MetabolicPanelId={''}/>, 'small')}}>
+           <Icon name='add'/>
         </Button></Header>
         </Segment>
     <TableContainer component={Paper}>
       <Table  aria-label="simple table">
         <TableHead>
+        <Header>Table of Metabolic Panel</Header>
           <TableRow>
             <TableCell>Date Added (yyyy-mm-dd)</TableCell>
             <TableCell align="right">Glucose (mg/Dl)</TableCell>
@@ -234,7 +240,7 @@ function scrollToMetabolicPanel() {
               <TableCell align="right">
               <Card.Content extra>
             <Button.Group>
-                <Button as={Link} to={`/manageMetabolicPanel/${patientId}/${doctorId}/${mp.id}`} color='blue'>
+                <Button onClick={()=>{modalStore.openModal(<MetabolicPanelForm patientId={patientId} doctorId={doctorId} MetabolicPanelId={mp.id}/>, 'small')}} color='black'>
                     Edit
                     </Button>
                 <Button.Or/>
@@ -275,18 +281,19 @@ function scrollToMetabolicPanel() {
 <Segment className='liverPanel'>
       <Segment>
             <Header>
-          <Header>Add {selectedPatient?.name}'s Liver Panel Results</Header>
-        <Button size ='large' color='teal' as={Link} to={`/LiverPanelForm/${patientId}/${doctorId}`}>
-                Add Liver Panel
+          <Header>Add Liver Panel Results</Header>
+        <Button style={{width:"130px"}} color='black' onClick={()=>{modalStore.openModal(<LiverPanelForm patientId={patientId} doctorId={doctorId} LiverPanelId={''}/>, 'small')}} >
+        <Icon name='add'/>
         </Button></Header>
         <Header>
         <Header>View {selectedPatient?.name}'s Liver Panel Graph Results</Header>
         <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<LiverPanelGraphs/>, 'large')}}>
-                    View Graph
+        Plot Results
           </Button></Header></Segment> 
     <TableContainer component={Paper}>
       <Table  aria-label="simple table">
         <TableHead>
+        <Header>Table of Liver Panel</Header>
           <TableRow>
             <TableCell>Date Added (yyyy-mm-dd)</TableCell>
             <TableCell align="right">Total BiliRubin (mg/Dl)</TableCell>
@@ -312,7 +319,7 @@ function scrollToMetabolicPanel() {
               <TableCell align="right">
               <Card.Content extra>
             <Button.Group>
-                <Button as={Link} to={`/manageLiverPanel/${patientId}/${doctorId}/${lp.id}`} color='blue'>
+                <Button onClick={()=>{modalStore.openModal(<LiverPanelForm patientId={patientId} doctorId={doctorId} LiverPanelId={lp.id}/>, 'small')}}  color='black'>
                     Edit
                     </Button>
                 <Button.Or/>
@@ -353,14 +360,15 @@ function scrollToMetabolicPanel() {
     <Segment className='urinalysis'>
       <Segment>
             <Header>
-          <Header>Add {selectedPatient?.name}'s Urinalysis Results</Header>
-        <Button size ='large' color='teal' as={Link} to={`/UrinalysisForm/${patientId}/${doctorId}`}>
-                Add Urinalysis
+          <Header>Add Urinalysis Results</Header>
+        <Button style={{width:"130px"}} color='black' onClick={()=>{modalStore.openModal(<UrinalysisForm patientId={patientId} doctorId={doctorId} UrinalysisId={''}/>, 'small')}} >
+        <Icon name='add'/>
         </Button></Header>
   </Segment> 
     <TableContainer component={Paper}>
       <Table  aria-label="simple table">
         <TableHead>
+          <Header>Table of Urinalysis</Header>
           <TableRow>
             <TableCell>Date Added</TableCell>
             <TableCell align="right"></TableCell>
@@ -397,7 +405,7 @@ function scrollToMetabolicPanel() {
               <TableCell align="right">
               <Card.Content extra>
             <Button.Group>
-                <Button as={Link} to={`/manageUrinalysis/${patientId}/${doctorId}/${u.id}`} color='blue'>
+                <Button onClick={()=>{modalStore.openModal(<UrinalysisForm patientId={patientId} doctorId={doctorId} UrinalysisId={u.id}/>, 'small')}} color='black'>
                     Edit
                     </Button>
                 <Button.Or/>
@@ -418,7 +426,7 @@ function scrollToMetabolicPanel() {
             content="Yes!"
             name={u.id}
             loading={loading && target===u.id}
-            onClick={(e)=>handleLiverPanelDelete(e, u.id) }
+            onClick={(e)=>handleUrinalysisDelete(e, u.id) }
             color='red'
           />
         </Modal.Actions>

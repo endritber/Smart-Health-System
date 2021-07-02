@@ -32,9 +32,14 @@ namespace Application.Patients
                     patient.LastName = request.Patient.LastName?? patient.LastName;
                     patient.BirthDate = request.Patient.BirthDate ?? patient.BirthDate;
                     patient.Address = request.Patient.Address?? patient.Address;
-                    patient.PhoneNumber = request.Patient.PhoneNumber?? patient.PhoneNumber;
                     patient.Language = request.Patient.Language?? patient.Language;
                     patient.Profession = request.Patient.Profession?? patient.Profession;
+
+                    patient.City = request.Patient.City?? patient.City;
+                    patient.Area = request.Patient.Area?? patient.Area;
+                    patient.Information = request.Patient.Information?? patient.Information;
+                    patient.Number = request.Patient.Number?? patient.Number;
+                    patient.BloodGroup = request.Patient.BloodGroup?? patient.BloodGroup;
                     
                     await _context.SaveChangesAsync();
 

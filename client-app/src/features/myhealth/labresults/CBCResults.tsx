@@ -28,18 +28,18 @@ interface Column {
   }
 const columns : Column[] = [
     { id: 'date', label: 'Date Added', minWidth: 170 },
-    { id: 'wbc', label: 'Wbc', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
-    { id: 'segmentedNeutrofilis', label: 'Segmented Neutrofilis', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'wbc', label: 'Wbc(ml)', minWidth: 170, format: (value: number) => value.toLocaleString('en-US'), },
+    { id: 'segmentedNeutrofilis', label: 'Segmented Neutrofilis(ml)', minWidth: 100, format: (value: number) => value.toLocaleString('en-US'), },
     {
       id: 'bandForms',
-      label: 'Band Forms',
+      label: 'Band Forms(%)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
     },
     {
       id: 'lymphocytes',
-      label: 'Lymphocytes',
+      label: 'Lymphocytes(%)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -47,7 +47,7 @@ const columns : Column[] = [
     },
     {
       id: 'monocytes',
-      label: 'Monocytes',
+      label: 'Monocytes(%)',
       minWidth: 170,
       align: 'right',
       format: (value: number) => value.toLocaleString('en-US'),
@@ -55,7 +55,7 @@ const columns : Column[] = [
     },
     {
         id: 'basoghilis',
-        label: 'Basoghilis',
+        label: 'Basoghilis(%)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -63,7 +63,7 @@ const columns : Column[] = [
       },
       {
         id: 'hemoglobin',
-        label: 'Hemoglobin',
+        label: 'Hemoglobin(%)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -71,7 +71,7 @@ const columns : Column[] = [
       },
       {
         id: 'hematocrit',
-        label: 'Hematocrit',
+        label: 'Hematocrit(%)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -79,7 +79,7 @@ const columns : Column[] = [
       },
       {
         id: 'plateletCount',
-        label: 'Platelet Count',
+        label: 'Platelet Count(%)',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -192,7 +192,7 @@ const useStyles = makeStyles({
         </Table>
       </TableContainer>
       <Header>
-      <Button size='large' color='teal' onClick={()=>{modalStore.openModal(<CBCGraphs/>,'large')}} floated='right' style={{marginRight:10}}>
+      <Button size='large' color='black' onClick={()=>{modalStore.openModal(<CBCGraphs/>,'large')}} floated='right' style={{marginRight:10}}>
                     View Graph
           </Button>
           </Header>

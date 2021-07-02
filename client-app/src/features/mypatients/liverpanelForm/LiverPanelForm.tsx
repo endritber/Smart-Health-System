@@ -7,9 +7,13 @@ import { CBC } from "../../../app/models/cbc";
 import { LiverPanel } from "../../../app/models/liverpanel";
 import { useStore } from "../../../app/stores/store";
 import { scroller } from "react-scroll";
+interface Props {
+    patientId:string;
+    doctorId:string;
+    LiverPanelId:string;
+}
 
-
-export default observer (function LiverPanelForm(){
+export default observer (function LiverPanelForm({patientId, doctorId,LiverPanelId }:Props){
 
     const history = useHistory();
 
@@ -17,17 +21,18 @@ export default observer (function LiverPanelForm(){
 
     const {loading, createLiverPanel, updateLiverPanel, loadLiverPanel} = liverpanelStore;
 
-    const {patientId} = useParams<{patientId: string}>();
-    const {doctorId} = useParams<{doctorId: string}>();
-    const {LiverPanelId} = useParams<{LiverPanelId: string}>();
-
+interface Props {
+    patientId:string;
+    doctorId:string;
+    MetabolicPanelId:string;
+}
     const [liverpanel, setLiverPanel]= useState<LiverPanel>({
         id:'',
-        totalBiliRubin :parseInt(''),
-        directBiliRubin :parseInt(''),
-        sgot:parseInt(''),
-        sgpt:parseInt(''),
-        alkalinePhosPhatase :parseInt(''),
+        totalBiliRubin :0,
+        directBiliRubin :0,
+        sgot:0,
+        sgpt:0,
+        alkalinePhosPhatase :0,
         date:'',
     
     });
@@ -57,20 +62,16 @@ export default observer (function LiverPanelForm(){
             <Header content='Add Liver Panel from Laboratory'></Header> }
             <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Group unstackable widths={2}>
-            <Form.Input label='Total BiliRubin' placeholder='totalBiliRubin...' name = 'totalBiliRubin' value = {liverpanel.totalBiliRubin} onChange={handleInputChange}  />
-            <Form.Input label='Direct BiliRubin' placeholder='directBiliRubin...' name = 'directBiliRubin' value = {liverpanel.directBiliRubin} onChange={handleInputChange}/>
+            <Form.Input label='Total BiliRubin'type='number' step="0.1" placeholder='totalBiliRubin...' name = 'totalBiliRubin' value = {liverpanel.totalBiliRubin} onChange={handleInputChange}  />
+            <Form.Input label='Direct BiliRubin' placeholder='directBiliRubin...'type='number' step="0.1" name = 'directBiliRubin' value = {liverpanel.directBiliRubin} onChange={handleInputChange}/>
             </Form.Group>
-            <Form.Group unstackable widths={2}>
-            <Form.Input label='SGOT' placeholder='sgot...' name = 'sgot' value = {liverpanel.sgot} onChange={handleInputChange}  />
-            <Form.Input label='SGPT' placeholder='sgpt...' name = 'sgpt' value = {liverpanel.sgpt} onChange={handleInputChange}/>
+            <Form.Group unstackable widths={3}>
+            <Form.Input label='SGOT' placeholder='sgot...' type='number' step="0.1"name = 'sgot' value = {liverpanel.sgot} onChange={handleInputChange}  />
+            <Form.Input label='Alkaline PhosPhatase' placeholder='alkalinePhosPhatase...' type='number' step="0.1"name = 'alkalinePhosPhatase' value = {liverpanel.alkalinePhosPhatase} onChange={handleInputChange}  />
+            <Form.Input label='SGPT' placeholder='sgpt...' type='number' step="0.1"name = 'sgpt' value = {liverpanel.sgpt} onChange={handleInputChange}/>
             </Form.Group>
-            <Form.Group unstackable widths={2}>
-            <Form.Input label='Alkaline PhosPhatase' placeholder='alkalinePhosPhatase...' name = 'alkalinePhosPhatase' value = {liverpanel.alkalinePhosPhatase} onChange={handleInputChange}  />
-            <Form.Input label='Date' placeholder='Date added...' name = 'date' value = {liverpanel.date} onChange={handleInputChange}/>
-            </Form.Group>
-            
-        
-            <Button as={Link} to ={`/myPatients/labResults/${patientId}/${doctorId}`} type='cancel' color='red'>Cancel</Button>
+            <Form.Input type='Date'label='Date' placeholder='Date added...' name = 'date' value = {liverpanel.date} onChange={handleInputChange}/>
+    
             <Button loading={loading} type='submit' color='blue'>Submit</Button>
             
         </Form>

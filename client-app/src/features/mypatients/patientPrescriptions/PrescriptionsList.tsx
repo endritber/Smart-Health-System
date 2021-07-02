@@ -6,6 +6,7 @@ import { Button, Card, Checkbox, Divider, Header, Icon, Image, Item, Modal, Segm
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { Patient } from "../../../app/models/patient";
 import { useStore } from "../../../app/stores/store";
+import PrescriptionForm from "../prescriptionForm/PrescriptionForm";
 
 
 
@@ -14,7 +15,7 @@ export default observer (function PrescriptionsList() {
     const [open, setOpen] = React.useState(false)
     const history = useHistory();
 
-    const {patientStore, prescriptionStore} = useStore();
+    const {patientStore, prescriptionStore, modalStore} = useStore();
 
     const {loadPatient, selectedPatient} = patientStore
     const {deletePrescription, loading} = prescriptionStore
@@ -38,8 +39,9 @@ export default observer (function PrescriptionsList() {
       <>
       <Header sub>{selectedPatient?.name} {selectedPatient?.lastName}'s Prescriptions</Header> 
       <br/>  
-              <Button size ='huge' color='teal' as={Link} to={`/prescriptionsForm/${patientId}/${doctorId}`}>
-                Add Prescription
+      <Header>Add Prescription</Header>
+              <Button style={{width:"160px"}} color='black' onClick={()=>{modalStore.openModal(<PrescriptionForm patientId={patientId} doctorId={doctorId} prescriptionId={''}/>, 'small')}}>
+                <Icon name='add'></Icon>
         </Button> 
         <Segment>    
  
@@ -51,8 +53,6 @@ export default observer (function PrescriptionsList() {
               <Card.Description><Header sub >Prescription {count+=1}</Header></Card.Description>
               <br></br>
                <Card.Description>Medication: {prescription.medication}</Card.Description>
-               <Divider />
-                <Card.Description>Prescription Dose: {prescription.dose}</Card.Description>
                 <Divider  />
                 <Card.Description>Prescription Provider: {prescription.provider}</Card.Description>
                 <Divider  />
@@ -66,7 +66,7 @@ export default observer (function PrescriptionsList() {
             </Card.Content>
             <Card.Content extra>
             <Button.Group fluid>
-                <Button as={Link} to={`/managePrescription/${patientId}/${doctorId}/${prescription.id}`} color='blue'>
+                <Button as={Link} onClick={()=>{modalStore.openModal(<PrescriptionForm patientId={patientId} doctorId={doctorId} prescriptionId={prescription.id}/>, 'small')}} color='black'>
                     Edit
                     </Button>
                 <Button.Or/>

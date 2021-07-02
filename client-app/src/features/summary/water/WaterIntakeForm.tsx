@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { CBC } from "../../../app/models/cbc";
 import { Height } from "../../../app/models/height";
-import { Waterintake } from "../../../app/models/waterintake";
+import { WaterIntake } from "../../../app/models/waterintake";
 import { Weight } from "../../../app/models/weight";
 import { useStore } from "../../../app/stores/store";
 
@@ -20,25 +20,28 @@ export default observer (function WaterIntakeForm({id} : Props){
 
     const { waterintakeStore} = useStore();
 
-    const {loading, createWaterintake, updateWaterintake, loadWaterintake} = waterintakeStore;
+    const {loading, createWaterIntake, updateWaterIntake, loadWaterIntake} = waterintakeStore;
 
     // const {patientId} = useParams<{patientId: string}>();
     // const {id} = useParams<{id: string}>();
     // console.log(id)
-    const [waterintake, setWaterintake]= useState<Waterintake>({
+
+    const [waterintake, setWaterintake]= useState<WaterIntake>({
         waterintakeId:'',
-        waterPerHour: parseInt(''),
+        literPerHour: 0,
         date:'',
     });
+
+    
     
     useEffect(()=>{
-        if (id) loadWaterintake(id).then(height=>setWaterintake(height!))
-},[id, loadWaterintake]);
+        if (id) loadWaterIntake(id).then(waterintake=>setWaterintake(waterintake!))
+},[id, loadWaterIntake]);
     
     function handleSubmit() {
-        waterintake.waterintakeId? updateWaterintake(waterintake)
+        waterintake.waterintakeId? updateWaterIntake(waterintake)
         
-        : createWaterintake(waterintake,id)
+        : createWaterIntake(waterintake,id)
         
     }
 
@@ -53,8 +56,8 @@ export default observer (function WaterIntakeForm({id} : Props){
             <Header content='Add Water Intake'></Header> }
             <Form onSubmit={handleSubmit} autoComplete="off">
            
-            <Form.Input label='My Intake' placeholder='waterintake...' name = 'WaterPerHour' value = {waterintake.waterPerHour} onChange={handleInputChange}  />
-            <Form.Input label='Date' type='date' placeholder='date...' name = 'date' value = {waterintake.date} onChange={handleInputChange}/>
+            <Form.Input label='My Intake' placeholder='waterintake...' name = 'literPerHour' value = {waterintake.literPerHour} onChange={handleInputChange}  />
+            <Form.Input label='Date' type='datetime-local' placeholder='date...' name = 'date' value = {waterintake.date} onChange={handleInputChange}/>
             
            
         

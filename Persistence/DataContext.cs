@@ -64,12 +64,6 @@ namespace Persistence
             .WithOne(x=>x.patient);
 
 
-
-
-
-
-
-
             builder.Entity<Doctor>()
             .HasMany(x=>x.Patients)
             .WithOne(x=>x.doctor);
@@ -118,8 +112,9 @@ namespace Persistence
             builder.Entity<Doctor>()
             .HasMany(x => x.Appointments)
             .WithOne(x => x.doctor);
-        
-        }
 
+        
+             }
+
+        }
     }
-}

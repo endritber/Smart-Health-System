@@ -22,7 +22,7 @@ export default observer(function HomePage() {
               {userStore.isLoggedIn?(<Header></Header>):
               (
                <>
-              <Button content='Sign Up' color='teal' floated='right' style={{marginLeft:730}}></Button>
+              <Button content='Sign Up' color='black' floated='right' style={{marginLeft:730}}></Button>
               </>)}
               
             </Header>
@@ -41,10 +41,10 @@ export default observer(function HomePage() {
                 <>
                 {userStore.isLoggedIn ? (
                   <>
-                <Button color='teal' as={Link} to={'/myhealthlist'} size='massive' >
+                <Button color='black' as={Link} to={'/myhealthlist'} size='massive' >
                 Get started {userStore.user.userName}
               </Button>
-              </>):( <Button floated='right' color='teal' onClick={()=>{modalStore.openModal(<LoginForm/>,'tiny')}} size='large' error >
+              </>):( <Button floated='right' color='black' onClick={()=>{modalStore.openModal(<LoginForm/>,'tiny')}} size='large' error >
                     Log In
                      </Button>
                )}
@@ -53,13 +53,13 @@ export default observer(function HomePage() {
               <>
                 {userStore.isLoggedIn ? (
                          <>
-                       <Button color='teal' as={Link} to={`/myPatients/${userStore.user?.id}`} size='massive' >
+                       <Button color='black' as={Link} to={`/myPatients/${userStore.user?.id}`} size='massive' >
                                 Get Started {userStore.user?.displayName}
                         </Button>
 
                         </>   
                    ) : (
-                    <Button color='teal' onClick={()=>{modalStore.openModal(<LoginForm/>, 'tiny')}} size='large' error >
+                    <Button color='black' onClick={()=>{modalStore.openModal(<LoginForm/>, 'tiny')}} size='large' error >
                          Log In
                       </Button>
                              )}

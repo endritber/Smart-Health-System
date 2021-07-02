@@ -27,7 +27,7 @@ export default class UserStore {
             runInAction(()=> this.user = user);
 
             if (user.roleId===1) { 
-                history.push('/myhealthlist');
+                history.push(`/profiles/${user.userName}/${user.id}`);
             } else if (user.roleId === 2) {
                 history.push(`/myPatients/${user.id}`);
             } 

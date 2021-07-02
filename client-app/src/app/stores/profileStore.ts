@@ -28,6 +28,7 @@ export default class profileStore {
             runInAction(()=> this.loadingProfile=false)
         }
     }
+    
 
     loadDocProfile = async (username: string) =>{
         this.loadingProfile=true;

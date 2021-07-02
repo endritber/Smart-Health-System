@@ -15,7 +15,7 @@ export default observer( function MyPatientDetail() {
   const {id} = useParams<{id: string}>();
 
     return (
-      <Card className='card' style={{width:"400px", "border-radius": "15px", marginTop:"100px"}}>
+      <Card className='MyPatientsDashBoard' style={{width:"400px", "border-radius": "15px", marginTop:"100px"}}>
       <Card.Content>
         <Image
           floated='right'
@@ -31,18 +31,28 @@ export default observer( function MyPatientDetail() {
 
     <Card.Content extra>
       <Card.Header>Laboratory Results</Card.Header>
-    <Button color='teal' as={Link} to ={`/myPatients/labResults/${patient?.id}/${id}`} fluid>Show Lab Results</Button>
+    <Button color='black' as={Link} to ={`/myPatients/labResults/${patient?.id}/${id}`} fluid >Show Lab Results</Button>
     </Card.Content>
 
     
     <Card.Content extra>
     <Card.Header>Prescriptions</Card.Header>
-    <Button color='teal' as={Link} to ={`/myPatients/prescriptions/${patient?.id}/${id}`} fluid>Show Prescriptions</Button>
+    <Button color='black' as={Link} to ={`/myPatients/prescriptions/${patient?.id}/${id}`} fluid>Show Prescriptions</Button>
     </Card.Content>
 
     <Card.Content extra>
     <Card.Header>Allergies</Card.Header>
-    <Button color='teal' as={Link} to ={`/myPatients/allergies/${patient?.id}/${id}`} fluid>Show Allergies</Button>
+    <Button color='black' as={Link} to ={`/myPatients/allergies/${patient?.id}/${id}`} fluid>Show Allergies</Button>
+
+    </Card.Content>
+    <Card.Content extra>
+    <Card.Header>Medical Images</Card.Header>
+    <Button color='black'  fluid>Show Medical Images</Button>
+
+    </Card.Content>
+        <Card.Content extra>
+    <Card.Header>Appointments</Card.Header>
+    <Button color='black' fluid>Show Appointments</Button>
 
     </Card.Content>
     <Card.Content extra>

@@ -10,7 +10,7 @@ import WeightForm from './WeightForm';
 import { observer } from 'mobx-react-lite';
 
 export default observer( function WeightResults(){
-    const data = [
+    var data = [
         {
           "name": "",
           "Weight": parseInt('')
@@ -45,7 +45,7 @@ export default observer( function WeightResults(){
             <Tooltip />
             <Legend />
             <CartesianGrid stroke="#f5f5f5" />
-            <Line type="monotone" dataKey="Weight(kg)" stroke="#ff7300" />
+            <Line type="monotone" dataKey="Weight" stroke="#ff7300" />
         </ComposedChart>
         </Segment>
 

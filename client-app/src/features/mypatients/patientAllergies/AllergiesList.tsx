@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Header, Divider, Modal, Segment } from "semantic-ui-react";
+import { Button, Header, Divider, Icon, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { Patient } from "../../../app/models/patient";
 import { useStore } from "../../../app/stores/store";
@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import AllergyAction from '../patientAllergies/AllergyAction';
+import AllergyForm from "../allergyForm/AllergyForm";
 
 interface Column {
   id: 'info' | 'causes' | 'treatments' | 'naturalRemedies' | 'commonFoodTriggers' | 'action';
@@ -86,7 +87,7 @@ export default observer (function AllergiesList() {
     const [open, setOpen] = React.useState(false)
     const history = useHistory();
 
-    const {patientStore, allergyStore} = useStore();
+    const {patientStore, allergyStore, modalStore} = useStore();
 
     const {loadPatient, selectedPatient} = patientStore
     const {deleteAllergy, loading} = allergyStore
@@ -137,8 +138,9 @@ export default observer (function AllergiesList() {
       <>
       <Header sub>{selectedPatient?.name} {selectedPatient?.lastName}'s Allergies</Header> 
         <Segment>    
-        <Button size ='huge' color='teal' as={Link} to={`/allergyForm/${patientId}/${doctorId}`}>
-                Add Allergy
+          <Header>Add Allergy</Header>
+        <Button style={{width:"130px"}} color='black' onClick={()=>{modalStore.openModal(<AllergyForm patientId={patientId} doctorId={doctorId} allergyId={''}/>, 'small')}}>
+                <Icon name='add'></Icon>
         </Button>
         <Divider/>
         <Paper className={classes.root} style={{borderRadius:'5px'}}>

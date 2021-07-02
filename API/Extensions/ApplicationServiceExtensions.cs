@@ -1,13 +1,11 @@
 using Application.CBCs;
 using Application.Core;
 using Application.Doctors;
-using Application.Interfaces;
 using Application.LiverPanels;
 using Application.MetabolicPanels;
 using Application.Patients;
 using Application.Prescriptions;
 using Application.Urinalysiss;
-using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,14 +37,13 @@ namespace API.Extensions
             services.AddMediatR(typeof(ListDoctors.Handler).Assembly);
             services.AddMediatR(typeof(ListPatients.Handler).Assembly);
 
+
             services.AddMediatR(typeof(ListCBC.Handler).Assembly);
             services.AddMediatR(typeof(ListUrinalysis.Handler).Assembly);
             services.AddMediatR(typeof(ListMetabolicPanel.Handler).Assembly);
             services.AddMediatR(typeof(ListLiverPanel.Handler).Assembly);
 
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-
-            services.AddScoped<IUserAccessor, UserAccessor>();
             
             return services;
         }

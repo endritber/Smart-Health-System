@@ -6,6 +6,7 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 import MyPatientsDashBoard from "./MyPatientsDashBoard";
 
+
 export default observer(function MyPatients() {
 
     const {doctorStore, patientStore} = useStore();
@@ -26,7 +27,7 @@ export default observer(function MyPatients() {
         <>
         <Container style={{marginTop:"7em"}}>
             { selectedDoctor &&
-            <MyPatientsDashBoard 
+            <MyPatientsDashBoard
             selectedPatient = {selectedPatient}
             doctor = {selectedDoctor}
             />}

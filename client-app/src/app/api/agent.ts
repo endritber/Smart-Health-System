@@ -11,7 +11,7 @@ import { Prescription } from '../models/prescription';
 import { Symptoms } from '../models/symptoms';
 import { Urinalysis } from '../models/urinalysis';
 import {doctorUser, patientUser, User, userFormValues } from '../models/user';
-import { Waterintake } from '../models/waterintake';
+import { WaterIntake } from '../models/waterintake';
 import { Weight } from '../models/weight';
 
 
@@ -168,11 +168,11 @@ const Heights = {
 }
 
 const WaterIntakes = {
-    list: () => requests.get<Waterintake[]>('/waterintake'),
-    details: (id: string) => requests.get<Waterintake>(`/waterintake/${id}`),
-    update: (waterintake: Waterintake) => axios.put<void>(`/waterintake/${waterintake.waterintakeId}`, waterintake),
+    list: () => requests.get<WaterIntake[]>('/waterintake'),
+    details: (id: string) => requests.get<WaterIntake>(`/waterintake/${id}`),
+    update: (waterintake: WaterIntake) => axios.put<void>(`/waterintake/${waterintake.waterintakeId}`, waterintake),
     delete:(id:string) => axios.delete<void>(`/waterintake/${id}`),
-    create : (waterintake: Waterintake,patientId: string) => axios.post<void>(`/waterintake/${patientId}`,waterintake)
+    create : (waterintake: WaterIntake,patientId: string) => axios.post<void>(`/waterintake/${patientId}`,waterintake)
     
 }
 

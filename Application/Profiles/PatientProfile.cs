@@ -19,7 +19,16 @@ namespace Application.Profiles
         public string Language {get; set;}
 
         public string Profession { get; set; }
+
+        public string City { get; set; }
+
+        public string Area { get; set; }
         
+        public string Information {get; set;}
+
+        public string Number {get;set;}
+
+        public string BloodGroup {get; set;}
         public string Bio { get; set; }
 
         public string Image {get; set;}

@@ -36,8 +36,6 @@ namespace Domain
         public ICollection<MetabolicPanel> MetabolicPanelsAdded {get; set;} = new List<MetabolicPanel>();
 
          public ICollection<LiverPanel> LiverPanelsAdded {get; set;} = new List<LiverPanel>();
-
-
         
         
     }

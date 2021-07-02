@@ -24,6 +24,7 @@ export default class doctorStore {
         try {
             const doctors = await agent.Doctors.list();    
                 doctors.forEach(doctor=> {
+                doctor.birthDate = doctor.birthDate.split('T')[0];
                 this.doctorRegistry.set(doctor.id, doctor)
             })
             this.setLoadingIntitial(false);
@@ -50,6 +51,9 @@ export default class doctorStore {
                 this.setDoctor(doctor);
                 runInAction(()=>{
                     this.selectedDoctor=doctor;
+                    this.selectedDoctor?.patients.forEach(patient=>{
+                    
+                    })
                 })
                 this.setLoadingIntitial(false);
                 return doctor;

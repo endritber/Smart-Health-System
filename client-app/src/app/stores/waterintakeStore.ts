@@ -5,13 +5,13 @@ import { Patient } from "../models/patient";
 import { Doctor } from "../models/doctor";
 import { Prescription } from "../models/prescription";
 import { Weight } from "../models/weight";
-import { Waterintake } from "../models/waterintake";
+import { WaterIntake } from "../models/waterintake";
 
 
-export default class waterintakeStore {
+export default class WaterIntakeStore {
 
-    waterintakeRegistry= new Map<string, Waterintake>();
-    selectedWaterintake:Waterintake |undefined = undefined;
+    WaterIntakeRegistry= new Map<string, WaterIntake>();
+    selectedWaterIntake:WaterIntake |undefined = undefined;
     editMode =false;
     loading=false;
     loadingInitial = false;
@@ -22,13 +22,13 @@ export default class waterintakeStore {
     }
 
 
-    loadWaterintakes = async () => { 
+    loadWaterIntakes = async () => { 
         this.setLoadingInitial(true);
         try {
-            const waterintakes = await agent.WaterIntakes.list();    
-                waterintakes.forEach(waterintake=> {
-                waterintake.date = waterintake.date.split("T")[0];
-                this.waterintakeRegistry.set(waterintake.waterintakeId, waterintake)
+            const WaterIntakes = await agent.WaterIntakes.list();    
+                WaterIntakes.forEach(WaterIntake=> {
+                WaterIntake.date = WaterIntake.date.split("T")[0];
+                this.WaterIntakeRegistry.set(WaterIntake.waterintakeId, WaterIntake)
             })
             this.setLoadingInitial(false);
         }catch(error) {
@@ -40,21 +40,21 @@ export default class waterintakeStore {
 
     }
 
-    loadWaterintake = async(id:string)=> {
-        let waterintake = this.getWaterintake(id);
-        if(waterintake) {
-            this.selectedWaterintake = waterintake;
-            return waterintake;
+    loadWaterIntake = async(id:string)=> {
+        let WaterIntake = this.getWaterIntake(id);
+        if(WaterIntake) {
+            this.selectedWaterIntake = WaterIntake;
+            return WaterIntake;
         } else{
             this.loadingInitial=true;
             try {
-                waterintake = await agent.WaterIntakes.details(id);
-                this.setWaterintake(waterintake);
+                WaterIntake = await agent.WaterIntakes.details(id);
+                this.setWaterIntake(WaterIntake);
                 runInAction(()=>{
-                    this.selectedWaterintake=waterintake;
+                    this.selectedWaterIntake=WaterIntake;
                 })
                 this.setLoadingInitial(false);
-                return waterintake;
+                return WaterIntake;
             } catch(error) {
                 console.log(error);
                 this.setLoadingInitial(false);
@@ -62,30 +62,30 @@ export default class waterintakeStore {
         }
     }
 
-    private getWaterintake = (id: string) => {
-        return this.waterintakeRegistry.get(id);
+    private getWaterIntake = (id: string) => {
+        return this.WaterIntakeRegistry.get(id);
     }
 
-    private setWaterintake = (waterintake: Waterintake) => {
-        this.waterintakeRegistry.set(waterintake.waterintakeId, waterintake);
+    private setWaterIntake = (WaterIntake: WaterIntake) => {
+        this.WaterIntakeRegistry.set(WaterIntake.waterintakeId, WaterIntake);
     }
 
     setLoadingInitial  = (state:boolean) => {
         this.loadingInitial = state;
     }
 
-    selectWaterintake= (id: string)=> {
-        this.selectedWaterintake = this.waterintakeRegistry.get(id);
+    selectWaterIntake= (id: string)=> {
+        this.selectedWaterIntake = this.WaterIntakeRegistry.get(id);
     }
 
-    createWaterintake= async (waterintake :Waterintake, patientId:string) => {
+    createWaterIntake= async (WaterIntake :WaterIntake, patientId:string) => {
         this.loading =true;
-        waterintake.waterintakeId = uuid();
+        WaterIntake.waterintakeId = uuid();
         try {
-            await agent.WaterIntakes.create(waterintake, patientId);
+            await agent.WaterIntakes.create(WaterIntake, patientId);
             runInAction(()=> {
-                this.waterintakeRegistry.set(waterintake.waterintakeId, waterintake);
-                this.selectedWaterintake = waterintake;
+                this.WaterIntakeRegistry.set(WaterIntake.waterintakeId, WaterIntake);
+                this.selectedWaterIntake = WaterIntake;
                 this.editMode = false;
                 this.loading = false;
             })
@@ -97,13 +97,13 @@ export default class waterintakeStore {
         }
 
     }
-    updateWaterintake= async(waterintake :Waterintake) => {
+    updateWaterIntake= async(WaterIntake :WaterIntake) => {
         this.loading =true;
         try {
-            await agent.WaterIntakes.update(waterintake);
+            await agent.WaterIntakes.update(WaterIntake);
             runInAction(()=> {
-                this.waterintakeRegistry.set(waterintake.waterintakeId, waterintake);
-                this.selectedWaterintake = waterintake;
+                this.WaterIntakeRegistry.set(WaterIntake.waterintakeId, WaterIntake);
+                this.selectedWaterIntake = WaterIntake;
                 this.editMode = false;
                 this.loading = false;
             })
@@ -115,12 +115,12 @@ export default class waterintakeStore {
             })
         }
     }
-    deleteWaterintake = async(id: string) => {
+    deleteWaterIntake = async(id: string) => {
         this.loading = true;
         try {
             await agent.WaterIntakes.delete(id);
             runInAction(()=> {
-                this.waterintakeRegistry.delete(id);
+                this.WaterIntakeRegistry.delete(id);
                 this.loading = false;
             })
 

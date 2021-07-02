@@ -16,7 +16,6 @@ export default observer ( function MyPatientsList({doctor}: Props) {
     const {patientStore} = useStore();
     const {selectPatient, loading} = patientStore
     const [searchTerm, setSearchTerm] = useState("");
-
     return (
         <>
          <Header as='h3' >Search a Patient</Header>
@@ -59,7 +58,7 @@ export default observer ( function MyPatientsList({doctor}: Props) {
             </Card.Description>
             </Card.Content>
             <Card.Content extra>
-            <Button onClick={()=>selectPatient(patient.id)} content = "View Patient" color='blue'/>
+            <Button onClick={()=>selectPatient(patient.id)} content = "View Patient" color='black'/>
             </Card.Content>
             
         </Card>

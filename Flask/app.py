@@ -1,13 +1,12 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify, Response
 from flask_sqlalchemy  import SQLAlchemy
-from form import TheSymptoms
 from disease_prediction import message
 from flask_cors import CORS, cross_origin
 from flask_marshmallow import Marshmallow
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/endritberisha/Desktop/Demo/Smart-Health-System/API/SHSystem.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/endritberisha/Demo/Smart-Health-System/API/SHSystem.db'
 app.config['SECRET_KEY'] = 'password'
 
 db= SQLAlchemy(app)
@@ -43,7 +42,6 @@ symptoms_schema = SymptomsSchema(many=True)
 
  
 @app.route('/getPredictions', methods=['GET'])
-@cross_origin()
 def getSymptoms():
     all_symptoms = Symptoms.query.all()
     results = symptoms_schema.dump(all_symptoms)

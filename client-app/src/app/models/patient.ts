@@ -8,7 +8,7 @@ import { MetabolicPanel } from "./metabolicpanel";
 import { Prescription } from "./prescription";
 import { Symptoms } from "./symptoms";
 import { Urinalysis } from "./urinalysis";
-import { Waterintake } from "./waterintake";
+import { WaterIntake } from "./waterintake";
 import { Weight } from "./weight";
 
 export interface Patient {
@@ -19,6 +19,11 @@ export interface Patient {
     address:string;
     language:string;
     profession:string;
+    city :string;
+    area:string;
+    information :string;
+    number :string;
+    bloodGroup:string; 
     doctor:doctorprofile;
     prescriptions: Prescription[];
     allergies: Allergy[];
@@ -29,6 +34,46 @@ export interface Patient {
     symptoms: Symptoms[];
     weight : Weight [];
     height : Height [];
-    waterintake : Waterintake [];
+    waterIntake : WaterIntake [];
     
 }
+
+export class Patient implements Patient {
+    constructor(init?: PatientFormValues) {
+      Object.assign(this, init);
+    }
+  }
+
+  export class PatientFormValues {
+    id?:string = undefined;
+    name: string = '';
+    lastName: string = '';
+    birthDate: string= '';
+    address:string = '';
+    language:string = '';
+    profession:string ='';
+    city :string = '';
+    area:string = '';
+    information :string = '';
+    number :string = '';
+    bloodGroup:string ='';
+
+    constructor(patient?: PatientFormValues) {
+      if (patient) {
+        this.id = patient.id;
+        this.name = patient.name;
+        this.lastName = patient.lastName;
+        this.birthDate = patient.birthDate;
+        this.city = patient.city;
+        this.language = patient.language;
+        this.area = patient.area;
+        this.profession=patient.profession;
+        this.number = patient.number;
+        this.bloodGroup = patient.bloodGroup;
+        this.address = patient.address;
+        this.information = patient.information
+
+      }
+    }
+  }
+

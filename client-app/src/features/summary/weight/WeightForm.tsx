@@ -25,7 +25,7 @@ export default observer (function WeightForm({id} : Props){
     // console.log(id)
     const [weight, setWeight]= useState<Weight>({
         weightId:'',
-        myWeight: parseInt(''),
+        myWeight: 0,
         date:'',
     });
     

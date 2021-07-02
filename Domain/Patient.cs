@@ -13,11 +13,19 @@ namespace Domain
 
         public string Address{get; set;}
 
-        public  override string PhoneNumber {get; set;} 
-
         public string Language {get; set;}
 
         public string Profession { get; set; }
+
+        public string City { get; set; }
+
+        public string Area { get; set; }
+        
+        public string Information {get; set;}
+
+        public string Number {get;set;}
+
+        public string BloodGroup {get; set;}
 
         public Doctor doctor {get; set;}
 
@@ -44,6 +52,7 @@ namespace Domain
          public ICollection<LiverPanel> LiverPanels {get; set;} = new List<LiverPanel>();
 
          public ICollection<Symptoms> Symptoms {get; set;} = new List<Symptoms>();
+
 
     }
 }
