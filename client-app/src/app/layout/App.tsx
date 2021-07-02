@@ -37,7 +37,7 @@ import PatientAllergyTable from '../../features/myhealth/allergies/PatientAllerg
 import HeightResults from '../../features/summary/height/HeightResults';
 import WeightResults from '../../features/summary/weight/WeightResults';
 import WaterResults from '../../features/summary/water/WaterResults';
-
+import VitalsResults from '../../features/summary/vitals/VitalsResults';
 
 
 
@@ -90,6 +90,7 @@ function App() {
         <Route path='/height/:id' component={HeightResults}/>
         <Route path='/weight/:id' component={WeightResults}/>
         <Route path='/water/:id' component={WaterResults}/>
+        <Route path='/vitals/:id' component={VitalsResults}/>
     </Container>
     </>
   )}

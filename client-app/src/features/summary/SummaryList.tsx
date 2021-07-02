@@ -44,7 +44,7 @@ export default function SummaryList() {
           </Item.Content>
         </Item>
         
-        <Item as='a'>
+        <Item as={Link} to="/vitals">
 
 
         <Image className='vitals' src='/vitals.png' alt = 'logo' />
