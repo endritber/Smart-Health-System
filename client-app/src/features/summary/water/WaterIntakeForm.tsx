@@ -11,10 +11,11 @@ import { useStore } from "../../../app/stores/store";
 
 interface Props { 
     id:string
+    waterintakeId: string
 }
 
 
-export default observer (function WaterIntakeForm({id} : Props){
+export default observer (function WaterIntakeForm({id,waterintakeId} : Props){
 
     const history = useHistory();
 
@@ -35,13 +36,14 @@ export default observer (function WaterIntakeForm({id} : Props){
     
     
     useEffect(()=>{
-        if (id) loadWaterIntake(id).then(waterintake=>setWaterintake(waterintake!))
-},[id, loadWaterIntake]);
+        if (waterintakeId) loadWaterIntake(waterintakeId).then(waterintake=>setWaterintake(waterintake!))
+},[waterintakeId, loadWaterIntake]);
     
     function handleSubmit() {
         waterintake.waterintakeId? updateWaterIntake(waterintake)
         
         : createWaterIntake(waterintake,id)
+        window.location.reload()
         
     }
 

@@ -8,6 +8,7 @@ import WaterIntakeForm from './WaterIntakeForm';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { observer } from 'mobx-react-lite';
 import { DateTime } from 'luxon';
+import WaterData from './WaterData';
 
 
 export default observer( function WaterResults(){
@@ -57,9 +58,9 @@ export default observer( function WaterResults(){
         <Header sub>Today's Water Intake</Header>
         <br></br>
         <Button.Group>
-        <Button content='Add Data' onClick={()=>{modalStore.openModal(<WaterIntakeForm id = {id} />,'large')}}  color='teal' ></Button>
+        <Button content='Add Data' onClick={()=>{modalStore.openModal(<WaterIntakeForm waterintakeId = {""} id = {id} />,'large')}}  color='teal' ></Button>
         <Button.Or/>
-        <Button content='Show all data'  color='twitter'></Button>
+        <Button content='Show all data' onClick={()=>{modalStore.openModal(<WaterData patientId = {id} />,'large')}} color='twitter'></Button>
         </Button.Group>
         <Header>Today you drank {sum} ml</Header>
         <Segment>

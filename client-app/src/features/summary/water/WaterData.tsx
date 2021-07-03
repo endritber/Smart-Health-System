@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import { Button, Segment, Table } from "semantic-ui-react";
 import modalStore from "../../../app/stores/modalStore";
 import { useStore } from "../../../app/stores/store";
-import HeightForm from "./HeightForm";
+import HeightForm from "../height/HeightForm";
+import WaterIntakeForm from "./WaterIntakeForm";
 
 
 interface Props {
@@ -13,13 +14,13 @@ interface Props {
 }
 
 
-export default observer ( function HeighttData ({patientId}: Props){
+export default observer ( function WaterData ({patientId}: Props){
 
     const [target, setTarget] = useState('');
 
-    const {patientStore,heightStore,modalStore} = useStore();
+    const {patientStore,waterintakeStore,modalStore} = useStore();
     const {loadPatient,selectedPatient} = patientStore;
-    const {deleteHeight,loading} = heightStore;
+    const {deleteWaterIntake,loading} = waterintakeStore;
     useEffect(() => {
         loadPatient(patientId)
       }, [loadPatient])
@@ -27,7 +28,7 @@ export default observer ( function HeighttData ({patientId}: Props){
       var index = 0;
       function handleHeightDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name)
-        deleteHeight(id)
+        deleteWaterIntake(id)
         window.location.reload()
     }
     return (
@@ -35,45 +36,45 @@ export default observer ( function HeighttData ({patientId}: Props){
             <Table celled striped>
         <Table.Header>
         <Table.Row>
-            <Table.HeaderCell colSpan='7'><h1>Height Data</h1></Table.HeaderCell>
+            <Table.HeaderCell colSpan='7'><h1>Water Intake Data</h1></Table.HeaderCell>
         </Table.Row>
         </Table.Header>
         <Table.Header>
         <Table.Row>
             <Table.HeaderCell colSpan='1'>No</Table.HeaderCell>
-            <Table.HeaderCell colSpan='1'>Height (M)</Table.HeaderCell>
+            <Table.HeaderCell colSpan='1'>Water Intake (l/d)</Table.HeaderCell>
             <Table.HeaderCell colSpan='1'>Date </Table.HeaderCell>
             <Table.HeaderCell colSpan='1'>Action </Table.HeaderCell>
         </Table.Row>
         </Table.Header>
-            {selectedPatient?.height.map(s=>(
+            {selectedPatient?.waterIntake.map(s=>(
                 <>
              <Table.Body>
              
-            {(index+1 === selectedPatient.height.length)? (
+            {(index+1 === selectedPatient.waterIntake.length)? (
                 <>
                 <Table.Row positive>
                 <Table.Cell> 
                     {index+=1} 
                     </Table.Cell>
                     <Table.Cell> 
-                        {s.myHeight}
+                        {s.literPerHour}
                     </Table.Cell>
                     <Table.Cell>{s.date.split("T") [0]}</Table.Cell>
                     <Table.Cell>
                         <Button.Group>
                         <Button style={{width:' 100px'}} 
                             color='black'  content='Edit'
-                            loading={loading && target === s.heightId}
-                            name = {s.heightId}
-                            onClick={()=>{modalStore.openModal(<HeightForm heightId = {s.heightId} id = {patientId} />,'large')}}                             />
+                            loading={loading && target === s.waterintakeId}
+                            name = {s.waterintakeId}
+                            onClick={()=>{modalStore.openModal(<WaterIntakeForm waterintakeId = {s.waterintakeId} id = {patientId} />,'large')}}                             />
                             <Button.Or/>
 
                         <Button style={{width:' 100px'}} 
                             color='red' type='submit' content='Delete'
-                            loading={loading && target === s.heightId}
-                            name = {s.heightId}
-                            onClick={(e)=>handleHeightDelete(e,s.heightId)}                             />
+                            loading={loading && target === s.waterintakeId}
+                            name = {s.waterintakeId}
+                            onClick={(e)=>handleHeightDelete(e,s.waterintakeId)}                             />
                         </Button.Group>
                     </Table.Cell>
                     </Table.Row>
@@ -87,23 +88,23 @@ export default observer ( function HeighttData ({patientId}: Props){
                         {index+=1}
                     </Table.Cell>
                     <Table.Cell> 
-                        {s.myHeight}
+                        {s.literPerHour}
                     </Table.Cell>
                     <Table.Cell>{s.date.split("T") [0]}</Table.Cell>
                     <Table.Cell>
                     <Button.Group>
                         <Button style={{width:' 100px'}} 
                             color='black'  content='Edit'
-                            loading={loading && target === s.heightId}
-                            name = {s.heightId}
-                            onClick={()=>{modalStore.openModal(<HeightForm heightId = {s.heightId} id = {patientId} />,'large')}}                             />
+                            loading={loading && target === s.waterintakeId}
+                            name = {s.waterintakeId}
+                            onClick={()=>{modalStore.openModal(<WaterIntakeForm waterintakeId = {s.waterintakeId} id = {patientId} />,'large')}}                             />
                             <Button.Or/>
 
                         <Button style={{width:' 100px'}} 
                             color='red' type='submit' content='Delete'
-                            loading={loading && target === s.heightId}
-                            name = {s.heightId}
-                            onClick={(e)=>handleHeightDelete(e,s.heightId)}                             />
+                            loading={loading && target === s.waterintakeId}
+                            name = {s.waterintakeId}
+                            onClick={(e)=>handleHeightDelete(e,s.waterintakeId)}                             />
                         </Button.Group>
                     </Table.Cell>
                     

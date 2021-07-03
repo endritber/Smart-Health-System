@@ -25,6 +25,7 @@ namespace Application.Core
             CreateMap<Patient, PatientProfile>();
             CreateMap<Weight,Weight>();
             CreateMap<Height,Height>();
+            CreateMap<WaterIntake,WaterIntake>();
 
             
 
