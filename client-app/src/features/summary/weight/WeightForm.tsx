@@ -9,10 +9,11 @@ import { useStore } from "../../../app/stores/store";
 
 interface Props { 
     id:string
+    weightId : string
 }
 
 
-export default observer (function WeightForm({id} : Props){
+export default observer (function WeightForm({id,weightId} : Props){
 
     const history = useHistory();
 
@@ -30,14 +31,14 @@ export default observer (function WeightForm({id} : Props){
     });
     
     useEffect(()=>{
-        if (id) loadWeight(id).then(weight=>setWeight(weight!))
-},[id, loadWeight]);
+        if (weightId) loadWeight(weightId).then(weight=>setWeight(weight!))
+},[weightId, loadWeight]);
     
     function handleSubmit() {
         weight.weightId? updateWeight(weight)
         
         : createWeight(weight,id)
-        
+        window.location.reload()
     }
 
     function handleInputChange(event:ChangeEvent<HTMLInputElement>) {

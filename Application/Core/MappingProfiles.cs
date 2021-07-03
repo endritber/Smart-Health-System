@@ -23,6 +23,7 @@ namespace Application.Core
             CreateMap<Doctor, DoctorProfile>();
             CreateMap<Patient, PatientDto>();
             CreateMap<Patient, PatientProfile>();
+            CreateMap<Weight,Weight>();
 
             
 

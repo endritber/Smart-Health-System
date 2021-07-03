@@ -59,7 +59,7 @@ export default observer( function WaterResults(){
         <Button.Group>
         <Button content='Add Data' onClick={()=>{modalStore.openModal(<WaterIntakeForm id = {id} />,'large')}}  color='teal' ></Button>
         <Button.Or/>
-        <Button content='Show all data' color='twitter'></Button>
+        <Button content='Show all data'  color='twitter'></Button>
         </Button.Group>
         <Header>Today you drank {sum} ml</Header>
         <Segment>

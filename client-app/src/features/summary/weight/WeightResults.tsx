@@ -9,6 +9,7 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import WeightForm from './WeightForm';
 import { observer } from 'mobx-react-lite';
 import { DateTime } from 'luxon';
+import WeightData from './WeightData';
 
 
 export default observer( function WeightResults(){
@@ -40,9 +41,9 @@ export default observer( function WeightResults(){
         <Header sub>Weight</Header>
         <br></br>
         <Button.Group>
-        <Button content='Add Data' onClick={()=>{modalStore.openModal(<WeightForm id={id}/>,'large')}}  color='teal' ></Button>
+        <Button content='Add Data' onClick={()=>{modalStore.openModal(<WeightForm weightId = {""}  id={id}/>,'large')}}  color='teal' ></Button>
         <Button.Or/>
-        <Button content='Show all data' color='twitter'></Button>
+        <Button content='Show all data'  onClick={()=>{modalStore.openModal(<WeightData patientId = {id} />,'large')}} color='twitter'></Button>
         </Button.Group>
         <Header sub>Showing data only this month.</Header>
         <Segment>
