@@ -10,10 +10,11 @@ import { useStore } from "../../../app/stores/store";
 
 interface Props { 
     id:string
+    heightId : string
 }
 
 
-export default observer (function HeightForm({id} : Props){
+export default observer (function HeightForm({id,heightId} : Props){
 
     const history = useHistory();
 
@@ -31,13 +32,14 @@ export default observer (function HeightForm({id} : Props){
     });
     
     useEffect(()=>{
-        if (id) loadHeight(id).then(height=>setHeight(height!))
-},[id, loadHeight]);
+        if (heightId) loadHeight(heightId).then(height=>setHeight(height!))
+},[heightId, loadHeight]);
     
     function handleSubmit() {
         height.heightId? updateHeight(height)
         
         : createHeight(height,id)
+        window.location.reload()
         
     }
 

@@ -8,6 +8,7 @@ import HeightForm from './HeightForm';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { DateTime } from 'luxon';
 import { observer } from 'mobx-react-lite';
+import HeightData from './HeightData';
 
 export default observer(function HeightResults(){
     const data = [
@@ -41,9 +42,9 @@ export default observer(function HeightResults(){
         <Header sub>Height</Header>
         <br></br>
         <Button.Group>
-        <Button content='Add Data' onClick={()=>{modalStore.openModal(<HeightForm id={id}/>,'large')}} color='teal' ></Button>
+        <Button content='Add Data' onClick={()=>{modalStore.openModal(<HeightForm heightId = {""} id={id}/>,'large')}} color='teal' ></Button>
         <Button.Or/>
-        <Button content='Show all data'  color='twitter'></Button>
+        <Button content='Show all data' onClick={()=>{modalStore.openModal(<HeightData patientId = {id} />,'large')}}  color='twitter'></Button>
         </Button.Group>
         <Header sub>Showing data only this year.</Header>
         <Segment>
