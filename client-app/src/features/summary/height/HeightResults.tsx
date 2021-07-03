@@ -6,8 +6,10 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import HeightForm from './HeightForm';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { DateTime } from 'luxon';
+import { observer } from 'mobx-react-lite';
 
-export default function HeightResults(){
+export default observer(function HeightResults(){
     const data = [
         {
           "name": "",
@@ -16,6 +18,8 @@ export default function HeightResults(){
 
 
       ]
+      let dateTime = DateTime.now().toISO();
+      var index = 0
       const {id} = useParams<{id: string}>();
       const{modalStore,heightStore,patientStore}=useStore()
       const {loadPatient,selectedPatient} = patientStore;
@@ -25,8 +29,11 @@ export default function HeightResults(){
 
       if (patientStore.loadingInitial) return <LoadingComponent content={`Loading Graph...`}/>
       selectedPatient?.height.map(h => (
-        data.push({name: (h.date),Height: (h.myHeight)})
+        (h.date.split('-')[0] === dateTime.toString().split('-')[0])?
+        data.push({name: (h.date.split('T')[0]),Height: (h.myHeight)}):index+=1
     )) ;
+
+
 
    
     return (
@@ -38,6 +45,7 @@ export default function HeightResults(){
         <Button.Or/>
         <Button content='Show all data'  color='twitter'></Button>
         </Button.Group>
+        <Header sub>Showing data only this year.</Header>
         <Segment>
         <LineChart width={1050} height={500} data={data}
             margin={{ top: 15, right: 30, left: 20, bottom: 15 }}>
@@ -53,4 +61,4 @@ export default function HeightResults(){
         
         </>
     )
-}
+})

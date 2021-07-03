@@ -8,6 +8,8 @@ import { parse } from 'uuid';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import WeightForm from './WeightForm';
 import { observer } from 'mobx-react-lite';
+import { DateTime } from 'luxon';
+
 
 export default observer( function WeightResults(){
     var data = [
@@ -17,6 +19,8 @@ export default observer( function WeightResults(){
         },
    
       ]
+      let dateTime = DateTime.now().toISO();
+      var index = 0;
       const {id} = useParams<{id: string}>();
       const{modalStore,weightStore,patientStore}=useStore()
       const {loadPatient,selectedPatient} = patientStore;
@@ -26,8 +30,10 @@ export default observer( function WeightResults(){
 
       if (patientStore.loadingInitial) return <LoadingComponent content={`Loading Graph...`}/>
       selectedPatient?.weight.map(w => (
-        data.push({name: (w.date),Weight: (w.myWeight)})
+        (w.date.split('-')[1] === dateTime.toString().split('-')[1])?
+        data.push({name: (w.date.split('T')[0]),Weight: (w.myWeight)}): index+=1
     )) ;
+
    
     return (
         <>
@@ -38,10 +44,11 @@ export default observer( function WeightResults(){
         <Button.Or/>
         <Button content='Show all data' color='twitter'></Button>
         </Button.Group>
+        <Header sub>Showing data only this month.</Header>
         <Segment>
         <ComposedChart width={1050} height={500} data={data}>
             <XAxis dataKey="name" />
-            <YAxis domain={[85,120]}/>
+            <YAxis domain={[30,150]}/>
             <Tooltip />
             <Legend />
             <CartesianGrid stroke="#f5f5f5" />

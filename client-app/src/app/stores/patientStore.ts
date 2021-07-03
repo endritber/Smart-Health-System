@@ -30,6 +30,15 @@ export default class patientStore {
     sortCBC= async() =>{
         return this.selectedPatient?.cbCs.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
     }
+    sortWeight= async() =>{
+        return this.selectedPatient?.weight.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
+    sortHeight= async() =>{
+        return this.selectedPatient?.height.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
+    sortWater= async() =>{
+        return this.selectedPatient?.waterIntake.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
 
 
     loadPatients = async () => { 
@@ -78,6 +87,9 @@ export default class patientStore {
                     this.sortMetabolicPanel();
                     this.sortLiverPanel();
                     this.sortCBC();
+                    this.sortWater();
+                    this.sortHeight();
+                    this.sortWeight();
                     
 
 

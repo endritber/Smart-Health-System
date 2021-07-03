@@ -48,11 +48,9 @@ export default observer( function WaterResults(){
       sum += Water.Water
     })
 
-    data.sort()
 
         
-    
-
+  
     
     return (
         <>
@@ -67,7 +65,7 @@ export default observer( function WaterResults(){
         <Segment>
         <ComposedChart width={1050} height={500} data={data}>
             <XAxis dataKey="name" />
-            <YAxis domain={[0,10]}/>
+            <YAxis domain={[0, 1000]}/>
             <Tooltip />
             <Legend />
             <CartesianGrid stroke="#f5f5f5" />
